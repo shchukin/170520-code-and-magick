@@ -4,7 +4,7 @@
 [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Антон Щукин](https://htmlacademy.ru/profile/id170520).
-* Наставник: `Евгений Пономарев`.
+* Наставник: [Евгений Пономарев](https://htmlacademy.ru/profile/id166116).
 
 ### Немного о себе
 `Верстаю`.
