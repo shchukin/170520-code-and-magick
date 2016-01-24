@@ -380,16 +380,51 @@
     _drawPauseScreen: function() {
       switch (this.state.currentStatus) {
         case Verdict.WIN:
-          console.log('you have won!');
+          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+          this.ctx.fillRect(110,60,500,200);
+
+          this.ctx.fillStyle = '#FFFFFF';
+          this.ctx.fillRect(100,50,500,200);
+
+          this.ctx.font = '16px PT Mono';
+          this.ctx.fillStyle = '#000000';
+          this.ctx.fillText('You have won!',150,150);
           break;
+
         case Verdict.FAIL:
-          console.log('you have failed!');
+          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+          this.ctx.fillRect(110,60,500,200);
+
+          this.ctx.fillStyle = '#FFFFFF';
+          this.ctx.fillRect(100,50,500,200);
+
+          this.ctx.font = '16px PT Mono';
+          this.ctx.fillStyle = '#000000';
+          this.ctx.fillText('You have failed!',150,150);
           break;
+
         case Verdict.PAUSE:
-          console.log('game is on pause!');
+          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+          this.ctx.fillRect(110,60,500,200);
+
+          this.ctx.fillStyle = '#FFFFFF';
+          this.ctx.fillRect(100,50,500,200);
+
+          this.ctx.font = '16px PT Mono';
+          this.ctx.fillStyle = '#000000';
+          this.ctx.fillText('Game is on pause!',150,150);
           break;
+
         case Verdict.INTRO:
-          console.log('welcome to the game! Press Space to start');
+          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+          this.ctx.fillRect(110,60,500,200);
+
+          this.ctx.fillStyle = '#FFFFFF';
+          this.ctx.fillRect(100,50,500,200);
+
+          this.ctx.font = '16px PT Mono';
+          this.ctx.fillStyle = '#000000';
+          this.ctx.fillText('Welcome to the game! Press Space to start',150,150);
           break;
       }
     },
