@@ -1,5 +1,19 @@
 'use strict';
 
+
+var NOTIFICATION_FONT = '16px';
+var NOTIFICATION_FAMILY = 'PT Mono';
+var NOTIFICATION_COLOR = '#000000';
+
+var NOTIFICATION_WIDTH = 500;
+var NOTIFICATION_HEIGHT = 200;
+var NOTIFICATION_BACKGROUND = '#FFFFFF';
+
+var SHADOW_SIZE = 10;
+var SHADOW_COLOR = 'rgba(0, 0, 0, 0.7)';
+
+
+
 function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth, containerHeight, content) {
 
   var lineHeight = 20;
@@ -26,20 +40,38 @@ function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth,
     ctx.fillText(content[line], textX + (textWidth/2), textY + textShift + (line * lineHeight) );
   }
 
-
 }
 
 
 function drawNotification(ctx, message) {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-  ctx.fillRect(110,60,500,200);
-  ctx.fillStyle = '#FFFFFF';
-  ctx.fillRect(100,50,500,200);
 
-  ctx.font = '16px PT Mono';
-  ctx.fillStyle = '#000000';
+  ctx.fillStyle = SHADOW_COLOR;
+  ctx.fillRect(
+    ( (ctx.canvas.width - NOTIFICATION_WIDTH) / 2 ) + SHADOW_SIZE,
+    ( (ctx.canvas.height - NOTIFICATION_HEIGHT) / 2 ) + SHADOW_SIZE,
+    NOTIFICATION_WIDTH,
+    NOTIFICATION_HEIGHT
+  );
+
+  ctx.fillStyle = NOTIFICATION_BACKGROUND;
+  ctx.fillRect(
+    (ctx.canvas.width - NOTIFICATION_WIDTH) / 2,
+    (ctx.canvas.height - NOTIFICATION_HEIGHT) / 2,
+    NOTIFICATION_WIDTH,
+    NOTIFICATION_HEIGHT
+  );
+
+  ctx.font = NOTIFICATION_FONT + ' ' + NOTIFICATION_FAMILY;
+  ctx.fillStyle = NOTIFICATION_COLOR;
   ctx.textAlign = 'center';
 
-  drawAlignedTextInContainer(ctx, 100, 50, 500, 200, message);
+  drawAlignedTextInContainer(
+    ctx,
+    (ctx.canvas.width - NOTIFICATION_WIDTH) / 2,
+    (ctx.canvas.height - NOTIFICATION_HEIGHT) / 2,
+    NOTIFICATION_WIDTH,
+    NOTIFICATION_HEIGHT,
+    message
+  );
 
 }
