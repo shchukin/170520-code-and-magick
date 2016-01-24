@@ -1,6 +1,5 @@
 'use strict';
 
-
 var NOTIFICATION_FONT = '16px';
 var NOTIFICATION_FAMILY = 'PT Mono';
 var NOTIFICATION_COLOR = '#000000';
@@ -12,6 +11,24 @@ var NOTIFICATION_BACKGROUND = '#FFFFFF';
 var SHADOW_SIZE = 10;
 var SHADOW_COLOR = 'rgba(0, 0, 0, 0.7)';
 
+
+function drawBubble(ctx) {
+  ctx.fillStyle = SHADOW_COLOR;
+  ctx.fillRect(
+    ( (ctx.canvas.width - NOTIFICATION_WIDTH) / 2 ) + SHADOW_SIZE,
+    ( (ctx.canvas.height - NOTIFICATION_HEIGHT) / 2 ) + SHADOW_SIZE,
+    NOTIFICATION_WIDTH,
+    NOTIFICATION_HEIGHT
+  );
+
+  ctx.fillStyle = NOTIFICATION_BACKGROUND;
+  ctx.fillRect(
+    (ctx.canvas.width - NOTIFICATION_WIDTH) / 2,
+    (ctx.canvas.height - NOTIFICATION_HEIGHT) / 2,
+    NOTIFICATION_WIDTH,
+    NOTIFICATION_HEIGHT
+  );
+}
 
 
 function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth, containerHeight, content) {
@@ -45,21 +62,7 @@ function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth,
 
 function drawNotification(ctx, message) {
 
-  ctx.fillStyle = SHADOW_COLOR;
-  ctx.fillRect(
-    ( (ctx.canvas.width - NOTIFICATION_WIDTH) / 2 ) + SHADOW_SIZE,
-    ( (ctx.canvas.height - NOTIFICATION_HEIGHT) / 2 ) + SHADOW_SIZE,
-    NOTIFICATION_WIDTH,
-    NOTIFICATION_HEIGHT
-  );
-
-  ctx.fillStyle = NOTIFICATION_BACKGROUND;
-  ctx.fillRect(
-    (ctx.canvas.width - NOTIFICATION_WIDTH) / 2,
-    (ctx.canvas.height - NOTIFICATION_HEIGHT) / 2,
-    NOTIFICATION_WIDTH,
-    NOTIFICATION_HEIGHT
-  );
+  drawBubble(ctx);
 
   ctx.font = NOTIFICATION_FONT + ' ' + NOTIFICATION_FAMILY;
   ctx.fillStyle = NOTIFICATION_COLOR;
