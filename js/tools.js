@@ -33,6 +33,18 @@ function drawBubble(ctx) {
 
 function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth, containerHeight, content) {
 
+  if( typeof(content) === 'number' ) {  // in case of number
+    var tempMessage = content;
+    content = [];
+    content[0] = tempMessage.toString();
+  }
+
+  if( typeof(content) === 'string' ) {  // in case of single string
+    var tempMessage = content;
+    content = [];
+    content[0] = tempMessage;
+  }
+
   var lineHeight = 20;
   var lineQuantity = Math.min(content.length, Math.floor( containerHeight / lineHeight) );
 
