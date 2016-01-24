@@ -389,7 +389,7 @@
           this.ctx.font = '16px PT Mono';
           this.ctx.fillStyle = '#000000';
 
-          drawText(this.ctx, 100, 50, 500, 200, ['You have won!', 'Press Space to start']);
+          drawAlignedTextInContainer(this.ctx, 100, 50, 500, 200, ['You have won!', 'Press Space to start']);
 
           break;
 
@@ -403,7 +403,7 @@
           this.ctx.font = '16px PT Mono';
           this.ctx.fillStyle = '#000000';
 
-          drawText(this.ctx, 100, 50, 500, 200, ['You have failed!', 'Press Space to start']);
+          drawAlignedTextInContainer(this.ctx, 100, 50, 500, 200, ['You have failed!', 'Press Space to start']);
 
           break;
 
@@ -417,7 +417,7 @@
           this.ctx.font = '16px PT Mono';
           this.ctx.fillStyle = '#000000';
 
-          drawText(this.ctx, 100, 50, 500, 200, ['Game is on pause!', 'Press Space to start']);
+          drawAlignedTextInContainer(this.ctx, 100, 50, 500, 200, ['Game is on pause!', 'Press Space to start']);
 
           break;
 
@@ -432,7 +432,7 @@
           this.ctx.fillStyle = '#000000';
           this.ctx.textAlign = 'center';
 
-          drawText(this.ctx, 100, 50, 500, 200, ['Welcome to the game!', 'Press Space to start']);
+          drawAlignedTextInContainer(this.ctx, 100, 50, 500, 200, ['Welcome to the game!', 'Press Space to start']);
 
           break;
       }

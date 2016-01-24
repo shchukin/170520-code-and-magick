@@ -1,6 +1,6 @@
 'use strict';
 
-function drawText(ctx, containerX, containerY, containerWidth, containerHeight, content) {
+function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth, containerHeight, content) {
 
   var lineHeight = 20;
   var lineQuantity = Math.min(content.length, Math.floor( containerHeight / lineHeight) );
