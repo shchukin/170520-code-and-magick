@@ -47,11 +47,11 @@ function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth,
   if ( containerHeight - textHeight > 0 ) {                     // if container height is enough to fit all lines
     textY = containerY + (containerHeight - textHeight) / 2;
   }
-  else {                                                       // else just start from top
+  else {                                                        // else just start from top
     textY = containerY;
   }
 
-  var textShift = lineHeight - Math.round(lineHeight / 4);       // shift text down to avoid http://prntscr.com/9u2qqn
+  var textShift = lineHeight - Math.round(lineHeight / 4);      // shift text down to avoid http://prntscr.com/9u2qqn
 
   for ( var line = 0; (line < lineQuantity) && (1); line++ ) {
     ctx.fillText(content[line], textX + (textWidth / 2), textY + textShift + (line * lineHeight) );
@@ -76,7 +76,7 @@ function drawNotification(ctx, message) {
     message[0] = tempMessage.toString();
   }
 
-  if ( typeof(message) === 'string' ) {  // in case of single string
+  if ( typeof (message) === 'string' ) {  // in case of single string
     tempMessage = message;
     message = [];
     message = tempMessage.split('\n');
