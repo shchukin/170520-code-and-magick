@@ -380,16 +380,16 @@
     _drawPauseScreen: function() {
       switch (this.state.currentStatus) {
         case Verdict.WIN:
-          drawNotification(this.ctx, ['You have won!', 'Press Space to start']);
+          drawNotification(this.ctx, 'You have won!\nPress Space to start');
           break;
         case Verdict.FAIL:
-          drawNotification(this.ctx, ['You have failed!', 'Press Space to start']);
+          drawNotification(this.ctx, 'You have failed!\nPress Space to start');
           break;
         case Verdict.PAUSE:
-          drawNotification(this.ctx, ['Game is on pause!', 'Press Space to start']);
+          drawNotification(this.ctx, 'Game is on pause!\nPress Space to start');
           break;
         case Verdict.INTRO:
-          drawNotification(this.ctx,['Welcome to the game!', 'Press Space to start']);
+          drawNotification(this.ctx, 'Welcome to the game!\nPress Space to start');
           break;
       }
     },

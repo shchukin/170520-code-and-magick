@@ -42,7 +42,7 @@ function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth,
   if( typeof(content) === 'string' ) {  // in case of single string
     var tempMessage = content;
     content = [];
-    content[0] = tempMessage;
+    content = tempMessage.split('\n');
   }
 
   var lineHeight = 20;
