@@ -33,18 +33,6 @@ function drawBubble(ctx) {
 
 function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth, containerHeight, content) {
 
-  if( typeof(content) === 'number' ) {  // in case of number
-    var tempMessage = content;
-    content = [];
-    content[0] = tempMessage.toString();
-  }
-
-  if( typeof(content) === 'string' ) {  // in case of single string
-    var tempMessage = content;
-    content = [];
-    content = tempMessage.split('\n');
-  }
-
   var lineHeight = 20;
   var lineQuantity = Math.min(content.length, Math.floor( containerHeight / lineHeight) );
 
@@ -79,6 +67,18 @@ function drawNotification(ctx, message) {
   ctx.font = NOTIFICATION_FONT + ' ' + NOTIFICATION_FAMILY;
   ctx.fillStyle = NOTIFICATION_COLOR;
   ctx.textAlign = 'center';
+
+  if( typeof(message) === 'number' ) {  // in case of number
+    var tempMessage = message;
+    message = [];
+    message[0] = tempMessage.toString();
+  }
+
+  if( typeof(message) === 'string' ) {  // in case of single string
+    var tempMessage = message;
+    message = [];
+    message = tempMessage.split('\n');
+  }
 
   drawAlignedTextInContainer(
     ctx,
