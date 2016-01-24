@@ -1,6 +1,7 @@
 'use strict';
 
 var NOTIFICATION_FONT = '16px';
+var NOTIFICATION_LINE = 20;
 var NOTIFICATION_FAMILY = 'PT Mono';
 var NOTIFICATION_COLOR = '#000000';
 
@@ -31,9 +32,8 @@ function drawBubble(ctx) {
 }
 
 
-function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth, containerHeight, content) {
+function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth, containerHeight, content, lineHeight) {
 
-  var lineHeight = 20;
   var lineQuantity = Math.min(content.length, Math.floor( containerHeight / lineHeight) );
 
   var textWidth = containerWidth;
@@ -86,7 +86,8 @@ function drawNotification(ctx, message) {
     (ctx.canvas.height - NOTIFICATION_HEIGHT) / 2,
     NOTIFICATION_WIDTH,
     NOTIFICATION_HEIGHT,
-    message
+    message,
+    NOTIFICATION_LINE
   );
 
 }
