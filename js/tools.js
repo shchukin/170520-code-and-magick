@@ -1,6 +1,6 @@
 'use strict';
 
-var NOTIFICATION_FONT = '16px';
+var NOTIFICATION_FONT = 16;
 var NOTIFICATION_LINE = 20;
 var NOTIFICATION_FAMILY = 'PT Mono';
 var NOTIFICATION_COLOR = '#000000';
@@ -64,7 +64,7 @@ function drawNotification(ctx, message) {
 
   drawBubble(ctx);
 
-  ctx.font = NOTIFICATION_FONT + ' ' + NOTIFICATION_FAMILY;
+  ctx.font = NOTIFICATION_FONT + 'px' + ' ' + NOTIFICATION_FAMILY;
   ctx.fillStyle = NOTIFICATION_COLOR;
   ctx.textAlign = 'center';
 
