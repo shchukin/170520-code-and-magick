@@ -28,3 +28,18 @@ function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth,
 
 
 }
+
+
+function drawNotification(ctx, message) {
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+  ctx.fillRect(110,60,500,200);
+  ctx.fillStyle = '#FFFFFF';
+  ctx.fillRect(100,50,500,200);
+
+  ctx.font = '16px PT Mono';
+  ctx.fillStyle = '#000000';
+  ctx.textAlign = 'center';
+
+  drawAlignedTextInContainer(ctx, 100, 50, 500, 200, message);
+
+}

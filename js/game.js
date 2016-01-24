@@ -380,63 +380,16 @@
     _drawPauseScreen: function() {
       switch (this.state.currentStatus) {
         case Verdict.WIN:
-          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-          this.ctx.fillRect(110,60,500,200);
-
-          this.ctx.fillStyle = '#FFFFFF';
-          this.ctx.fillRect(100,50,500,200);
-
-          this.ctx.font = '16px PT Mono';
-          this.ctx.fillStyle = '#000000';
-          this.ctx.textAlign = 'center';
-
-          drawAlignedTextInContainer(this.ctx, 100, 50, 500, 200, ['You have won!', 'Press Space to start']);
-
+          drawNotification(this.ctx, ['You have won!', 'Press Space to start']);
           break;
-
         case Verdict.FAIL:
-          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-          this.ctx.fillRect(110,60,500,200);
-
-          this.ctx.fillStyle = '#FFFFFF';
-          this.ctx.fillRect(100,50,500,200);
-
-          this.ctx.font = '16px PT Mono';
-          this.ctx.fillStyle = '#000000';
-          this.ctx.textAlign = 'center';
-
-          drawAlignedTextInContainer(this.ctx, 100, 50, 500, 200, ['You have failed!', 'Press Space to start']);
-
+          drawNotification(this.ctx, ['You have failed!', 'Press Space to start']);
           break;
-
         case Verdict.PAUSE:
-          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-          this.ctx.fillRect(110,60,500,200);
-
-          this.ctx.fillStyle = '#FFFFFF';
-          this.ctx.fillRect(100,50,500,200);
-
-          this.ctx.font = '16px PT Mono';
-          this.ctx.fillStyle = '#000000';
-          this.ctx.textAlign = 'center';
-
-          drawAlignedTextInContainer(this.ctx, 100, 50, 500, 200, ['Game is on pause!', 'Press Space to start']);
-
+          drawNotification(this.ctx, ['Game is on pause!', 'Press Space to start']);
           break;
-
         case Verdict.INTRO:
-          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-          this.ctx.fillRect(110,60,500,200);
-
-          this.ctx.fillStyle = '#FFFFFF';
-          this.ctx.fillRect(100,50,500,200);
-
-          this.ctx.font = '16px PT Mono';
-          this.ctx.fillStyle = '#000000';
-          this.ctx.textAlign = 'center';
-
-          drawAlignedTextInContainer(this.ctx, 100, 50, 500, 200, ['Welcome to the game!', 'Press Space to start']);
-
+          drawNotification(this.ctx,['Welcome to the game!', 'Press Space to start']);
           break;
       }
     },
