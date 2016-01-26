@@ -71,15 +71,11 @@ function drawNotification(ctx, message) {
   var tempMessage;
 
   if ( typeof (message) === 'number' ) {  // in case of number
-    tempMessage = message;
-    message = [];
-    message[0] = tempMessage.toString();
+    message = [message.toString()];
   }
 
   if ( typeof (message) === 'string' ) {  // in case of single string
-    tempMessage = message;
-    message = [];
-    message = tempMessage.split('\n');
+    message = message.split('\n');
   }
 
   drawAlignedTextInContainer(
