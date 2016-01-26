@@ -46,8 +46,7 @@ function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth,
 
   if ( containerHeight - textHeight > 0 ) {                     // if container height is enough to fit all lines
     textY = containerY + (containerHeight - textHeight) / 2;
-  }
-  else {                                                        // else just start from top
+  } else {                                                        // else just start from top
     textY = containerY;
   }
 
