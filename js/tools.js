@@ -67,8 +67,6 @@ function drawNotification(ctx, message) {
   ctx.fillStyle = NOTIFICATION_COLOR;
   ctx.textAlign = 'center';
 
-  var tempMessage;
-
   if ( typeof (message) === 'number' ) {  // in case of number
     message = [message.toString()];
   }
