@@ -23,6 +23,7 @@ function drawBubble(ctx) {
   );
 
   ctx.fillStyle = NOTIFICATION_BACKGROUND;
+  ctx.textBaseline = 'top';
   ctx.fillRect(
     (ctx.canvas.width - NOTIFICATION_WIDTH) / 2,
     (ctx.canvas.height - NOTIFICATION_HEIGHT) / 2,
@@ -50,10 +51,8 @@ function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth,
     textY = containerY;
   }
 
-  var textShift = lineHeight - Math.round(lineHeight / 4);      // shift text down to avoid http://prntscr.com/9u2qqn
-
   for ( var line = 0; (line < lineQuantity); line++ ) {
-    ctx.fillText(content[line], textX + (textWidth / 2), textY + textShift + (line * lineHeight) );
+    ctx.fillText(content[line], textX + (textWidth / 2), textY + (line * lineHeight) );
   }
 
 }
