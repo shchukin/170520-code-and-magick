@@ -53,7 +53,7 @@ function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth,
 
   var textShift = lineHeight - Math.round(lineHeight / 4);      // shift text down to avoid http://prntscr.com/9u2qqn
 
-  for ( var line = 0; (line < lineQuantity) && (1); line++ ) {
+  for ( var line = 0; (line < lineQuantity); line++ ) {
     ctx.fillText(content[line], textX + (textWidth / 2), textY + textShift + (line * lineHeight) );
   }
 
