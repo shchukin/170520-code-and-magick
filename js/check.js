@@ -17,10 +17,8 @@ function getMessage(a,b){
 
     if( Array.isArray(a) && ! Array.isArray(b) ) {
 
-        var sum = 0;
-
-        a.forEach(function(value){
-            sum += value;
+        var sum = a.reduce(function(previousValue, currentValue){
+            return previousValue + currentValue;
         });
 
         return 'Я прошёл ' + sum + ' шагов';
