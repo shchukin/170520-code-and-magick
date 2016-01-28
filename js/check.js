@@ -31,7 +31,7 @@ function getMessage(a,b){
 
         var length = 0;
 
-        for( var i = 0; i < Math.min(a.length, b.length); i++ ) {
+        for( var i = 0, minLength = Math.max(a.length, b.length); i < minLength; i++ ) {
             length += a[i] * b[i];
         }
 
