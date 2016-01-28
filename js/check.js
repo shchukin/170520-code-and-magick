@@ -7,8 +7,7 @@ function getMessage(a,b){
     if( typeof(a) === 'boolean') {
         if(a) {
             return 'Я попал в ' + b;
-        }
-        else {
+        } else {
             return 'Я никуда не попал';
         }
     }
@@ -28,7 +27,7 @@ function getMessage(a,b){
             }
 
             return 'Я прошёл ' + length + ' метров';
-            
+
         } else {
 
             sum = a.reduce(function(previousValue, currentValue){
