@@ -19,23 +19,25 @@ function getMessage(a,b){
     }
 
 
-    if( Array.isArray(a) && ! Array.isArray(b) ) {
+    if( Array.isArray(a) ) {
 
-        sum = a.reduce(function(previousValue, currentValue){
-            return previousValue + currentValue;
-        });
+        if( Array.isArray(b) ) {
 
-        return 'Я прошёл ' + sum + ' шагов';
-    }
+            for( i = 0, minLength = Math.max(a.length, b.length); i < minLength; i++ ) {
+                length += a[i] * b[i];
+            }
 
+            return 'Я прошёл ' + length + ' метров';
+            
+        } else {
 
-    if( Array.isArray(a) && Array.isArray(b) ) {
+            sum = a.reduce(function(previousValue, currentValue){
+                return previousValue + currentValue;
+            });
 
-        for( i = 0, minLength = Math.max(a.length, b.length); i < minLength; i++ ) {
-            length += a[i] * b[i];
+            return 'Я прошёл ' + sum + ' шагов';
         }
 
-        return 'Я прошёл ' + length + ' метров';
     }
 
 }
