@@ -51,7 +51,7 @@ function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth,
     textY = containerY;
   }
 
-  for ( var line = 0; (line < lineQuantity); line++ ) {
+  for ( var line = 0; line < lineQuantity; line++ ) {
     ctx.fillText(content[line], textX + (textWidth / 2), textY + (line * lineHeight) );
   }
 
