@@ -1,5 +1,9 @@
 function getMessage(a,b){
 
+    var sum = 0;
+    var length = 0;
+
+
     if( typeof(a) === 'boolean') {
         if(a) {
             return 'Я попал в ' + b;
@@ -17,7 +21,7 @@ function getMessage(a,b){
 
     if( Array.isArray(a) && ! Array.isArray(b) ) {
 
-        var sum = a.reduce(function(previousValue, currentValue){
+        sum = a.reduce(function(previousValue, currentValue){
             return previousValue + currentValue;
         });
 
@@ -27,9 +31,7 @@ function getMessage(a,b){
 
     if( Array.isArray(a) && Array.isArray(b) ) {
 
-        var length = 0;
-
-        for( var i = 0, minLength = Math.max(a.length, b.length); i < minLength; i++ ) {
+        for( i = 0, minLength = Math.max(a.length, b.length); i < minLength; i++ ) {
             length += a[i] * b[i];
         }
 
