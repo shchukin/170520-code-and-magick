@@ -23,41 +23,46 @@
 
   var LOWEST_POSITIVE_GRADE = 3;
 
+  /* Form elements */
   var formElement = document.querySelector('.review-form');
   var nameElement = formElement.querySelector('#review-name');
   var textElement = formElement.querySelector('#review-text');
   var markElements = formElement.querySelectorAll('[name="review-mark"]');
   var submitElement = formElement.querySelector('.review-submit');
 
+  /* Form notification labels elements */
   var nameNotifyElement = formElement.querySelector('.review-fields-name');
   var textNotifyElement = formElement.querySelector('.review-fields-text');
-  var notifySectionElement = formElement.querySelector('.review-fields');
+  var notifyContainerElement = formElement.querySelector('.review-fields');
 
+  /* Form state */
+  var markPositive;
   var nameValidity;
   var textValidity;
 
+  /* Helpers */
   var i;
 
 
-  function isGradePositive() {
+  function changeMarkPositive() {
     if ( formElement.querySelector('[name="review-mark"]:checked').value >= LOWEST_POSITIVE_GRADE) {
-      return true;
+      markPositive = true;
     } else {
-      return false;
+      markPositive = false;
     }
   }
 
-  function labelsVisibility() {
+  function labelsContainerVisibility() {
     if ( nameValidity && textValidity ) {
-      notifySectionElement.style.display = 'none';
+      notifyContainerElement.style.display = 'none';
     }
     else {
-      notifySectionElement.style.display = 'inline-block';
+      notifyContainerElement.style.display = 'inline-block';
     }
   }
 
-  function checkRequirements() {
-    if ( nameElement.value && (isGradePositive() || textElement.value) ) {
+  function checkAllRequirements() {
+    if ( nameValidity && textValidity ) {
       submitElement.disabled = false;
     } else {
       submitElement.disabled = true;
@@ -72,30 +77,34 @@
       nameValidity = false;
       nameNotifyElement.style.display = 'inline';
     }
-    labelsVisibility();
-    checkRequirements();
+    labelsContainerVisibility();
+    checkAllRequirements();
   }
 
   function validateText() {
-    if (isGradePositive() || textElement.value) {
+    if (markPositive || textElement.value) {
       textValidity = true;
       textNotifyElement.style.display = 'none';
     } else {
       textValidity = false;
       textNotifyElement.style.display = 'inline';
     }
-    labelsVisibility();
-    checkRequirements();
+    labelsContainerVisibility();
+    checkAllRequirements();
   }
 
-
+  changeMarkPositive();
   validateName();
   validateText();
 
   nameElement.onchange = validateName;
   textElement.onchange = validateText;
+  
   for (i = 0; i < markElements.length; i++ ) {
-    markElements[i].onchange = validateText;
+    markElements[i].onchange = function(){
+      changeMarkPositive();
+      validateText();
+    };
   }
 
 
