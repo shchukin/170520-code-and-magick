@@ -33,13 +33,26 @@
   var textNotifyElement = formElement.querySelector('.review-fields-text');
   var notifySectionElement = formElement.querySelector('.review-fields');
 
+  var nameValidity;
+  var textValidity;
+
   var i;
+
 
   function isGradePositive() {
     if ( formElement.querySelector('[name="review-mark"]:checked').value >= LOWEST_POSITIVE_GRADE) {
       return true;
     } else {
       return false;
+    }
+  }
+
+  function labelsVisibility() {
+    if ( nameValidity && textValidity ) {
+      notifySectionElement.style.display = 'none';
+    }
+    else {
+      notifySectionElement.style.display = 'inline-block';
     }
   }
 
@@ -53,19 +66,25 @@
 
   function validateName() {
     if( nameElement.value ) {
+      nameValidity = true;
       nameNotifyElement.style.display = 'none';
     } else {
+      nameValidity = false;
       nameNotifyElement.style.display = 'inline';
     }
+    labelsVisibility();
     checkRequirements();
   }
 
   function validateText() {
     if (isGradePositive() || textElement.value) {
+      textValidity = true;
       textNotifyElement.style.display = 'none';
     } else {
+      textValidity = false;
       textNotifyElement.style.display = 'inline';
     }
+    labelsVisibility();
     checkRequirements();
   }
 
