@@ -44,21 +44,17 @@
 
     if ( ! nameElement.value) {
 
-      ;
-
+      submitElement.disabled = true;
     } else if( ! isGradePositive() && ! textElement.value ) {
 
-      ;
-
+      submitElement.disabled = true;
     } else {
 
       submitElement.disabled = false;
-
     }
   }
-  
 
-  submitElement.disabled = true;
+
 
   checkRequirements();
 
