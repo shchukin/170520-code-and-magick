@@ -2,6 +2,8 @@ function getMessage(a,b){
 
   var sum = 0;
   var length = 0;
+  var i;
+  var minLength;
 
   
   if( typeof(a) === 'boolean') {
