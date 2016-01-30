@@ -32,7 +32,7 @@
   var i;
 
   function isGradePositive() {
-    if( formElement.querySelector('[name="review-mark"]:checked').value >= LOWEST_POSITIVE_GRADE) {
+    if ( formElement.querySelector('[name="review-mark"]:checked').value >= LOWEST_POSITIVE_GRADE) {
       return true;
     } else {
       return false;
@@ -40,13 +40,11 @@
   }
 
   function checkRequirements() {
-
-    if( nameElement.value && (isGradePositive() || textElement.value) ) {
+    if ( nameElement.value && (isGradePositive() || textElement.value) ) {
       submitElement.disabled = false;
     } else {
       submitElement.disabled = true;
     }
-
   }
 
   checkRequirements();
