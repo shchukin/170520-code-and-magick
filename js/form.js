@@ -27,6 +27,9 @@
   var nameElement = formElement.querySelector('#review-name');
   var textElement = formElement.querySelector('#review-text');
   var markElement = formElement.querySelectorAll('[name="review-mark"]');
+  var submitElement = formElement.querySelector('.review-submit');
+
+
 
   function isGradePositive() {
     if( formElement.querySelector('[name="review-mark"]:checked').value >= LOWEST_POSITIVE_GRADE) {
@@ -35,5 +38,28 @@
       return false;
     }
   }
+
+
+  function checkRequirements() {
+
+    if ( ! nameElement.value) {
+
+      ;
+
+    } else if( ! isGradePositive() && ! textElement.value ) {
+
+      ;
+
+    } else {
+
+      submitElement.disabled = false;
+
+    }
+  }
+  
+
+  submitElement.disabled = true;
+
+  checkRequirements();
 
 })();
