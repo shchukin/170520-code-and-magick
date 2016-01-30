@@ -39,19 +39,14 @@
     }
   }
 
-
   function checkRequirements() {
 
-    if ( ! nameElement.value) {
-
-      submitElement.disabled = true;
-    } else if( ! isGradePositive() && ! textElement.value ) {
-
-      submitElement.disabled = true;
-    } else {
-
+    if( nameElement.value && (isGradePositive() || textElement.value) ) {
       submitElement.disabled = false;
+    } else {
+      submitElement.disabled = true;
     }
+
   }
 
   checkRequirements();
