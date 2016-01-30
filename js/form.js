@@ -47,20 +47,25 @@
     }
   }
 
-  checkRequirements();
+  function validate() {
+    
+    checkRequirements();
+  }
 
+
+  validate();
 
   nameElement.onchange = function() {
-    checkRequirements();
+    validate();
   };
 
   textElement.onchange = function() {
-    checkRequirements();
+    validate();
   };
 
   for (i = 0; i < markElements.length; i++ ) {
     markElements[i].onchange = function() {
-      checkRequirements();
+      validate();
     }
   }
 
