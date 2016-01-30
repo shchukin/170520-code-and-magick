@@ -99,11 +99,13 @@
   nameElement.oninput = validateName;
   textElement.oninput = validateText;
 
+  function onMarkChange () {
+    changeMarkPositive();
+    validateText();
+  }
+
   for (i = 0; i < markElements.length; i++ ) {
-    markElements[i].onchange = function() {
-      changeMarkPositive();
-      validateText();
-    };
+    markElements[i].onchange = onMarkChange;
   }
 
 
