@@ -45,7 +45,7 @@
 
 
   function changeMarkPositive() {
-    if ( formElement.querySelector('[name="review-mark"]:checked').value >= LOWEST_POSITIVE_GRADE) {
+    if ( formElement.querySelector('[name="review-mark"]:checked').value >= LOWEST_POSITIVE_GRADE ) {
       markPositive = true;
     } else {
       markPositive = false;
@@ -61,7 +61,7 @@
   }
 
   function validateText() {
-    if (markPositive || textElement.value) {
+    if ( markPositive || textElement.value ) {
       textValidity = true;
     } else {
       textValidity = false;
@@ -76,7 +76,7 @@
       nameNotifyElement.style.display = 'inline';
     }
 
-    if( textValidity ) {
+    if ( textValidity ) {
       textNotifyElement.style.display = 'none';
     } else {
       textNotifyElement.style.display = 'inline';
@@ -110,7 +110,7 @@
     setValidationHelpers();
   };
 
-  function onMarkChange () {
+  function onMarkChange() {
     changeMarkPositive();
     validateText();
     setValidationHelpers();
