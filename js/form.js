@@ -100,7 +100,7 @@
   textElement.onchange = validateText;
 
   for (i = 0; i < markElements.length; i++ ) {
-    markElements[i].onchange = function (){
+    markElements[i].onchange = function() {
       changeMarkPositive();
       validateText();
     };
