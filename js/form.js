@@ -26,10 +26,10 @@
   var formElement = document.querySelector('.review-form');
   var nameElement = formElement.querySelector('#review-name');
   var textElement = formElement.querySelector('#review-text');
-  var markElement = formElement.querySelectorAll('[name="review-mark"]');
+  var markElements = formElement.querySelectorAll('[name="review-mark"]');
   var submitElement = formElement.querySelector('.review-submit');
 
-
+  var i;
 
   function isGradePositive() {
     if( formElement.querySelector('[name="review-mark"]:checked').value >= LOWEST_POSITIVE_GRADE) {
@@ -54,8 +54,22 @@
     }
   }
 
-
-
   checkRequirements();
+
+
+  nameElement.onchange = function() {
+    checkRequirements();
+  };
+
+  textElement.onchange = function() {
+    checkRequirements();
+  };
+
+  for (i = 0; i < markElements.length; i++ ) {
+    markElements[i].onchange = function() {
+      checkRequirements();
+    }
+  }
+
 
 })();
