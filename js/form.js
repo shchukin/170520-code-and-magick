@@ -52,56 +52,68 @@
     }
   }
 
-  function labelsContainerVisibility() {
-    if ( nameValidity && textValidity ) {
-      notifyContainerElement.style.display = 'none';
-    } else {
-      notifyContainerElement.style.display = 'inline-block';
-    }
-  }
-
-  function checkAllRequirements() {
-    if ( nameValidity && textValidity ) {
-      submitElement.disabled = false;
-    } else {
-      submitElement.disabled = true;
-    }
-  }
-
   function validateName() {
     if ( nameElement.value ) {
       nameValidity = true;
-      nameNotifyElement.style.display = 'none';
     } else {
       nameValidity = false;
-      nameNotifyElement.style.display = 'inline';
     }
-    labelsContainerVisibility();
-    checkAllRequirements();
   }
 
   function validateText() {
     if (markPositive || textElement.value) {
       textValidity = true;
-      textNotifyElement.style.display = 'none';
     } else {
       textValidity = false;
+    }
+  }
+
+  function setValidationHelpers() {
+
+    if ( nameValidity ) {
+      nameNotifyElement.style.display = 'none';
+    } else {
+      nameNotifyElement.style.display = 'inline';
+    }
+
+    if( textValidity ) {
+      textNotifyElement.style.display = 'none';
+    } else {
       textNotifyElement.style.display = 'inline';
     }
-    labelsContainerVisibility();
-    checkAllRequirements();
+
+    if ( nameValidity && textValidity ) {
+      notifyContainerElement.style.display = 'none';
+    } else {
+      notifyContainerElement.style.display = 'inline-block';
+    }
+
+    if ( nameValidity && textValidity ) {
+      submitElement.disabled = false;
+    } else {
+      submitElement.disabled = true;
+    }
+
   }
 
   changeMarkPositive();
   validateName();
   validateText();
+  setValidationHelpers();
 
-  nameElement.oninput = validateName;
-  textElement.oninput = validateText;
+  nameElement.oninput = function() {
+    validateName();
+    setValidationHelpers();
+  };
+  textElement.oninput = function() {
+    validateText();
+    setValidationHelpers();
+  };
 
   function onMarkChange () {
     changeMarkPositive();
     validateText();
+    setValidationHelpers();
   }
 
   for (i = 0; i < markElements.length; i++ ) {
