@@ -73,18 +73,10 @@
   validateName();
   validateText();
 
-  nameElement.onchange = function() {
-    validateName();
-  };
-
-  textElement.onchange = function() {
-    validateText();
-  };
-
+  nameElement.onchange = validateName;
+  textElement.onchange = validateText;
   for (i = 0; i < markElements.length; i++ ) {
-    markElements[i].onchange = function() {
-      validateText();
-    }
+    markElements[i].onchange = validateText;
   }
 
 
