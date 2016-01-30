@@ -29,6 +29,10 @@
   var markElements = formElement.querySelectorAll('[name="review-mark"]');
   var submitElement = formElement.querySelector('.review-submit');
 
+  var nameNotifyElement = formElement.querySelector('.review-fields-name');
+  var textNotifyElement = formElement.querySelector('.review-fields-text');
+  var notifySectionElement = formElement.querySelector('.review-fields');
+
   var i;
 
   function isGradePositive() {
@@ -47,25 +51,39 @@
     }
   }
 
-  function validate() {
-    
+  function validateName() {
+    if( nameElement.value ) {
+      nameNotifyElement.style.display = 'none';
+    } else {
+      nameNotifyElement.style.display = 'inline';
+    }
+    checkRequirements();
+  }
+
+  function validateText() {
+    if (isGradePositive() || textElement.value) {
+      textNotifyElement.style.display = 'none';
+    } else {
+      textNotifyElement.style.display = 'inline';
+    }
     checkRequirements();
   }
 
 
-  validate();
+  validateName();
+  validateText();
 
   nameElement.onchange = function() {
-    validate();
+    validateName();
   };
 
   textElement.onchange = function() {
-    validate();
+    validateText();
   };
 
   for (i = 0; i < markElements.length; i++ ) {
     markElements[i].onchange = function() {
-      validate();
+      validateText();
     }
   }
 
