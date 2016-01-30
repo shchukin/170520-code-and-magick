@@ -55,8 +55,7 @@
   function labelsContainerVisibility() {
     if ( nameValidity && textValidity ) {
       notifyContainerElement.style.display = 'none';
-    }
-    else {
+    } else {
       notifyContainerElement.style.display = 'inline-block';
     }
   }
@@ -70,7 +69,7 @@
   }
 
   function validateName() {
-    if( nameElement.value ) {
+    if ( nameElement.value ) {
       nameValidity = true;
       nameNotifyElement.style.display = 'none';
     } else {
@@ -101,7 +100,7 @@
   textElement.onchange = validateText;
 
   for (i = 0; i < markElements.length; i++ ) {
-    markElements[i].onchange = function(){
+    markElements[i].onchange = function (){
       changeMarkPositive();
       validateText();
     };
