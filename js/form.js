@@ -28,5 +28,12 @@
   var textElement = formElement.querySelector('#review-text');
   var markElement = formElement.querySelectorAll('[name="review-mark"]');
 
+  function isGradePositive() {
+    if( formElement.querySelector('[name="review-mark"]:checked').value >= LOWEST_POSITIVE_GRADE) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 })();
