@@ -96,8 +96,8 @@
   validateName();
   validateText();
 
-  nameElement.onchange = validateName;
-  textElement.onchange = validateText;
+  nameElement.oninput = validateName;
+  textElement.oninput = validateText;
 
   for (i = 0; i < markElements.length; i++ ) {
     markElements[i].onchange = function() {
