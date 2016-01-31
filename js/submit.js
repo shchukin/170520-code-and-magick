@@ -2,7 +2,24 @@
 
 (function() {
 
+  /* Get cookies */
+
   var formElement = document.querySelector('.review-form');
+  var nameElement = formElement.querySelector('#review-name');
+  var markElements = formElement.querySelectorAll('[name="review-mark"]');
+
+
+  for ( var i = 0; i < markElements.length; i++ ) {
+    markElements[i].checked = false;
+  }
+
+  formElement.querySelector('#review-mark-' + docCookies.getItem('mark') ).checked = true;
+
+  nameElement.value = docCookies.getItem('name');
+
+
+
+  /* Set cookies */
 
   formElement.onsubmit = function() {
     event.preventDefault();
@@ -25,5 +42,5 @@
 
     formElement.submit();
   }
-  
+
 })();
