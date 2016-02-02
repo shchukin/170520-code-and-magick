@@ -84,16 +84,12 @@
 
     if ( nameValidity && textValidity ) {
       notifyContainerElement.style.display = 'none';
-    } else {
-      notifyContainerElement.style.display = 'inline-block';
-    }
-
-    if ( nameValidity && textValidity ) {
       submitElement.disabled = false;
     } else {
+      notifyContainerElement.style.display = 'inline-block';
       submitElement.disabled = true;
     }
-
+    
   }
 
   changeMarkPositive();
