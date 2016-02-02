@@ -53,11 +53,7 @@
   }
 
   function validateText() {
-    if ( markPositive || textElement.value ) {
-      textValidity = true;
-    } else {
-      textValidity = false;
-    }
+      textValidity = markPositive || textElement.value;
   }
 
   function setValidationHelpers() {
