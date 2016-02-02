@@ -45,7 +45,7 @@
 
 
   function changeMarkPositive() {
-    markPositive = formElement.querySelector('[name="review-mark"]:checked').value >= LOWEST_POSITIVE_GRADE
+    markPositive = formElement.querySelector('[name="review-mark"]:checked').value >= LOWEST_POSITIVE_GRADE;
   }
 
   function validateName() {
@@ -53,7 +53,7 @@
   }
 
   function validateText() {
-      textValidity = markPositive || textElement.value;
+    textValidity = markPositive || textElement.value;
   }
 
   function setValidationHelpers() {
