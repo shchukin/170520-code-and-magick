@@ -8,14 +8,22 @@
   var nameElement = formElement.querySelector('#review-name');
   var markElements = formElement.querySelectorAll('[name="review-mark"]');
 
+  var markCookie = docCookies.getItem('mark');
+  var nameCookie = docCookies.getItem('name');
 
-  for ( var i = 0; i < markElements.length; i++ ) {
-    markElements[i].checked = false;
+  if ( markCookie ) {
+    for ( var i = 0; i < markElements.length; i++ ) {
+      markElements[i].checked = false;
+    }
+    formElement.querySelector('#review-mark-' + markCookie ).checked = true;
   }
 
-  formElement.querySelector('#review-mark-' + docCookies.getItem('mark') ).checked = true;
+  if ( nameCookie ) {
+    nameElement.value = nameCookie;
+  }
 
-  nameElement.value = docCookies.getItem('name');
+
+
 
 
 
@@ -23,7 +31,6 @@
 
   formElement.onsubmit = function() {
     event.preventDefault();
-
     var BIRTH_MONTH = 10;
     var BIRTH_DAY = 27;
 
