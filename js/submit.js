@@ -37,7 +37,6 @@
     var currentDate = Date.now();
 
     var cookiesExpire = currentDate > birthdayThisYear ? currentDate - birthdayThisYear : currentDate - birthdayThisYear + (1000 * 60 * 60 * 24 * 365);
-    //var cookiesExpireFormatted = new Date(cookiesExpire).toUTCString();
 
     markCookie = formElement.querySelector('[name="review-mark"]:checked').value;
     nameCookie = formElement.querySelector('#review-name').value;
