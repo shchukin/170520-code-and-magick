@@ -49,11 +49,7 @@
   }
 
   function validateName() {
-    if ( nameElement.value ) {
-      nameValidity = true;
-    } else {
-      nameValidity = false;
-    }
+    nameValidity = !!nameElement.value;
   }
 
   function validateText() {
