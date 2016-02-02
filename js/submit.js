@@ -42,8 +42,8 @@
     markCookie = formElement.querySelector('[name="review-mark"]:checked').value;
     nameCookie = formElement.querySelector('#review-name').value;
 
-    document.cookie = 'mark=' + markCookie + ';'// + ' expires=' + cookiesExpireFormatted + ';';
-    document.cookie = 'name=' + nameCookie + ';'// + ' expires=' + cookiesExpireFormatted + ';';
+    docCookies.setItem('mark', markCookie, cookiesExpire);
+    docCookies.setItem('name', nameCookie, cookiesExpire);
 
     formElement.submit();
   }
