@@ -29,7 +29,7 @@
 
   /* Set cookies */
 
-  formElement.onsubmit = function() {
+  formElement.onsubmit = function(event) {
     event.preventDefault();
 
     var currentYear = new Date().getFullYear();
