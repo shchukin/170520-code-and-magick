@@ -38,7 +38,7 @@
       reviewElement.replaceChild(avatarValue, avatarElement);
     };
 
-    avatarValue.onload.onerror = function(){
+    avatarValue.onerror = function(){
       reviewElement.className += ' review-load-failure';
     };
 
