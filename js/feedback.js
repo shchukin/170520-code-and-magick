@@ -17,9 +17,9 @@
     var template = document.querySelector('#review-template');
     var element = 'content' in template ? template.content.children[0].cloneNode(true) : template.children[0].cloneNode(true);
 
-    var grade = convertGradeValueToWord(data.rating);
+    var gradeFormatted = convertGradeValueToWord(data.rating);
 
-    element.querySelector('.review-rating').className += data.rating >= 2 ? ' review-rating-' + grade : '';
+    element.querySelector('.review-rating').className += data.rating >= 2 ? ' review-rating-' + gradeFormatted : '';
     element.querySelector('.review-text').textContent = data.description;
 
 
