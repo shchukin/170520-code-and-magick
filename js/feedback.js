@@ -15,31 +15,31 @@
   function getElementFromTemplate(data) {
 
     var template = document.querySelector('#review-template');
-    var element = 'content' in template ? template.content.children[0].cloneNode(true) : template.children[0].cloneNode(true);
+    var revieWelement = 'content' in template ? template.content.children[0].cloneNode(true) : template.children[0].cloneNode(true);
 
     var gradeFormatted = convertGradeValueToWord(data.rating);
 
-    element.querySelector('.review-rating').className += data.rating >= 2 ? ' review-rating-' + gradeFormatted : '';
-    element.querySelector('.review-text').textContent = data.description;
+    revieWelement.querySelector('.review-rating').className += data.rating >= 2 ? ' review-rating-' + gradeFormatted : '';
+    revieWelement.querySelector('.review-text').textContent = data.description;
 
 
     var avatar = new Image();
     avatar.src = data.author.picture;
 
     avatar.onload = function(){
-      element.querySelector('.review-author').src = avatar.src;
-      element.querySelector('.review-author').width = REVIEW_AUTHOR_AVATAR_SIZE;
-      element.querySelector('.review-author').height = REVIEW_AUTHOR_AVATAR_SIZE;
-      element.querySelector('.review-author').alt = 'data.author.name';
-      element.querySelector('.review-author').title = data.author.name;
+      revieWelement.querySelector('.review-author').src = avatar.src;
+      revieWelement.querySelector('.review-author').width = REVIEW_AUTHOR_AVATAR_SIZE;
+      revieWelement.querySelector('.review-author').height = REVIEW_AUTHOR_AVATAR_SIZE;
+      revieWelement.querySelector('.review-author').alt = 'data.author.name';
+      revieWelement.querySelector('.review-author').title = data.author.name;
     };
 
     avatar.onload.onerror = function(){
-      element.className += ' review-load-failure';
+      revieWelement.className += ' review-load-failure';
     };
 
 
-    return element;
+    return revieWelement;
   }
 
   function reviewsOutput() {
