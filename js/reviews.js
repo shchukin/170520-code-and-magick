@@ -87,3 +87,7 @@ function reviewsOutput() {
 
 }
 
+if(reviews) {
+  reviewsOutput();
+}
+
