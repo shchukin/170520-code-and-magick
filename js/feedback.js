@@ -5,8 +5,18 @@
   var container = document.querySelector('.reviews-list');
 
   function getElementFromTemplate(data) {
+
     var template = document.querySelector('#review-template');
-    var element = template.content.children[0].cloneNode(true);
+
+    if ( 'content' in template ) {
+      var element = template.content.children[0].cloneNode(true);
+    } else {
+      var element = template.children[0].cloneNode(true);
+    }
+
+
+
+
     element.querySelector('.review-text').textContent = data.description;
 
 
