@@ -125,14 +125,11 @@
 
 <script>
   var reviews = null;
-  var FiltersElement = document.querySelector('.reviews-filter');
-  FiltersElement.classList.add('invisible');
 
   function __reviewsLoadCallback(data) {
     reviews = data;
     if ( reviews ) {
       reviewsOutput();
-      FiltersElement.classList.remove('invisible');
     }
   }
 </script>

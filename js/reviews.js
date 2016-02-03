@@ -2,6 +2,9 @@
 
 var REVIEW_AUTHOR_AVATAR_SIZE = 124;
 var LOADING_TIMEOUT = 10000;
+var FiltersElement = document.querySelector('.reviews-filter');
+FiltersElement.classList.add('invisible');
+
 
 
 function convertGradeValueToWord( grade ) {
@@ -79,4 +82,8 @@ function reviewsOutput() {
     var reviewValue = getElementFromTemplate(review);
     containerElement.appendChild(reviewValue);
   });
+
+  FiltersElement.classList.remove('invisible');
+
 }
+
