@@ -3,9 +3,6 @@
 var REVIEW_AUTHOR_AVATAR_SIZE = 124;
 var LOADING_TIMEOUT = 10000;
 
-var scriptElement;
-var reviews;
-
 
 function convertGradeValueToWord( grade ) {
   if ( grade === 1 ) {
@@ -83,26 +80,3 @@ function reviewsOutput() {
     containerElement.appendChild(reviewValue);
   });
 }
-
-
-reviews = null;
-
-function __reviewsLoadCallback(data) {
-  reviews = data;
-
-  var FiltersElement = document.querySelector('.reviews-filter');
-
-  FiltersElement.classList.add('invisible');
-
-  if ( reviews ) {
-    reviewsOutput();
-  }
-
-  FiltersElement.classList.remove('invisible');
-
-}
-
-
-scriptElement = document.createElement('script');
-scriptElement.src = 'https://up.htmlacademy.ru/assets/js_intensive/jsonp/reviews.js';
-document.body.appendChild(scriptElement);
