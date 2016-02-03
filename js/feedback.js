@@ -4,27 +4,20 @@
 
   var container = document.querySelector('.reviews-list');
 
+  function convertGradeValueToWord( grade ) {
+    if( grade == 1 ) return 'one';
+    if( grade == 2 ) return 'two';
+    if( grade == 3 ) return 'three';
+    if( grade == 4 ) return 'four';
+    if( grade == 5 ) return 'five';
+  }
+
   function getElementFromTemplate(data) {
 
     var template = document.querySelector('#review-template');
     var element = 'content' in template ? template.content.children[0].cloneNode(true) : template.children[0].cloneNode(true);
-    
-    var grade;
 
-    switch (data.rating) {
-      case 2:
-        grade = 'two';
-        break;
-      case 3:
-        grade = 'three';
-        break;
-      case 4:
-        grade = 'four';
-        break;
-      case 5:
-        grade = 'five';
-        break;
-    }
+    var grade = convertGradeValueToWord(data.rating);
 
     element.querySelector('.review-rating').className += data.rating >= 2 ? ' review-rating-' + grade : '';
     element.querySelector('.review-text').textContent = data.description;
