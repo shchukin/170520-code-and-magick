@@ -3,7 +3,9 @@
   var REVIEW_AUTHOR_AVATAR_SIZE = 124;
   var LOADING_TIMEOUT = 10000;
 
-  var container = document.querySelector('.reviews-list');
+  var containerElement;
+  var reviews;
+
 
   function convertGradeValueToWord( grade ) {
     if( grade == 1 ) return 'one';
@@ -61,21 +63,24 @@
     return reviewElement;
   }
 
+
+  containerElement = document.querySelector('.reviews-list');
+
   function reviewsOutput() {
-    if ( reviews ) {
-      reviews.forEach(function(review){
-        var element = getElementFromTemplate(review);
-        container.appendChild(element);
-      });
-    }
+    reviews.forEach(function(review){
+      var reviewValue = getElementFromTemplate(review);
+      containerElement.appendChild(reviewValue);
+    });
   }
 
 
-  var reviews = null;
+  reviews = null;
 
   function __reviewsLoadCallback(data) {
     reviews = data;
-    reviewsOutput();
+    if ( reviews ) {
+      reviewsOutput();
+    }
   }
 
   var scriptElement = document.createElement('script');
