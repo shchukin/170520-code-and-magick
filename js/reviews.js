@@ -18,7 +18,7 @@ function convertGradeValueToWord( grade ) {
 function getElementFromTemplate(data) {
 
   var template = document.querySelector('#review-template');
-  var reviewElement = 'content' in template ? template.content.children[0].cloneNode(true) : template.children[0].cloneNode(true);
+  var reviewElement = 'content' in template ? template.content.children[0].cloneNode(true) : template.childNodes[0].cloneNode(true);
 
   var avatarElement      = reviewElement.querySelector('.review-author');
   var ratingElement      = reviewElement.querySelector('.review-rating');
