@@ -125,22 +125,18 @@
 
 <script>
   var reviews = null;
+  var FiltersElement = document.querySelector('.reviews-filter');
+  FiltersElement.classList.add('invisible');
 
   function __reviewsLoadCallback(data) {
     reviews = data;
-
-    var FiltersElement = document.querySelector('.reviews-filter');
-    FiltersElement.classList.add('invisible');
-
     if ( reviews ) {
       reviewsOutput();
+      FiltersElement.classList.remove('invisible');
     }
-
-    FiltersElement.classList.remove('invisible');
-
   }
-
 </script>
+
 <script src="https://up.htmlacademy.ru/assets/js_intensive/jsonp/reviews.js"></script>
 
 </body>
