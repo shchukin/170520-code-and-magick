@@ -8,11 +8,21 @@ var reviews;
 
 
 function convertGradeValueToWord( grade ) {
-  if ( grade === 1 ) { return 'one';   }
-  if ( grade === 2 ) { return 'two';   }
-  if ( grade === 3 ) { return 'three'; }
-  if ( grade === 4 ) { return 'four';  }
-  if ( grade === 5 ) { return 'five';  }
+  if ( grade === 1 ) {
+    return 'one';
+  }
+  if ( grade === 2 ) {
+    return 'two';
+  }
+  if ( grade === 3 ) {
+    return 'three';
+  }
+  if ( grade === 4 ) {
+    return 'four';
+  }
+  if ( grade === 5 ) {
+    return 'five';
+  }
 }
 
 function getElementFromTemplate(data) {
@@ -20,8 +30,8 @@ function getElementFromTemplate(data) {
   var template = document.querySelector('#review-template');
   var reviewElement = 'content' in template ? template.content.children[0].cloneNode(true) : template.childNodes[0].cloneNode(true);
 
-  var avatarElement      = reviewElement.querySelector('.review-author');
-  var ratingElement      = reviewElement.querySelector('.review-rating');
+  var avatarElement = reviewElement.querySelector('.review-author');
+  var ratingElement = reviewElement.querySelector('.review-rating');
   var descriptionElement = reviewElement.querySelector('.review-text');
 
   var avatarValue;
