@@ -1,6 +1,7 @@
 'use strict';
 
   var REVIEW_AUTHOR_AVATAR_SIZE = 124;
+  var LOADING_TIMEOUT = 10000;
 
   var container = document.querySelector('.reviews-list');
 
@@ -25,11 +26,14 @@
     var ratingValue;
     var descriptionValue;
 
+    var avatarLoadTimeout;
+
     
     avatarValue = new Image();
     avatarValue.src = data.author.picture;
 
     avatarValue.onload = function(){
+      clearTimeout(avatarLoadTimeout);
       avatarValue.width = REVIEW_AUTHOR_AVATAR_SIZE;
       avatarValue.height = REVIEW_AUTHOR_AVATAR_SIZE;
       avatarValue.alt = data.author.name;
@@ -41,6 +45,11 @@
     avatarValue.onerror = function(){
       reviewElement.className += ' review-load-failure';
     };
+
+    avatarLoadTimeout = setTimeout(function(){
+      avatarValue.src = '';
+      reviewElement.className += ' review-load-failure';
+    }, LOADING_TIMEOUT);
 
 
     ratingValue = convertGradeValueToWord(data.rating);
