@@ -15,31 +15,31 @@
   function getElementFromTemplate(data) {
 
     var template = document.querySelector('#review-template');
-    var revieWelement = 'content' in template ? template.content.children[0].cloneNode(true) : template.children[0].cloneNode(true);
+    var reviewElement = 'content' in template ? template.content.children[0].cloneNode(true) : template.children[0].cloneNode(true);
 
     var gradeFormatted = convertGradeValueToWord(data.rating);
 
-    revieWelement.querySelector('.review-rating').className += data.rating >= 2 ? ' review-rating-' + gradeFormatted : '';
-    revieWelement.querySelector('.review-text').textContent = data.description;
+    reviewElement.querySelector('.review-rating').className += data.rating >= 2 ? ' review-rating-' + gradeFormatted : '';
+    reviewElement.querySelector('.review-text').textContent = data.description;
 
 
     var avatar = new Image();
     avatar.src = data.author.picture;
 
     avatar.onload = function(){
-      revieWelement.querySelector('.review-author').src = avatar.src;
-      revieWelement.querySelector('.review-author').width = REVIEW_AUTHOR_AVATAR_SIZE;
-      revieWelement.querySelector('.review-author').height = REVIEW_AUTHOR_AVATAR_SIZE;
-      revieWelement.querySelector('.review-author').alt = 'data.author.name';
-      revieWelement.querySelector('.review-author').title = data.author.name;
+      reviewElement.querySelector('.review-author').src = avatar.src;
+      reviewElement.querySelector('.review-author').width = REVIEW_AUTHOR_AVATAR_SIZE;
+      reviewElement.querySelector('.review-author').height = REVIEW_AUTHOR_AVATAR_SIZE;
+      reviewElement.querySelector('.review-author').alt = 'data.author.name';
+      reviewElement.querySelector('.review-author').title = data.author.name;
     };
 
     avatar.onload.onerror = function(){
-      revieWelement.className += ' review-load-failure';
+      reviewElement.className += ' review-load-failure';
     };
 
 
-    return revieWelement;
+    return reviewElement;
   }
 
   function reviewsOutput() {
