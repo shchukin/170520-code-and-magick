@@ -15,31 +15,39 @@
   function getElementFromTemplate(data) {
 
     var template = document.querySelector('#review-template');
-
     var reviewElement = 'content' in template ? template.content.children[0].cloneNode(true) : template.children[0].cloneNode(true);
-    var avatarElement = reviewElement.querySelector('.review-author');
 
-    var gradeFormatted = convertGradeValueToWord(data.rating);
-    var avatarImage;
+    var avatarElement      = reviewElement.querySelector('.review-author');
+    var ratingElement      = reviewElement.querySelector('.review-rating');
+    var descriptionElement = reviewElement.querySelector('.review-text');
 
-    avatarImage = new Image();
-    avatarImage.src = data.author.picture;
+    var avatarValue;
+    var ratingValue;
+    var descriptionValue;
 
-    avatarImage.onload = function(){
-      avatarImage.width = REVIEW_AUTHOR_AVATAR_SIZE;
-      avatarImage.height = REVIEW_AUTHOR_AVATAR_SIZE;
-      avatarImage.alt = data.author.name;
-      avatarImage.title = data.author.name;
-      avatarImage.className = avatarElement.className;
-      reviewElement.replaceChild(avatarImage, avatarElement);
+    
+    avatarValue = new Image();
+    avatarValue.src = data.author.picture;
+
+    avatarValue.onload = function(){
+      avatarValue.width = REVIEW_AUTHOR_AVATAR_SIZE;
+      avatarValue.height = REVIEW_AUTHOR_AVATAR_SIZE;
+      avatarValue.alt = data.author.name;
+      avatarValue.title = data.author.name;
+      avatarValue.className = avatarElement.className;
+      reviewElement.replaceChild(avatarValue, avatarElement);
     };
 
-    avatarImage.onload.onerror = function(){
+    avatarValue.onload.onerror = function(){
       reviewElement.className += ' review-load-failure';
     };
 
-    reviewElement.querySelector('.review-rating').className += data.rating >= 2 ? ' review-rating-' + gradeFormatted : '';
-    reviewElement.querySelector('.review-text').textContent = data.description;
+
+    ratingValue = convertGradeValueToWord(data.rating);
+    ratingElement.className += data.rating >= 2 ? ' review-rating-' + ratingValue : '';
+
+    descriptionValue = data.description;
+    descriptionElement.textContent = descriptionValue;
 
     return reviewElement;
   }
