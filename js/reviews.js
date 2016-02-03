@@ -3,6 +3,7 @@
 var REVIEW_AUTHOR_AVATAR_SIZE = 124;
 var LOADING_TIMEOUT = 10000;
 
+var scriptElement
 var reviews;
 
 
@@ -83,6 +84,6 @@ function __reviewsLoadCallback(data) {
   }
 }
 
-var scriptElement = document.createElement('script');
+scriptElement = document.createElement('script');
 scriptElement.src = 'https://up.htmlacademy.ru/assets/js_intensive/jsonp/reviews.js';
 document.body.appendChild(scriptElement);
