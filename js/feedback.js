@@ -1,12 +1,30 @@
 'use strict';
 
+  var REVIEW_AUTHOR_AVATAR_SIZE = 124;
+
   var container = document.querySelector('.reviews-list');
 
   function getElementFromTemplate(data) {
     var template = document.querySelector('#review-template');
     var element = template.content.children[0].cloneNode(true);
-
     element.querySelector('.review-text').textContent = data.description;
+
+
+    var avatar = new Image();
+    avatar.src = data.author.picture;
+
+    avatar.onload = function(){
+      element.querySelector('.review-author').src = avatar.src;
+      element.querySelector('.review-author').width = REVIEW_AUTHOR_AVATAR_SIZE;
+      element.querySelector('.review-author').height = REVIEW_AUTHOR_AVATAR_SIZE;
+      element.querySelector('.review-author').alt = 'data.author.name';
+      element.querySelector('.review-author').title = data.author.name;
+    };
+
+    avatar.onload.onerror = function(){
+      element.className += ' review-load-failure';
+    };
+
 
     return element;
   }
