@@ -3,7 +3,6 @@
 var REVIEW_AUTHOR_AVATAR_SIZE = 124;
 var LOADING_TIMEOUT = 10000;
 
-var containerElement;
 var reviews;
 
 
@@ -64,9 +63,10 @@ function getElementFromTemplate(data) {
 }
 
 
-containerElement = document.querySelector('.reviews-list');
-
 function reviewsOutput() {
+
+  var containerElement = document.querySelector('.reviews-list');
+
   reviews.forEach(function(review){
     var reviewValue = getElementFromTemplate(review);
     containerElement.appendChild(reviewValue);
