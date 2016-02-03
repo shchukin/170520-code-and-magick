@@ -8,11 +8,11 @@ var reviews;
 
 
 function convertGradeValueToWord( grade ) {
-  if( grade == 1 ) return 'one';
-  if( grade == 2 ) return 'two';
-  if( grade == 3 ) return 'three';
-  if( grade == 4 ) return 'four';
-  if( grade == 5 ) return 'five';
+  if ( grade === 1 ) { return 'one';   }
+  if ( grade === 2 ) { return 'two';   }
+  if ( grade === 3 ) { return 'three'; }
+  if ( grade === 4 ) { return 'four';  }
+  if ( grade === 5 ) { return 'five';  }
 }
 
 function getElementFromTemplate(data) {
@@ -34,7 +34,7 @@ function getElementFromTemplate(data) {
   avatarValue = new Image();
   avatarValue.src = data.author.picture;
 
-  avatarValue.onload = function(){
+  avatarValue.onload = function() {
     clearTimeout(avatarLoadTimeout);
     avatarValue.width = REVIEW_AUTHOR_AVATAR_SIZE;
     avatarValue.height = REVIEW_AUTHOR_AVATAR_SIZE;
@@ -44,11 +44,11 @@ function getElementFromTemplate(data) {
     reviewElement.replaceChild(avatarValue, avatarElement);
   };
 
-  avatarValue.onerror = function(){
+  avatarValue.onerror = function() {
     reviewElement.className += ' review-load-failure';
   };
 
-  avatarLoadTimeout = setTimeout(function(){
+  avatarLoadTimeout = setTimeout(function() {
     avatarValue.src = '';
     reviewElement.className += ' review-load-failure';
   }, LOADING_TIMEOUT);
@@ -68,7 +68,7 @@ function reviewsOutput() {
 
   var containerElement = document.querySelector('.reviews-list');
 
-  reviews.forEach(function(review){
+  reviews.forEach(function(review) {
     var reviewValue = getElementFromTemplate(review);
     containerElement.appendChild(reviewValue);
   });
