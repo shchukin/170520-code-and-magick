@@ -18,13 +18,8 @@
   /* Get cookies */
 
   if ( markCookie ) {
-
     for ( var i = 0; i < markElements.length; i++ ) {
-      markElements[i].checked = false;
-
-      if ( i + 1 === +markCookie ) {
-        markElements[i].checked = true;
-      }
+      markElements[i].checked = (i + 1 == markCookie);
     }
   }
 
