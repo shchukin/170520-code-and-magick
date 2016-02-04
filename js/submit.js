@@ -1,3 +1,5 @@
+/* global docCookies */
+
 'use strict';
 
 (function() {
@@ -37,7 +39,7 @@
     event.preventDefault();
 
     var currentYear = new Date().getFullYear();
-    var birthdayThisYear = new Date(currentYear,  BIRTH_MONTH - 1, BIRTH_DAY).getTime();
+    var birthdayThisYear = new Date(currentYear, BIRTH_MONTH - 1, BIRTH_DAY).getTime();
     var currentDate = Date.now();
 
     var cookiesExpire = currentDate > birthdayThisYear ? currentDate - birthdayThisYear : currentDate - birthdayThisYear + (1000 * 60 * 60 * 24 * 365);
@@ -49,6 +51,6 @@
     docCookies.setItem('name', nameCookie, cookiesExpire);
 
     formElement.submit();
-  }
+  };
 
 })();
