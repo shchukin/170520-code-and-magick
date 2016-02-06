@@ -18,22 +18,19 @@
 
 
   function getElementFromTemplate( data ) {
-    
+
     var reviewElement = ( 'content' in template ) ? ( template.content.children[0].cloneNode(true) ) : ( template.childNodes[0].cloneNode(true) );
 
     var avatarElement = reviewElement.querySelector('.review-author');
     var ratingElement = reviewElement.querySelector('.review-rating');
     var descriptionElement = reviewElement.querySelector('.review-text');
 
-    var avatarValue;
+    var avatarValue = new Image();
     var ratingValue;
     var descriptionValue;
 
     var avatarLoadTimeout;
 
-
-    avatarValue = new Image();
-    avatarValue.src = data.author.picture;
 
     avatarValue.onload = function() {
       clearTimeout(avatarLoadTimeout);
@@ -54,6 +51,7 @@
       reviewElement.className += ' review-load-failure';
     }, LOADING_TIMEOUT);
 
+    avatarValue.src = data.author.picture;
 
     ratingValue = convertGradeValueToWord(data.rating);
     ratingElement.className += data.rating >= 2 ? ' review-rating-' + ratingValue : '';
