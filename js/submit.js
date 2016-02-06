@@ -19,7 +19,7 @@
 
   if ( markCookie ) {
     for ( var i = 0; i < markElements.length; i++ ) {
-      markElements[i].checked = (i + 1 == markCookie);
+      markElements[i].checked = (i + 1 === +markCookie);
     }
   }
 
