@@ -69,11 +69,13 @@
   function reviewsOutput() {
 
     var containerElement = document.querySelector('.reviews-list');
+    var reviewValue = document.createDocumentFragment();
 
     reviews.forEach(function(review) {
-      var reviewValue = getElementFromTemplate(review);
-      containerElement.appendChild(reviewValue);
+      reviewValue.appendChild( getElementFromTemplate(review) );
     });
+
+    containerElement.appendChild(reviewValue);
 
     FiltersElement.classList.remove('invisible');
 
