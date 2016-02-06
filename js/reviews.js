@@ -1,3 +1,6 @@
+/* global reviews */
+
+
 'use strict';
 
 (function() {
