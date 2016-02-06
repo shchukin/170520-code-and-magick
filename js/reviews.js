@@ -4,6 +4,9 @@
 
   var REVIEW_AUTHOR_AVATAR_SIZE = 124;
   var LOADING_TIMEOUT = 10000;
+
+  var template = document.querySelector('#review-template');
+
   var FiltersElement = document.querySelector('.reviews-filter');
   FiltersElement.classList.add('invisible');
 
@@ -14,10 +17,9 @@
   }
 
 
-  function getElementFromTemplate(data) {
-
-    var template = document.querySelector('#review-template');
-    var reviewElement = 'content' in template ? template.content.children[0].cloneNode(true) : template.childNodes[0].cloneNode(true);
+  function getElementFromTemplate( data ) {
+    
+    var reviewElement = ( 'content' in template ) ? ( template.content.children[0].cloneNode(true) ) : ( template.childNodes[0].cloneNode(true) );
 
     var avatarElement = reviewElement.querySelector('.review-author');
     var ratingElement = reviewElement.querySelector('.review-rating');
