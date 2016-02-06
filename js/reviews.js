@@ -9,23 +9,10 @@
 
 
   function convertGradeValueToWord( grade ) {
-    if ( grade === 1 ) {
-      return 'one';
-    }
-    if ( grade === 2 ) {
-      return 'two';
-    }
-    if ( grade === 3 ) {
-      return 'three';
-    }
-    if ( grade === 4 ) {
-      return 'four';
-    }
-    if ( grade === 5 ) {
-      return 'five';
-    }
+    var grades = [null, 'one', 'two', 'three', 'four', 'five'];
+    return grades[grade];
   }
-  
+
 
   function getElementFromTemplate(data) {
 
