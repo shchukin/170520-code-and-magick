@@ -10,8 +10,8 @@
 
   var template = document.querySelector('#review-template');
 
-  var FiltersElement = document.querySelector('.reviews-filter');
-  FiltersElement.classList.add('invisible');
+  var filtersElement = document.querySelector('.reviews-filter');
+  filtersElement.classList.add('invisible');
 
 
   function convertGradeValueToWord( grade ) {
@@ -77,7 +77,7 @@
 
     containerElement.appendChild(reviewValue);
 
-    FiltersElement.classList.remove('invisible');
+    filtersElement.classList.remove('invisible');
 
   }
 
