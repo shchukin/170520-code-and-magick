@@ -11,7 +11,7 @@
   var template = document.querySelector('#review-template');
 
   var filtersElement = document.querySelector('.reviews-filter');
-  filtersElement.classList.add('invisible');
+  filtersElement.className += ' invisible';
 
 
   function convertGradeValueToWord( grade ) {
@@ -77,7 +77,7 @@
 
     containerElement.appendChild(reviewValue);
 
-    filtersElement.classList.remove('invisible');
+    filtersElement.className = filtersElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
 
   }
 
