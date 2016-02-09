@@ -91,10 +91,12 @@
     };
 
     xhr.onerror = function (event) {
+      reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
       reviewsListElement.className += ' reviews-load-failure';
     };
 
     xhr.ontimeout = function (event) {
+      reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
       reviewsListElement.className += ' reviews-load-failure';
     };
 
