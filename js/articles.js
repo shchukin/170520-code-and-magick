@@ -120,6 +120,7 @@
   function setActiveFilter(id) {
 
     var REVIEW_RELEVANCE_TIME_IN_DAYS = 100;
+    var LOWEST_POSITIVE_GRADE = 3;
 
     if ( activeFilter === id ) {
       return;
@@ -150,7 +151,7 @@
 
       case 'reviews-good':
         filteredReview = filteredReview.filter(function(element){
-          return element.rating > 2;
+          return element.rating >= LOWEST_POSITIVE_GRADE;
         });
         filteredReview = filteredReview.sort(function(a, b){
           return b.rating - a.rating;
@@ -159,7 +160,7 @@
 
       case 'reviews-bad':
         filteredReview = filteredReview.filter(function(element){
-          return element.rating <= 2;
+          return element.rating < LOWEST_POSITIVE_GRADE;
         });
         filteredReview = filteredReview.sort(function(a, b){
           return a.rating - b.rating;
