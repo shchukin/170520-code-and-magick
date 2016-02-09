@@ -10,9 +10,6 @@
   var filtersElement = document.querySelector('.reviews-filter');
   var reviewsListElement = document.querySelector('.reviews-list');
 
-  filtersElement.className += ' invisible';
-  reviewsListElement.className += ' reviews-list-loading';
-
   function convertGradeValueToWord( grade ) {
     var grades = [null, 'one', 'two', 'three', 'four', 'five'];
     return grades[grade];
@@ -102,6 +99,9 @@
     xhr.send();
 
   }
+
+  filtersElement.className += ' invisible';
+  reviewsListElement.className += ' reviews-list-loading';
 
   getReviewsData();
 
