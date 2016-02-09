@@ -1,12 +1,11 @@
-/* global reviews */
-
-
 'use strict';
 
 (function() {
 
   var REVIEW_AUTHOR_AVATAR_SIZE = 124;
   var LOADING_TIMEOUT = 10000;
+
+  var reviews = null;
 
   var template = document.querySelector('#review-template');
 
@@ -80,6 +79,23 @@
     filtersElement.className = filtersElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
 
   }
+
+  function getReviewsData() {
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://o0.github.io/assets/json/reviews.json');
+    xhr.timeout = 10000;
+    
+    xhr.onload = function (event) {
+      console.log( JSON.parse(event.target.response) );
+    };
+
+    xhr.send();
+
+  }
+
+  getReviewsData();
+
 
   if (reviews) {
     reviewsOutput();
