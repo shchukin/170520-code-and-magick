@@ -36,17 +36,15 @@
 
   /* Functions */
 
-  function setActiveFilter(id) {
+  function applyFilter(id) {
 
     activeFilter = id;
 
     var filteredReview = reviews.slice(0);
 
-
     switch (id) {
 
       case 'reviews-all':
-        filteredReview = reviews.slice(0);
         break;
 
       case 'reviews-recent':
@@ -102,7 +100,7 @@
     for( i = 0; i < filtersItemElement.length; i++ ) {
       filtersItemElement[i].onclick = function(event) {
         if ( activeFilter != event.target.id ) {
-          setActiveFilter(event.target.id);
+          applyFilter(event.target.id);
         }
       };
     }
@@ -189,7 +187,7 @@
       reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
       filtersElement.className = filtersElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
       reviews = JSON.parse( event.target.response );
-      setActiveFilter(activeFilter);
+      applyFilter(activeFilter);
     };
 
     xhr.onerror = function (event) {
@@ -208,9 +206,6 @@
 
   getReviews();
   initFilters();
-
-
-
 
 
 })();
