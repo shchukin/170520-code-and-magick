@@ -67,31 +67,28 @@
 
   function reviewsOutput(data) {
 
-    var containerElement = document.querySelector('.reviews-list');
     var reviewValue = document.createDocumentFragment();
 
-    data.forEach(function(review) {
-      reviewValue.appendChild( getElementFromTemplate(review) );
+    data.forEach(function(item) {
+      reviewValue.appendChild( getElementFromTemplate(item) );
     });
 
-    containerElement.appendChild(reviewValue);
-
     filtersElement.className = filtersElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
+    reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
+
+    reviewsListElement.appendChild(reviewValue);
 
   }
 
   function getReviewsData() {
 
-    var reviews = null;
     var xhr = new XMLHttpRequest();
 
     xhr.open('GET', 'http://o0.github.io/assets/json/reviews.json');
     xhr.timeout = LOADING_TIMEOUT;
     
     xhr.onload = function (event) {
-      reviewsListElement.className += reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
-      reviews = JSON.parse( event.target.response );
-      reviewsOutput(reviews);
+      reviewsOutput( JSON.parse( event.target.response ) );
     };
 
     xhr.onerror = function (event) {
