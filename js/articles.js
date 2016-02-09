@@ -189,7 +189,6 @@
       reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
       filtersElement.className = filtersElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
       reviews = JSON.parse( event.target.response );
-      initFilters();
       setActiveFilter(activeFilter);
     };
 
@@ -208,6 +207,7 @@
   }
 
   getReviews();
+  initFilters();
 
 
 
