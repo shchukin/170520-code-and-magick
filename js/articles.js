@@ -76,7 +76,7 @@
   }
 
 
-  function getReviewsData() {
+  function getReviews() {
 
     var xhr = new XMLHttpRequest();
 
@@ -106,6 +106,6 @@
   filtersElement.className += ' invisible';
   reviewsListElement.className += ' reviews-list-loading';
 
-  getReviewsData();
+  getReviews();
 
 })();
