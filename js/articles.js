@@ -54,12 +54,12 @@
         var reviewRelevanceExpireDate = new Date();
         reviewRelevanceExpireDate.setDate(reviewRelevanceExpireDate.getDate() - REVIEW_RELEVANCE_TIME_IN_DAYS);
 
-        filteredReview = filteredReview.filter(function(element){
+        filteredReview = filteredReview.filter(function(element) {
           reviewDate = new Date(element.date);
           return reviewDate > reviewRelevanceExpireDate;
         });
 
-        filteredReview = filteredReview.sort(function(a, b){
+        filteredReview = filteredReview.sort(function(a, b) {
           dateB = new Date(b.date);
           dateA = new Date(a.date);
           return dateB - dateA;
@@ -67,25 +67,25 @@
         break;
 
       case 'reviews-good':
-        filteredReview = filteredReview.filter(function(element){
+        filteredReview = filteredReview.filter(function(element) {
           return element.rating >= LOWEST_POSITIVE_GRADE;
         });
-        filteredReview = filteredReview.sort(function(a, b){
+        filteredReview = filteredReview.sort(function(a, b) {
           return b.rating - a.rating;
         });
         break;
 
       case 'reviews-bad':
-        filteredReview = filteredReview.filter(function(element){
+        filteredReview = filteredReview.filter(function(element) {
           return element.rating < LOWEST_POSITIVE_GRADE;
         });
-        filteredReview = filteredReview.sort(function(a, b){
+        filteredReview = filteredReview.sort(function(a, b) {
           return a.rating - b.rating;
         });
         break;
 
       case 'reviews-popular':
-        filteredReview = filteredReview.sort(function(a, b){
+        filteredReview = filteredReview.sort(function(a, b) {
           return b.review_usefulness - a.review_usefulness;
         });
         break;
@@ -97,9 +97,9 @@
 
   function initFilters() {
     var i;
-    for( i = 0; i < filtersItemElement.length; i++ ) {
+    for ( i = 0; i < filtersItemElement.length; i++ ) {
       filtersItemElement[i].onclick = function(event) {
-        if ( activeFilter != event.target.id ) {
+        if ( activeFilter !== event.target.id ) {
           applyFilter(event.target.id);
         }
       };
@@ -182,20 +182,20 @@
 
     xhr.open('GET', 'http://o0.github.io/assets/json/reviews.json');
     xhr.timeout = LOADING_TIMEOUT;
-    
-    xhr.onload = function (event) {
+
+    xhr.onload = function(event) {
       reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
       filtersElement.className = filtersElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
       reviews = JSON.parse( event.target.response );
       applyFilter(activeFilter);
     };
 
-    xhr.onerror = function (event) {
+    xhr.onerror = function() {
       reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
       reviewsListElement.className += ' reviews-load-failure';
     };
 
-    xhr.ontimeout = function (event) {
+    xhr.ontimeout = function() {
       reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
       reviewsListElement.className += ' reviews-load-failure';
     };
