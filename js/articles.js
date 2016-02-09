@@ -71,9 +71,6 @@
       reviewValue.appendChild( getElementFromTemplate(item) );
     });
 
-    filtersElement.className = filtersElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
-    reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
-
     reviewsListElement.appendChild(reviewValue);
 
   }
@@ -87,6 +84,8 @@
     xhr.timeout = LOADING_TIMEOUT;
     
     xhr.onload = function (event) {
+      reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
+      filtersElement.className = filtersElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
       reviewsOutput( JSON.parse( event.target.response ) );
     };
 
