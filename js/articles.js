@@ -5,13 +5,13 @@
   var REVIEW_AUTHOR_AVATAR_SIZE = 124;
   var LOADING_TIMEOUT = 10000;
 
-  var reviews = null;
-
   var template = document.querySelector('#review-template');
 
   var filtersElement = document.querySelector('.reviews-filter');
-  filtersElement.className += ' invisible';
+  var reviewsListElement = document.querySelector('.reviews-list');
 
+  filtersElement.className += ' invisible';
+  reviewsListElement.className += ' reviews-list-loading';
 
   function convertGradeValueToWord( grade ) {
     var grades = [null, 'one', 'two', 'three', 'four', 'five'];
@@ -82,12 +82,15 @@
 
   function getReviewsData() {
 
+    var reviews = null;
     var xhr = new XMLHttpRequest();
+
     xhr.open('GET', 'http://o0.github.io/assets/json/reviews.json');
     xhr.timeout = 10000;
     
     xhr.onload = function (event) {
-      console.log( JSON.parse(event.target.response) );
+      reviews = JSON.parse( event.target.response );
+      reviewsListElement.className += reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
     };
 
     xhr.send();
