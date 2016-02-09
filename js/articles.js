@@ -63,7 +63,7 @@
   }
 
 
-  function reviewsOutput(data) {
+  function renderReviews(data) {
 
     var reviewValue = document.createDocumentFragment();
 
@@ -86,7 +86,7 @@
     xhr.onload = function (event) {
       reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
       filtersElement.className = filtersElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
-      reviewsOutput( JSON.parse( event.target.response ) );
+      renderReviews( JSON.parse( event.target.response ) );
     };
 
     xhr.onerror = function (event) {
