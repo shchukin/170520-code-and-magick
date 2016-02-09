@@ -30,8 +30,7 @@
 
   /* Application states */
 
-  var activeFilter;
-
+  var activeFilter = filtersElement.querySelector('input[type="radio"]:checked').id;
 
 
   function convertGradeValueToWord( grade ) {
@@ -196,26 +195,16 @@
 
 
   function initFilters() {
-
     var i;
-
     for( i = 0; i < filtersItemElement.length; i++ ) {
-
-      if ( filtersItemElement[i].checked ) {
-        activeFilter = filtersItemElement[i].id;
-      }
-
       filtersItemElement[i].onclick = function(event) {
-
-        if (activeFilter != event.target.id ) {
+        if ( activeFilter != event.target.id ) {
           setActiveFilter(event.target.id);
         }
-
       };
-
     }
-
   }
+
 
 
   getReviews();
