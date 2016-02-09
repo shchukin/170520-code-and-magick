@@ -3,12 +3,12 @@
 (function() {
 
   var REVIEW_AUTHOR_AVATAR_SIZE = 124;
+  var LOADING_TIMEOUT = 10000;
 
   var template = document.querySelector('#review-template');
 
   var filtersElement = document.querySelector('.reviews-filter');
   var reviewsListElement = document.querySelector('.reviews-list');
-  var reviews = null;
 
   filtersElement.className += ' invisible';
   reviewsListElement.className += ' reviews-list-loading';
@@ -65,12 +65,12 @@
   }
 
 
-  function reviewsOutput() {
+  function reviewsOutput(data) {
 
     var containerElement = document.querySelector('.reviews-list');
     var reviewValue = document.createDocumentFragment();
 
-    reviews.forEach(function(review) {
+    data.forEach(function(review) {
       reviewValue.appendChild( getElementFromTemplate(review) );
     });
 
@@ -82,15 +82,16 @@
 
   function getReviewsData() {
 
-    var REVIEW_LOADING_TIMEOUT = 10000;
+    var reviews = null;
     var xhr = new XMLHttpRequest();
 
     xhr.open('GET', 'http://o0.github.io/assets/json/reviews.json');
-    xhr.timeout = REVIEW_LOADING_TIMEOUT;
+    xhr.timeout = LOADING_TIMEOUT;
     
     xhr.onload = function (event) {
       reviewsListElement.className += reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
       reviews = JSON.parse( event.target.response );
+      reviewsOutput(reviews);
     };
 
     xhr.onerror = function (event) {
@@ -106,11 +107,5 @@
   }
 
   getReviewsData();
-
-
-
-  //if (reviews) {
-  //  reviewsOutput();
-  //}
 
 })();
