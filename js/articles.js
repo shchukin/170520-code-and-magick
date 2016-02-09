@@ -126,9 +126,15 @@
       return;
     }
 
+    activeFilter = id;
+
     var filteredReview = reviews.slice(0);
 
     switch (id) {
+
+      case 'reviews-all':
+        filteredReview = reviews.slice(0);
+        break;
 
       case 'reviews-recent':
         var dateA;
