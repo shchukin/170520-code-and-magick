@@ -125,6 +125,26 @@
     var filteredReview = reviews.slice(0);
 
     switch (id) {
+
+      case 'reviews-good':
+        filteredReview = filteredReview.filter(function(element){
+          return element.rating > 2;
+        });
+        filteredReview = filteredReview.sort(function(a, b){
+          return b.rating - a.rating;
+        });
+        break;
+
+
+      case 'reviews-bad':
+        filteredReview = filteredReview.filter(function(element){
+          return element.rating <= 2;
+        });
+        filteredReview = filteredReview.sort(function(a, b){
+          return a.rating - b.rating;
+        });
+        break;
+
       case 'reviews-popular':
         filteredReview = filteredReview.sort(function(a, b){
           return b.review_usefulness - a.review_usefulness;
