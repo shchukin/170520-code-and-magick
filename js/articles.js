@@ -10,6 +10,7 @@
   var filtersElement = document.querySelector('.reviews-filter');
   var reviewsListElement = document.querySelector('.reviews-list');
 
+
   function convertGradeValueToWord( grade ) {
     var grades = [null, 'one', 'two', 'three', 'four', 'five'];
     return grades[grade];
@@ -76,6 +77,7 @@
     reviewsListElement.appendChild(reviewValue);
 
   }
+
 
   function getReviewsData() {
 
