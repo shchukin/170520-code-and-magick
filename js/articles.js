@@ -2,10 +2,13 @@
 
 (function() {
 
-  var reviews = null;
+  var REVIEW_RELEVANCE_TIME_IN_DAYS = 100;
+  var LOWEST_POSITIVE_GRADE = 3;
 
   var REVIEW_AUTHOR_AVATAR_SIZE = 124;
   var LOADING_TIMEOUT = 10000;
+
+  var reviews = null;
 
   var template = document.querySelector('#review-template');
 
@@ -118,9 +121,6 @@
   var i;
 
   function setActiveFilter(id) {
-
-    var REVIEW_RELEVANCE_TIME_IN_DAYS = 100;
-    var LOWEST_POSITIVE_GRADE = 3;
 
     if ( activeFilter === id ) {
       return;
