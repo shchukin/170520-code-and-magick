@@ -2,19 +2,42 @@
 
 (function() {
 
+  /* Constants */
+
   var REVIEW_RELEVANCE_TIME_IN_DAYS = 100;
   var LOWEST_POSITIVE_GRADE = 3;
 
   var REVIEW_AUTHOR_AVATAR_SIZE = 124;
   var LOADING_TIMEOUT = 10000;
 
+
+  /* DOM elements */
+
+  var reviewsListElement = document.querySelector('.reviews-list');
+  var filtersElement = document.querySelector('.reviews-filter');
+  var filtersItemElement = filtersElement.querySelectorAll('input[type="radio"]');
+
+
+  /* Templates */
+
+  var reviewTemplate = document.querySelector('#review-template');
+
+
+  /* Data */
+
   var reviews = null;
 
-  var template = document.querySelector('#review-template');
 
-  var filtersElement = document.querySelector('.reviews-filter');
-  var reviewsListElement = document.querySelector('.reviews-list');
+  /* Application states */
 
+  var activeFilter = 'reviews-all';
+
+
+  /* Helpers */
+
+  var i;
+
+  
 
   function convertGradeValueToWord( grade ) {
     var grades = [null, 'one', 'two', 'three', 'four', 'five'];
@@ -24,7 +47,7 @@
 
   function getElementFromTemplate( data ) {
 
-    var reviewElement = ( 'content' in template ) ? ( template.content.children[0].cloneNode(true) ) : ( template.childNodes[0].cloneNode(true) );
+    var reviewElement = ( 'content' in reviewTemplate ) ? ( reviewTemplate.content.children[0].cloneNode(true) ) : ( reviewTemplate.childNodes[0].cloneNode(true) );
 
     var avatarElement = reviewElement.querySelector('.review-author');
     var ratingElement = reviewElement.querySelector('.review-rating');
@@ -116,9 +139,6 @@
   getReviews();
 
 
-  var activeFilter = 'reviews-all';
-  var filters = filtersElement.querySelectorAll('input[type="radio"]');
-  var i;
 
   function setActiveFilter(id) {
 
@@ -183,8 +203,11 @@
     renderReviews(filteredReview);
   }
 
-  for( i = 0; i < filters.length; i++ ) {
-    filters[i].onclick = function(event) {
+
+
+
+  for( i = 0; i < filtersItemElement.length; i++ ) {
+    filtersItemElement[i].onclick = function(event) {
       setActiveFilter(event.target.id);
     };
   }
