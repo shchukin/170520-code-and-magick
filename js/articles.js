@@ -4,7 +4,7 @@
 
   /* Constants */
 
-  var REVIEW_RELEVANCE_TIME_IN_DAYS = 100;
+  var REVIEW_RELEVANCE_TIME_IN_DAYS = 14;
   var LOWEST_POSITIVE_GRADE = 3;
 
   var REVIEW_AUTHOR_AVATAR_SIZE = 124;
@@ -30,7 +30,7 @@
 
   /* Application states */
 
-  var activeFilter = 'reviews-all';
+  var activeFilter;
 
 
 
@@ -114,8 +114,8 @@
       reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
       filtersElement.className = filtersElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
       reviews = JSON.parse( event.target.response );
-      renderReviews( reviews );
       initFilters();
+      setActiveFilter(activeFilter);
     };
 
     xhr.onerror = function (event) {
@@ -135,13 +135,10 @@
 
   function setActiveFilter(id) {
 
-    if ( activeFilter === id ) {
-      return;
-    }
-
     activeFilter = id;
 
     var filteredReview = reviews.slice(0);
+
 
     switch (id) {
 
@@ -197,20 +194,33 @@
   }
 
 
+
   function initFilters() {
 
     var i;
 
     for( i = 0; i < filtersItemElement.length; i++ ) {
+
+      if ( filtersItemElement[i].checked ) {
+        activeFilter = filtersItemElement[i].id;
+      }
+
       filtersItemElement[i].onclick = function(event) {
-        setActiveFilter(event.target.id);
+
+        if (activeFilter != event.target.id ) {
+          setActiveFilter(event.target.id);
+        }
+
       };
+
     }
 
   }
 
 
   getReviews();
+
+
 
 
 
