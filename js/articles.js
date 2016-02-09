@@ -33,11 +33,6 @@
   var activeFilter = 'reviews-all';
 
 
-  /* Helpers */
-
-  var i;
-
-  
 
   function convertGradeValueToWord( grade ) {
     var grades = [null, 'one', 'two', 'three', 'four', 'five'];
@@ -109,6 +104,9 @@
 
     var xhr = new XMLHttpRequest();
 
+    filtersElement.className += ' invisible';
+    reviewsListElement.className += ' reviews-list-loading';
+
     xhr.open('GET', 'http://o0.github.io/assets/json/reviews.json');
     xhr.timeout = LOADING_TIMEOUT;
     
@@ -117,6 +115,7 @@
       filtersElement.className = filtersElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
       reviews = JSON.parse( event.target.response );
       renderReviews( reviews );
+      initFilters();
     };
 
     xhr.onerror = function (event) {
@@ -132,12 +131,6 @@
     xhr.send();
 
   }
-
-  filtersElement.className += ' invisible';
-  reviewsListElement.className += ' reviews-list-loading';
-
-  getReviews();
-
 
 
   function setActiveFilter(id) {
@@ -204,12 +197,21 @@
   }
 
 
+  function initFilters() {
 
+    var i;
 
-  for( i = 0; i < filtersItemElement.length; i++ ) {
-    filtersItemElement[i].onclick = function(event) {
-      setActiveFilter(event.target.id);
-    };
+    for( i = 0; i < filtersItemElement.length; i++ ) {
+      filtersItemElement[i].onclick = function(event) {
+        setActiveFilter(event.target.id);
+      };
+    }
+
   }
+
+
+  getReviews();
+
+
 
 })();
