@@ -30,7 +30,7 @@
 
   /* Modules */
 
-  var filteringReviews;
+  var filteredData;
 
   var filters = {
     'reviews-all': function(data) {
@@ -43,42 +43,42 @@
       var reviewRelevanceExpireDate = new Date();
       reviewRelevanceExpireDate.setDate(reviewRelevanceExpireDate.getDate() - REVIEW_RELEVANCE_TIME_IN_DAYS);
 
-      filteringReviews = data.filter(function(element) {
+      filteredData = data.filter(function(element) {
         reviewDate = new Date(element.date);
         return reviewDate > reviewRelevanceExpireDate;
       });
 
-      filteringReviews.sort(function(a, b) {
+      filteredData.sort(function(a, b) {
         dateB = new Date(b.date);
         dateA = new Date(a.date);
         return dateB - dateA;
       });
-      return filteringReviews;
+      return filteredData;
     },
     'reviews-good': function(data) {
-      filteringReviews = data.filter(function(element) {
+      filteredData = data.filter(function(element) {
         return element.rating >= LOWEST_POSITIVE_GRADE;
       });
-      filteringReviews.sort(function(a, b) {
+      filteredData.sort(function(a, b) {
         return b.rating - a.rating;
       });
-      return filteringReviews;
+      return filteredData;
     },
     'reviews-bad': function(data) {
-      filteringReviews = data.filter(function(element) {
+      filteredData = data.filter(function(element) {
         return element.rating < LOWEST_POSITIVE_GRADE;
       });
-      filteringReviews.sort(function(a, b) {
+      filteredData.sort(function(a, b) {
         return a.rating - b.rating;
       });
-      return filteringReviews;
+      return filteredData;
     },
     'reviews-popular': function(data) {
-      filteringReviews = data.slice(0);
-      filteringReviews.sort(function(a, b) {
+      filteredData = data.slice(0);
+      filteredData.sort(function(a, b) {
         return b.review_usefulness - a.review_usefulness;
       });
-      return filteringReviews;
+      return filteredData;
     }
   };
 
