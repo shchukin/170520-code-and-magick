@@ -55,7 +55,7 @@
       });
       return filteringReviews;
     },
-    'reviews-good': function (reviews) {
+    'reviews-good': function(reviews) {
       filteringReviews = reviews.filter(function(element) {
         return element.rating >= LOWEST_POSITIVE_GRADE;
       });
@@ -64,7 +64,7 @@
       });
       return filteringReviews;
     },
-    'reviews-bad': function (reviews) {
+    'reviews-bad': function(reviews) {
       filteringReviews = reviews.filter(function(element) {
         return element.rating < LOWEST_POSITIVE_GRADE;
       });
@@ -73,7 +73,7 @@
       });
       return filteringReviews;
     },
-    'reviews-popular': function (reviews) {
+    'reviews-popular': function(reviews) {
       filteringReviews = reviews.slice(0);
       filteringReviews.sort(function(a, b) {
         return b.review_usefulness - a.review_usefulness;
