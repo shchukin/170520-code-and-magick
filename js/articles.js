@@ -180,7 +180,7 @@
     filtersElement.className += ' invisible';
     reviewsListElement.className += ' reviews-list-loading';
 
-    xhr.open('GET', 'http://o0.github.io/assets/json/reviews.json');
+    xhr.open('GET', '//o0.github.io/assets/json/reviews.json');
     xhr.timeout = LOADING_TIMEOUT;
 
     xhr.onload = function(event) {
