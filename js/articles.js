@@ -94,15 +94,16 @@
     renderReviews(filteredReview);
   }
 
+  function initSingleFilter(event) {
+    if ( activeFilter !== event.target.id ) {
+      applyFilter(event.target.id);
+    }
+  }
 
   function initFilters() {
     var i;
     for ( i = 0; i < filtersItemElement.length; i++ ) {
-      filtersItemElement[i].onclick = function(event) {
-        if ( activeFilter !== event.target.id ) {
-          applyFilter(event.target.id);
-        }
-      };
+      filtersItemElement[i].onclick = initSingleFilter;
     }
   }
 
