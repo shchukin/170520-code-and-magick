@@ -33,17 +33,17 @@
   var filteringReviews;
 
   var filters = {
-    'reviews-all': function(reviews) {
-      return reviews;
+    'reviews-all': function(data) {
+      return data;
     },
-    'reviews-recent': function(reviews) {
+    'reviews-recent': function(data) {
       var dateA;
       var dateB;
       var reviewDate;
       var reviewRelevanceExpireDate = new Date();
       reviewRelevanceExpireDate.setDate(reviewRelevanceExpireDate.getDate() - REVIEW_RELEVANCE_TIME_IN_DAYS);
 
-      filteringReviews = reviews.filter(function(element) {
+      filteringReviews = data.filter(function(element) {
         reviewDate = new Date(element.date);
         return reviewDate > reviewRelevanceExpireDate;
       });
@@ -55,8 +55,8 @@
       });
       return filteringReviews;
     },
-    'reviews-good': function(reviews) {
-      filteringReviews = reviews.filter(function(element) {
+    'reviews-good': function(data) {
+      filteringReviews = data.filter(function(element) {
         return element.rating >= LOWEST_POSITIVE_GRADE;
       });
       filteringReviews.sort(function(a, b) {
@@ -64,8 +64,8 @@
       });
       return filteringReviews;
     },
-    'reviews-bad': function(reviews) {
-      filteringReviews = reviews.filter(function(element) {
+    'reviews-bad': function(data) {
+      filteringReviews = data.filter(function(element) {
         return element.rating < LOWEST_POSITIVE_GRADE;
       });
       filteringReviews.sort(function(a, b) {
@@ -73,8 +73,8 @@
       });
       return filteringReviews;
     },
-    'reviews-popular': function(reviews) {
-      filteringReviews = reviews.slice(0);
+    'reviews-popular': function(data) {
+      filteringReviews = data.slice(0);
       filteringReviews.sort(function(a, b) {
         return b.review_usefulness - a.review_usefulness;
       });
