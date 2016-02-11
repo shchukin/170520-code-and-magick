@@ -40,11 +40,12 @@
 
     activeFilter = id;
 
-    var filteredReview = reviews.slice(0);
+    var filteredReview;
 
     switch (id) {
 
       case 'reviews-all':
+        filteredReview = reviews.slice(0);
         break;
 
       case 'reviews-recent':
@@ -54,7 +55,7 @@
         var reviewRelevanceExpireDate = new Date();
         reviewRelevanceExpireDate.setDate(reviewRelevanceExpireDate.getDate() - REVIEW_RELEVANCE_TIME_IN_DAYS);
 
-        filteredReview = filteredReview.filter(function(element) {
+        filteredReview = reviews.filter(function(element) {
           reviewDate = new Date(element.date);
           return reviewDate > reviewRelevanceExpireDate;
         });
@@ -67,7 +68,7 @@
         break;
 
       case 'reviews-good':
-        filteredReview = filteredReview.filter(function(element) {
+        filteredReview = reviews.filter(function(element) {
           return element.rating >= LOWEST_POSITIVE_GRADE;
         });
         filteredReview = filteredReview.sort(function(a, b) {
@@ -76,7 +77,7 @@
         break;
 
       case 'reviews-bad':
-        filteredReview = filteredReview.filter(function(element) {
+        filteredReview = reviews.filter(function(element) {
           return element.rating < LOWEST_POSITIVE_GRADE;
         });
         filteredReview = filteredReview.sort(function(a, b) {
@@ -85,6 +86,7 @@
         break;
 
       case 'reviews-popular':
+        filteredReview = reviews.slice(0);
         filteredReview = filteredReview.sort(function(a, b) {
           return b.review_usefulness - a.review_usefulness;
         });
