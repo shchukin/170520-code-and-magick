@@ -87,17 +87,30 @@ function drawNotification(ctx, message) {
 }
 
 var cloudsElement = document.querySelector('.header-clouds');
+var demoElement = document.querySelector('.demo');
+
 var cloudsHeight = cloudsElement.getBoundingClientRect().height;
+var demoHeight = demoElement.getBoundingClientRect().height;
+
 var parallaxTimeout;
+
 cloudsElement.style.backgroundPosition = cloudsElement.getBoundingClientRect().top + 'px center';
 
 window.addEventListener('scroll', function (){
   clearTimeout(parallaxTimeout);
-  if ( Math.abs( cloudsElement.getBoundingClientRect().top ) < cloudsHeight ) {
-    parallaxTimeout = setTimeout(function () {
+  parallaxTimeout = setTimeout(function () {
+
+    if ( Math.abs( cloudsElement.getBoundingClientRect().top ) < cloudsHeight ) {
       cloudsElement.style.backgroundPosition = cloudsElement.getBoundingClientRect().top + 'px center';
-    }, 100);
-  }
+    }
+
+    if (demoElement.getBoundingClientRect().top + demoHeight < 0) {
+      game.setGameStatus(window.Game.Verdict.PAUSE);
+    } else {
+      game.setGameStatus(window.Game.Verdict.CONTINUE);
+    }
+
+  }, 100);
 });
 
 
