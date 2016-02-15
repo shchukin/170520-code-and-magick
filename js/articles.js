@@ -10,6 +10,7 @@
   var REVIEW_AUTHOR_AVATAR_SIZE = 124;
   var LOADING_TIMEOUT = 10000;
 
+  var REVIEWS_PAGE_SIZE = 3;
 
   /* DOM elements */
 
@@ -82,10 +83,12 @@
     }
   };
 
+
   /* Application states */
 
   var activeFilter = filtersElement.querySelector('input[type="radio"]:checked').id;
 
+  var reviewsCurrentPage = 0;
 
 
   /* Functions */
@@ -93,7 +96,7 @@
   function applyFilter(id) {
     activeFilter = id;
     var filteredReviews = filters[id](reviews);
-    renderReviews(filteredReviews);
+    renderReviews(filteredReviews, 0);
   }
 
   function initSingleFilter(event) {
@@ -162,11 +165,16 @@
   }
 
 
-  function renderReviews(data) {
+  function renderReviews(data, pageNumber) {
 
     var reviewValue = document.createDocumentFragment();
 
-    data.forEach(function(item) {
+    var from = pageNumber * REVIEWS_PAGE_SIZE;
+    var to = from + REVIEWS_PAGE_SIZE;
+    var pageOfData = data.slice(from, to);
+
+
+    pageOfData.forEach(function(item) {
       reviewValue.appendChild( getElementFromTemplate(item) );
     });
 
