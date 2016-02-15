@@ -222,7 +222,9 @@
   initFilters();
 
   document.querySelector('.reviews-controls-more').addEventListener('click', function(event){
+    if( reviewsCurrentPage < Math.ceil(filteredReviews.length / REVIEWS_PAGE_SIZE) ) {
       renderReviews(filteredReviews, ++reviewsCurrentPage, false);
+    }
   })
 
 
