@@ -97,7 +97,7 @@
   function applyFilter(id) {
     activeFilter = id;
     filteredReviews = filters[id](reviews);
-    renderReviews(filteredReviews, 0, true);
+    renderReviews(filteredReviews, reviewsCurrentPage = 0, true);
   }
 
   function initSingleFilter(event) {
