@@ -86,6 +86,17 @@ function drawNotification(ctx, message) {
 
 }
 
+var cloudsElement = document.querySelector('.header-clouds');
+var cloudsHeight = cloudsElement.getBoundingClientRect().height;
+
+cloudsElement.style.backgroundPosition = cloudsElement.getBoundingClientRect().top + 'px center';
+
+window.addEventListener('scroll', function(){
+  if ( Math.abs( cloudsElement.getBoundingClientRect().top ) < cloudsHeight ) {
+    cloudsElement.style.backgroundPosition = cloudsElement.getBoundingClientRect().top + 'px center';
+  }
+});
+
 
 (function() {
   /**
