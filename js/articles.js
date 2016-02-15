@@ -106,7 +106,7 @@
 
   function initMoreButton() {
     moreElement.addEventListener('click', function(event){
-      if( reviewsCurrentPage < Math.ceil(reviewsFiltered.length / REVIEWS_PAGE_SIZE) ) {
+      if( reviewsCurrentPage + 1 < Math.ceil(reviewsFiltered.length / REVIEWS_PAGE_SIZE) ) {
         renderReviews(reviewsFiltered, ++reviewsCurrentPage, false);
       }
     });
