@@ -5,7 +5,7 @@
   /* Constants */
 
   var REVIEW_RELEVANCE_TIME_IN_DAYS = 14;
-  var LOWEST_POSITIVE_GRADE = 3;
+  var REVIEW_LOWEST_POSITIVE_GRADE = 3;
 
   var REVIEW_AUTHOR_AVATAR_SIZE = 124;
   var LOADING_TIMEOUT = 10000;
@@ -27,7 +27,7 @@
   /* Data */
 
   var reviews = null;
-  var filteredReviews = null;
+  var reviewsFiltered = null;
 
 
   /* Filtering module */
@@ -54,14 +54,14 @@
     },
     'reviews-good': function(data) {
       return data.filter(function(element) {
-        return element.rating >= LOWEST_POSITIVE_GRADE;
+        return element.rating >= REVIEW_LOWEST_POSITIVE_GRADE;
       }).sort(function(a, b) {
         return b.rating - a.rating;
       });
     },
     'reviews-bad': function(data) {
       return data.filter(function(element) {
-        return element.rating < LOWEST_POSITIVE_GRADE;
+        return element.rating < REVIEW_LOWEST_POSITIVE_GRADE;
       }).sort(function(a, b) {
         return a.rating - b.rating;
       });
@@ -77,7 +77,7 @@
 
   /* Application states */
 
-  var activeFilter = filtersElement.querySelector('input[type="radio"]:checked').id;
+  var filterActive = filtersElement.querySelector('input[type="radio"]:checked').id;
 
   var reviewsCurrentPage = 0;
 
@@ -85,13 +85,13 @@
   /* Functions */
 
   function applyFilter(id) {
-    activeFilter = id;
-    filteredReviews = filters[id](reviews);
-    renderReviews(filteredReviews, reviewsCurrentPage = 0, true);
+    filterActive = id;
+    reviewsFiltered = filters[id](reviews);
+    renderReviews(reviewsFiltered, reviewsCurrentPage = 0, true);
   }
 
   function initSingleFilter(event) {
-    if ( activeFilter !== event.target.id ) {
+    if ( filterActive !== event.target.id ) {
       applyFilter(event.target.id);
     }
   }
@@ -191,7 +191,7 @@
       reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
       filtersElement.className = filtersElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
       reviews = JSON.parse( event.target.response );
-      applyFilter(activeFilter);
+      applyFilter(filterActive);
     };
 
     xhr.onerror = function() {
@@ -212,8 +212,8 @@
   initFilters();
 
   document.querySelector('.reviews-controls-more').addEventListener('click', function(event){
-    if( reviewsCurrentPage < Math.ceil(filteredReviews.length / REVIEWS_PAGE_SIZE) ) {
-      renderReviews(filteredReviews, ++reviewsCurrentPage, false);
+    if( reviewsCurrentPage < Math.ceil(reviewsFiltered.length / REVIEWS_PAGE_SIZE) ) {
+      renderReviews(reviewsFiltered, ++reviewsCurrentPage, false);
     }
   })
 
