@@ -171,6 +171,7 @@
     if (replace) {
       reviewsListElement.innerHTML = '';
     }
+    
     reviewsListElement.appendChild(reviewValue);
 
   }
