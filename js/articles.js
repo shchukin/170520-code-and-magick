@@ -27,9 +27,10 @@
   /* Data */
 
   var reviews = null;
+  var filteredReviews;
 
 
-  /* Modules */
+  /* Filtering module */
 
   var filteredData;
 
@@ -95,7 +96,7 @@
 
   function applyFilter(id) {
     activeFilter = id;
-    var filteredReviews = filters[id](reviews);
+    filteredReviews = filters[id](reviews);
     renderReviews(filteredReviews, 0);
   }
 
@@ -173,7 +174,6 @@
     var to = from + REVIEWS_PAGE_SIZE;
     var pageOfData = data.slice(from, to);
 
-
     pageOfData.forEach(function(item) {
       reviewValue.appendChild( getElementFromTemplate(item) );
     });
@@ -217,6 +217,10 @@
 
   getReviews();
   initFilters();
+
+  document.querySelector('.reviews-controls-more').addEventListener('click', function(event){
+    renderReviews(filteredReviews, ++reviewsCurrentPage);
+  })
 
 
 })();
