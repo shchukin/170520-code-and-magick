@@ -17,6 +17,7 @@
   var reviewsListElement = document.querySelector('.reviews-list');
   var filtersElement = document.querySelector('.reviews-filter');
   var filtersItemElement = filtersElement.querySelectorAll('input[type="radio"]');
+  var moreElement = document.querySelector('.reviews-controls-more');
 
 
   /* Templates */
@@ -103,6 +104,14 @@
     }
   }
 
+  function initMoreButton() {
+    moreElement.addEventListener('click', function(event){
+      if( reviewsCurrentPage < Math.ceil(reviewsFiltered.length / REVIEWS_PAGE_SIZE) ) {
+        renderReviews(reviewsFiltered, ++reviewsCurrentPage, false);
+      }
+    });
+  }
+
 
   function convertGradeValueToWord( grade ) {
     var grades = [null, 'one', 'two', 'three', 'four', 'five'];
@@ -171,7 +180,7 @@
     if (replace) {
       reviewsListElement.innerHTML = '';
     }
-    
+
     reviewsListElement.appendChild(reviewValue);
 
   }
@@ -210,12 +219,8 @@
 
   getReviews();
   initFilters();
+  initMoreButton();
 
-  document.querySelector('.reviews-controls-more').addEventListener('click', function(event){
-    if( reviewsCurrentPage < Math.ceil(reviewsFiltered.length / REVIEWS_PAGE_SIZE) ) {
-      renderReviews(reviewsFiltered, ++reviewsCurrentPage, false);
-    }
-  })
 
 
 })();
