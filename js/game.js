@@ -88,12 +88,15 @@ function drawNotification(ctx, message) {
 
 var cloudsElement = document.querySelector('.header-clouds');
 var cloudsHeight = cloudsElement.getBoundingClientRect().height;
-
+var parallaxTimeout;
 cloudsElement.style.backgroundPosition = cloudsElement.getBoundingClientRect().top + 'px center';
 
-window.addEventListener('scroll', function(){
+window.addEventListener('scroll', function (){
+  clearTimeout(parallaxTimeout);
   if ( Math.abs( cloudsElement.getBoundingClientRect().top ) < cloudsHeight ) {
-    cloudsElement.style.backgroundPosition = cloudsElement.getBoundingClientRect().top + 'px center';
+    parallaxTimeout = setTimeout(function () {
+      cloudsElement.style.backgroundPosition = cloudsElement.getBoundingClientRect().top + 'px center';
+    }, 100);
   }
 });
 
