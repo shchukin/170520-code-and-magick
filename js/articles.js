@@ -97,7 +97,7 @@
   function applyFilter(id) {
     activeFilter = id;
     filteredReviews = filters[id](reviews);
-    renderReviews(filteredReviews, 0);
+    renderReviews(filteredReviews, 0, true);
   }
 
   function initSingleFilter(event) {
@@ -166,7 +166,8 @@
   }
 
 
-  function renderReviews(data, pageNumber) {
+  function renderReviews(data, pageNumber, replace) {
+    console.log('d')
 
     var reviewValue = document.createDocumentFragment();
 
@@ -178,7 +179,9 @@
       reviewValue.appendChild( getElementFromTemplate(item) );
     });
 
-    reviewsListElement.innerHTML = '';
+    if (replace) {
+      reviewsListElement.innerHTML = '';
+    }
     reviewsListElement.appendChild(reviewValue);
 
   }
@@ -219,7 +222,7 @@
   initFilters();
 
   document.querySelector('.reviews-controls-more').addEventListener('click', function(event){
-    renderReviews(filteredReviews, ++reviewsCurrentPage);
+      renderReviews(filteredReviews, ++reviewsCurrentPage, false);
   })
 
 
