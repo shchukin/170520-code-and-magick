@@ -119,12 +119,10 @@
 
   function disableMoreButton() {
     if ( isMoreReviewToShow() ) {
-      moreElement.style.opacity = '';
-      moreElement.style.cursor = '';
+      moreElement.className = moreElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
     }
     else {
-      moreElement.style.opacity = 0.2;
-      moreElement.style.cursor = 'default';
+      moreElement.className += ' invisible';
     }
   }
 
