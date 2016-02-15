@@ -117,10 +117,9 @@
   }
 
   function disableMoreButton() {
-    if ( isMoreReviewToShow() ) {
+    if ( isMoreReviewToShow() && moreElement.classList.contains('invisible') ) {
       moreElement.className = moreElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
     }
-    else {
       moreElement.className += ' invisible';
     }
   }
