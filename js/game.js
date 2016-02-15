@@ -98,9 +98,9 @@
 
   cloudsElement.style.backgroundPosition = cloudsElement.getBoundingClientRect().top + 'px center';
 
-  window.addEventListener('scroll', function (){
+  window.addEventListener('scroll', function() {
     clearTimeout(parallaxTimeout);
-    parallaxTimeout = setTimeout(function () {
+    parallaxTimeout = setTimeout(function() {
 
       if ( Math.abs( cloudsElement.getBoundingClientRect().top ) < cloudsHeight ) {
         cloudsElement.style.backgroundPosition = cloudsElement.getBoundingClientRect().top + 'px center';
