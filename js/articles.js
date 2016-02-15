@@ -157,7 +157,6 @@
 
 
   function renderReviews(data, pageNumber, replace) {
-    console.log('d')
 
     var reviewValue = document.createDocumentFragment();
 
