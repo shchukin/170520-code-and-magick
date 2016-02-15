@@ -104,12 +104,28 @@
     }
   }
 
+
+  function isMoreReviewToShow() {
+    return reviewsCurrentPage + 1 < Math.ceil(reviewsFiltered.length / REVIEWS_PAGE_SIZE);
+  }
+
   function initMoreButton() {
     moreElement.addEventListener('click', function(event){
-      if( reviewsCurrentPage + 1 < Math.ceil(reviewsFiltered.length / REVIEWS_PAGE_SIZE) ) {
+      if( isMoreReviewToShow() ) {
         renderReviews(reviewsFiltered, ++reviewsCurrentPage, false);
       }
     });
+  }
+
+  function disableMoreButton() {
+    if ( isMoreReviewToShow() ) {
+      moreElement.style.opacity = '';
+      moreElement.style.cursor = '';
+    }
+    else {
+      moreElement.style.opacity = 0.2;
+      moreElement.style.cursor = 'default';
+    }
   }
 
 
@@ -182,6 +198,8 @@
     }
 
     reviewsListElement.appendChild(reviewValue);
+
+    disableMoreButton();
 
   }
 
