@@ -15,7 +15,6 @@
 
   var reviewsListElement = document.querySelector('.reviews-list');
   var filtersElement = document.querySelector('.reviews-filter');
-  var filtersItemElement = filtersElement.querySelectorAll('input[type="radio"]');
   var moreElement = document.querySelector('.reviews-controls-more');
 
 
@@ -90,17 +89,13 @@
     renderReviews(reviewsFiltered, reviewsCurrentPage = 0, true);
   }
 
-  function initSingleFilter(event) {
-    if ( filterActive !== event.target.id ) {
-      applyFilter(event.target.id);
-    }
-  }
-
   function initFilters() {
-    var i;
-    for ( i = 0; i < filtersItemElement.length; i++ ) {
-      filtersItemElement[i].onclick = initSingleFilter;
-    }
+    filtersElement.addEventListener('click', function(event) {
+      var clickedItem = event.target;
+      if ( clickedItem.type === 'radio' && clickedItem.id !== filterActive ) {
+        applyFilter(clickedItem.id);
+      }
+    });
   }
 
 
