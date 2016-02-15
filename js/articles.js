@@ -27,7 +27,7 @@
   /* Data */
 
   var reviews = null;
-  var filteredReviews;
+  var filteredReviews = null;
 
 
   /* Filtering module */
