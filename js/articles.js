@@ -32,8 +32,6 @@
 
   /* Filtering module */
 
-  var filteredData;
-
   var filters = {
     'reviews-all': function(data) {
       return data;
@@ -45,42 +43,34 @@
       var reviewRelevanceExpireDate = new Date();
       reviewRelevanceExpireDate.setDate(reviewRelevanceExpireDate.getDate() - REVIEW_RELEVANCE_TIME_IN_DAYS);
 
-      filteredData = data.filter(function(element) {
+      return data.filter(function(element) {
         reviewDate = new Date(element.date);
         return reviewDate > reviewRelevanceExpireDate;
-      });
-
-      filteredData.sort(function(a, b) {
+      }).sort(function(a, b) {
         dateB = new Date(b.date);
         dateA = new Date(a.date);
         return dateB - dateA;
       });
-      return filteredData;
     },
     'reviews-good': function(data) {
-      filteredData = data.filter(function(element) {
+      return data.filter(function(element) {
         return element.rating >= LOWEST_POSITIVE_GRADE;
-      });
-      filteredData.sort(function(a, b) {
+      }).sort(function(a, b) {
         return b.rating - a.rating;
       });
-      return filteredData;
     },
     'reviews-bad': function(data) {
-      filteredData = data.filter(function(element) {
+      return data.filter(function(element) {
         return element.rating < LOWEST_POSITIVE_GRADE;
-      });
-      filteredData.sort(function(a, b) {
+      }).sort(function(a, b) {
         return a.rating - b.rating;
       });
-      return filteredData;
     },
     'reviews-popular': function(data) {
-      filteredData = data.slice(0);
-      filteredData.sort(function(a, b) {
+      var filteredData = data.slice(0);
+      return filteredData.sort(function(a, b) {
         return b.review_usefulness - a.review_usefulness;
       });
-      return filteredData;
     }
   };
 
