@@ -109,8 +109,8 @@
   }
 
   function initMoreButton() {
-    moreElement.addEventListener('click', function(event){
-      if( isMoreReviewToShow() ) {
+    moreElement.addEventListener('click', function() {
+      if ( isMoreReviewToShow() ) {
         renderReviews(reviewsFiltered, ++reviewsCurrentPage, false);
       }
     });
@@ -120,6 +120,7 @@
     if ( isMoreReviewToShow() && moreElement.classList.contains('invisible') ) {
       moreElement.className = moreElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
     }
+    if ( !isMoreReviewToShow() && !moreElement.classList.contains('invisible') ) {
       moreElement.className += ' invisible';
     }
   }
