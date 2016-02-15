@@ -8,7 +8,7 @@
   var REVIEW_LOWEST_POSITIVE_GRADE = 3;
 
   var REVIEW_AUTHOR_AVATAR_SIZE = 124;
-  var LOADING_TIMEOUT = 10000;
+  var TIMEOUT_OF_LOADING = 10000;
 
   var REVIEWS_PAGE_SIZE = 3;
 
@@ -142,7 +142,7 @@
     avatarLoadTimeout = setTimeout(function() {
       avatarValue.src = '';
       reviewElement.className += ' review-load-failure';
-    }, LOADING_TIMEOUT);
+    }, TIMEOUT_OF_LOADING);
 
     avatarValue.src = data.author.picture;
 
@@ -185,7 +185,7 @@
     reviewsListElement.className += ' reviews-list-loading';
 
     xhr.open('GET', '//o0.github.io/assets/json/reviews.json');
-    xhr.timeout = LOADING_TIMEOUT;
+    xhr.timeout = TIMEOUT_OF_LOADING;
 
     xhr.onload = function(event) {
       reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
