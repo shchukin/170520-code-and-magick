@@ -115,7 +115,7 @@
     if ( isMoreReviewToShow() && moreElement.className.indexOf('invisible') > -1 ) {
       moreElement.className = moreElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
     }
-    if ( !isMoreReviewToShow() && !(moreElement.className.indexOf('invisible') > -1) ) {
+    if ( !isMoreReviewToShow() && moreElement.className.indexOf('invisible') == -1 ) {
       moreElement.className += ' invisible';
     }
   }
