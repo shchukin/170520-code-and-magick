@@ -3,11 +3,14 @@
 var AVATAR_MAX_LOADING_TIME = 10000;
 var REVIEW_AUTHOR_AVATAR_SIZE = 124;
 
+var reviewTemplate = document.querySelector('#review-template');
+
 
 function convertGradeValueToWord( grade ) {
   var grades = [null, 'one', 'two', 'three', 'four', 'five'];
   return grades[grade];
 }
+
 
 (function() {
 
@@ -17,8 +20,7 @@ function convertGradeValueToWord( grade ) {
   }
 
   Review.prototype.render = function() {
-    var template = document.querySelector('#review-template');
-    this.element = ( 'content' in template ) ? ( template.content.children[0].cloneNode(true) ) : ( template.childNodes[0].cloneNode(true) );
+    this.element = ( 'content' in reviewTemplate ) ? ( reviewTemplate.content.children[0].cloneNode(true) ) : ( reviewTemplate.childNodes[0].cloneNode(true) );
 
     var avatarElement = this.element.querySelector('.review-author');
     var ratingElement = this.element.querySelector('.review-rating');
