@@ -1,3 +1,5 @@
+'use strict';
+
 var AVATAR_MAX_LOADING_TIME = 10000;
 var REVIEW_AUTHOR_AVATAR_SIZE = 124;
 
