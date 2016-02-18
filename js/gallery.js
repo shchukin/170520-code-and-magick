@@ -67,10 +67,10 @@
       this.hide();
     }
     if (event.keyCode === 37) {
-      console.log('Left key has been pressed')
+      console.log('Left key has been pressed');
     }
     if (event.keyCode === 39) {
-      console.log('Right key has been pressed')
+      console.log('Right key has been pressed');
     }
   };
 
