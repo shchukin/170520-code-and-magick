@@ -37,16 +37,16 @@ function convertGradeValueToWord( grade ) {
       avatarValue.title = this._data.author.name;
       avatarValue.className = avatarElement.className;
       this.element.replaceChild(avatarValue, avatarElement);
-    };
+    }.bind(this);
 
     avatarValue.onerror = function() {
       this.element.className += ' review-load-failure';
-    };
+    }.bind(this);
 
     avatarLoadTimeout = setTimeout(function() {
       avatarValue.src = '';
       this.element.className += ' review-load-failure';
-    }, AVATAR_MAX_LOADING_TIME);
+    }.bind(this), AVATAR_MAX_LOADING_TIME);
 
     avatarValue.src = this._data.author.picture;
 
