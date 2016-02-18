@@ -94,17 +94,13 @@
   var cloudsHeight = cloudsElement.getBoundingClientRect().height;
   var demoHeight = demoElement.getBoundingClientRect().height;
 
-  var parallaxTimeout;
+  var cloudsMovementTimeout;
 
   cloudsElement.style.backgroundPosition = cloudsElement.getBoundingClientRect().top + 'px center';
 
   window.addEventListener('scroll', function() {
-    clearTimeout(parallaxTimeout);
-    parallaxTimeout = setTimeout(function() {
-
-      if ( Math.abs( cloudsElement.getBoundingClientRect().top ) < cloudsHeight ) {
-        cloudsElement.style.backgroundPosition = cloudsElement.getBoundingClientRect().top + 'px center';
-      }
+    clearTimeout(cloudsMovementTimeout);
+    cloudsMovementTimeout = setTimeout(function() {
 
       if (demoElement.getBoundingClientRect().top + demoHeight < 0) {
         game.setGameStatus(window.Game.Verdict.PAUSE);
@@ -113,6 +109,11 @@
       }
 
     }, 100);
+
+    if ( Math.abs( cloudsElement.getBoundingClientRect().top ) < cloudsHeight ) {
+      cloudsElement.style.backgroundPosition = cloudsElement.getBoundingClientRect().top + 'px center';
+    }
+
   });
 
 
