@@ -5,17 +5,17 @@
   /* Constants */
 
   var REVIEW_RELEVANCE_TIME_IN_DAYS = 14;
-  var LOWEST_POSITIVE_GRADE = 3;
-
+  var REVIEW_LOWEST_POSITIVE_GRADE = 3;
   var REVIEW_AUTHOR_AVATAR_SIZE = 124;
-  var LOADING_TIMEOUT = 10000;
+  var REVIEWS_PAGE_SIZE = 3;
+  var TIMEOUT_OF_LOADING = 10000;
 
 
   /* DOM elements */
 
   var reviewsListElement = document.querySelector('.reviews-list');
   var filtersElement = document.querySelector('.reviews-filter');
-  var filtersItemElement = filtersElement.querySelectorAll('input[type="radio"]');
+  var moreElement = document.querySelector('.reviews-controls-more');
 
 
   /* Templates */
@@ -26,11 +26,10 @@
   /* Data */
 
   var reviews = null;
+  var reviewsFiltered = null;
 
 
-  /* Modules */
-
-  var filteredData;
+  /* Filtering module */
 
   var filters = {
     'reviews-all': function(data) {
@@ -43,69 +42,81 @@
       var reviewRelevanceExpireDate = new Date();
       reviewRelevanceExpireDate.setDate(reviewRelevanceExpireDate.getDate() - REVIEW_RELEVANCE_TIME_IN_DAYS);
 
-      filteredData = data.filter(function(element) {
+      return data.filter(function(element) {
         reviewDate = new Date(element.date);
         return reviewDate > reviewRelevanceExpireDate;
-      });
-
-      filteredData.sort(function(a, b) {
+      }).sort(function(a, b) {
         dateB = new Date(b.date);
         dateA = new Date(a.date);
         return dateB - dateA;
       });
-      return filteredData;
     },
     'reviews-good': function(data) {
-      filteredData = data.filter(function(element) {
-        return element.rating >= LOWEST_POSITIVE_GRADE;
-      });
-      filteredData.sort(function(a, b) {
+      return data.filter(function(element) {
+        return element.rating >= REVIEW_LOWEST_POSITIVE_GRADE;
+      }).sort(function(a, b) {
         return b.rating - a.rating;
       });
-      return filteredData;
     },
     'reviews-bad': function(data) {
-      filteredData = data.filter(function(element) {
-        return element.rating < LOWEST_POSITIVE_GRADE;
-      });
-      filteredData.sort(function(a, b) {
+      return data.filter(function(element) {
+        return element.rating < REVIEW_LOWEST_POSITIVE_GRADE;
+      }).sort(function(a, b) {
         return a.rating - b.rating;
       });
-      return filteredData;
     },
     'reviews-popular': function(data) {
-      filteredData = data.slice(0);
-      filteredData.sort(function(a, b) {
+      var filteredData = data.slice(0);
+      return filteredData.sort(function(a, b) {
         return b.review_usefulness - a.review_usefulness;
       });
-      return filteredData;
     }
   };
 
+
   /* Application states */
 
-  var activeFilter = filtersElement.querySelector('input[type="radio"]:checked').id;
+  var filterActive = filtersElement.querySelector('input[type="radio"]:checked').id;
 
+  var reviewsCurrentPage = 0;
 
 
   /* Functions */
 
   function applyFilter(id) {
-    activeFilter = id;
-    var filteredReviews = filters[id](reviews);
-    renderReviews(filteredReviews);
-  }
-
-  function initSingleFilter(event) {
-    if ( activeFilter !== event.target.id ) {
-      applyFilter(event.target.id);
-    }
+    filterActive = id;
+    reviewsFiltered = filters[id](reviews);
+    renderReviews(reviewsFiltered, reviewsCurrentPage = 0, true);
   }
 
   function initFilters() {
-    var i;
-    for ( i = 0; i < filtersItemElement.length; i++ ) {
-      filtersItemElement[i].onclick = initSingleFilter;
+    filtersElement.addEventListener('click', function(event) {
+      var clickedItem = event.target;
+      if ( clickedItem.type === 'radio' && clickedItem.id !== filterActive ) {
+        applyFilter(clickedItem.id);
+      }
+    });
+  }
+
+
+  function isMoreReviewToShow() {
+    return reviewsCurrentPage + 1 < Math.ceil(reviewsFiltered.length / REVIEWS_PAGE_SIZE);
+  }
+
+  function initMoreButton() {
+    moreElement.addEventListener('click', function() {
+      if ( isMoreReviewToShow() ) {
+        renderReviews(reviewsFiltered, ++reviewsCurrentPage, false);
+      }
+    });
+  }
+
+  function disableMoreButton() {
+    if ( isMoreReviewToShow() && moreElement.className.indexOf('invisible') > -1 ) {
+      moreElement.className = moreElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
+    }
+    if ( !isMoreReviewToShow() && moreElement.className.indexOf('invisible') === -1 ) {
+      moreElement.className += ' invisible';
     }
   }
 
@@ -148,7 +159,7 @@
     avatarLoadTimeout = setTimeout(function() {
       avatarValue.src = '';
       reviewElement.className += ' review-load-failure';
-    }, LOADING_TIMEOUT);
+    }, TIMEOUT_OF_LOADING);
 
     avatarValue.src = data.author.picture;
 
@@ -162,16 +173,25 @@
   }
 
 
-  function renderReviews(data) {
+  function renderReviews(data, pageNumber, replace) {
 
     var reviewValue = document.createDocumentFragment();
 
-    data.forEach(function(item) {
+    var from = pageNumber * REVIEWS_PAGE_SIZE;
+    var to = from + REVIEWS_PAGE_SIZE;
+    var pageOfData = data.slice(from, to);
+
+    pageOfData.forEach(function(item) {
       reviewValue.appendChild( getElementFromTemplate(item) );
     });
 
-    reviewsListElement.innerHTML = '';
+    if (replace) {
+      reviewsListElement.innerHTML = '';
+    }
+
     reviewsListElement.appendChild(reviewValue);
+
+    disableMoreButton();
 
   }
 
@@ -184,13 +204,13 @@
     reviewsListElement.className += ' reviews-list-loading';
 
     xhr.open('GET', '//o0.github.io/assets/json/reviews.json');
-    xhr.timeout = LOADING_TIMEOUT;
+    xhr.timeout = TIMEOUT_OF_LOADING;
 
     xhr.onload = function(event) {
       reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
       filtersElement.className = filtersElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
       reviews = JSON.parse( event.target.response );
-      applyFilter(activeFilter);
+      applyFilter(filterActive);
     };
 
     xhr.onerror = function() {
@@ -209,6 +229,8 @@
 
   getReviews();
   initFilters();
+  initMoreButton();
+
 
 
 })();
