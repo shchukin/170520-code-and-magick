@@ -22,7 +22,7 @@
     this._closeButton.addEventListener('click', this._onCloseClick);
 
     /* Arrow buttons add event */
-    [].forEach.call(this._arrowButtons, function(arrow){
+    [].forEach.call(this._arrowButtons, function(arrow) {
       arrow.addEventListener('click', this._onArrowClick);
     }.bind(this));
 
@@ -39,7 +39,7 @@
     this._closeButton.removeEventListener('click', this._onCloseClick);
 
     /* Arrow buttons remove event */
-    [].forEach.call(this._arrowButtons, function(arrow){
+    [].forEach.call(this._arrowButtons, function(arrow) {
       arrow.removeEventListener('click', this._onArrowClick);
     }.bind(this));
 
@@ -54,16 +54,16 @@
 
   Gallery.prototype._onArrowClick = function() {
     if ( this.classList.contains('overlay-gallery-control-left') ) {
-      alert('Left arrow has been clicked')
+      console.log('Left arrow has been clicked');
     }
     if ( this.classList.contains('overlay-gallery-control-right') ) {
-      alert('Right arrow has been clicked')
+      console.log('Right arrow has been clicked');
     }
     //console.log(this);
   };
 
   Gallery.prototype._onDocumentKeyDown = function(event) {
-    if (event.keyCode == 27) {
+    if (event.keyCode === 27) {
       this.hide();
     }
   };

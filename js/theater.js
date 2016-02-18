@@ -1,3 +1,5 @@
+/* global Gallery */
+
 'use strict';
 
 (function() {
@@ -11,7 +13,7 @@
     gallery.show();
   }
 
-  [].forEach.call(theaterElements, function(element){
+  [].forEach.call(theaterElements, function(element) {
     element.addEventListener('click', _onClick);
   });
 
