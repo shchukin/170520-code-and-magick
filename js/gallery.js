@@ -9,6 +9,8 @@
 
     this._onCloseClick = this._onCloseClick.bind(this);
     //this._onArrowClick = this._onArrowClick.bind(this);
+    this._onDocumentKeyDown = this._onDocumentKeyDown.bind(this);
+
   };
 
   Gallery.prototype.show = function() {
@@ -23,6 +25,9 @@
     [].forEach.call(this._arrowButtons, function(arrow){
       arrow.addEventListener('click', this._onArrowClick);
     }.bind(this));
+
+    /* Keyboard */
+    document.addEventListener('keydown', this._onDocumentKeyDown);
   };
 
   Gallery.prototype.hide = function() {
@@ -37,6 +42,9 @@
     [].forEach.call(this._arrowButtons, function(arrow){
       arrow.removeEventListener('click', this._onArrowClick);
     }.bind(this));
+
+    /* Keyboard */
+    document.removeEventListener('keydown', this._onDocumentKeyDown);
   };
 
 
@@ -52,6 +60,12 @@
       alert('Right arrow has been clicked')
     }
     //console.log(this);
+  };
+
+  Gallery.prototype._onDocumentKeyDown = function(event) {
+    if (event.keyCode == 27) {
+      this.hide();
+    }
   };
 
   window.Gallery = Gallery;
