@@ -127,7 +127,6 @@
 
     pageOfData.forEach(function(item) {
       var reviewElement = new Review(item);
-      reviewElement.render();
       reviewValue.appendChild( reviewElement.element );
     });
 

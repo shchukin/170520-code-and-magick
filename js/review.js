@@ -16,10 +16,6 @@
 
   function Review(data) {
     this._data = data;
-    this.element = '';
-  }
-
-  Review.prototype.render = function() {
     this.element = ( 'content' in reviewTemplate ) ? ( reviewTemplate.content.children[0].cloneNode(true) ) : ( reviewTemplate.childNodes[0].cloneNode(true) );
 
     var avatarElement = this.element.querySelector('.review-author');
@@ -59,6 +55,12 @@
 
     descriptionValue = this._data.description;
     descriptionElement.textContent = descriptionValue;
+
+  }
+
+  Review.prototype.render = function() {
+
+
   };
 
   window.Review = Review;
