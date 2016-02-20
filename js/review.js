@@ -63,9 +63,8 @@
     setElement.call(this, this._data);
   }
 
-  Review.prototype.render = function() {
-
-
+  Review.prototype.render = function(element) {
+    element.appendChild(this.element);
   };
 
   window.Review = Review;
