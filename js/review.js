@@ -1,18 +1,18 @@
 'use strict';
 
-var AVATAR_MAX_LOADING_TIME = 10000;
-var REVIEW_AUTHOR_AVATAR_SIZE = 124;
-
-var reviewTemplate = document.querySelector('#review-template');
-
-
-function convertGradeValueToWord( grade ) {
-  var grades = [null, 'one', 'two', 'three', 'four', 'five'];
-  return grades[grade];
-}
-
-
 (function() {
+
+  var AVATAR_MAX_LOADING_TIME = 10000;
+  var REVIEW_AUTHOR_AVATAR_SIZE = 124;
+
+  var reviewTemplate = document.querySelector('#review-template');
+
+
+  function convertGradeValueToWord( grade ) {
+    var grades = [null, 'one', 'two', 'three', 'four', 'five'];
+    return grades[grade];
+  }
+
 
   function Review(data) {
     this._data = data;
