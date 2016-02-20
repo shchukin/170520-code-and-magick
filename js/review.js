@@ -13,9 +13,7 @@
     return grades[grade];
   }
 
-
-  function Review(data) {
-    this._data = data;
+  function setElement(data) {
     this.element = ( 'content' in reviewTemplate ) ? ( reviewTemplate.content.children[0].cloneNode(true) ) : ( reviewTemplate.childNodes[0].cloneNode(true) );
 
     var avatarElement = this.element.querySelector('.review-author');
@@ -56,6 +54,13 @@
     descriptionValue = this._data.description;
     descriptionElement.textContent = descriptionValue;
 
+  }
+
+
+  function Review(data) {
+    this._data = data;
+    this.element = '';
+    setElement.call(this, this._data);
   }
 
   Review.prototype.render = function() {
