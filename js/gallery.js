@@ -8,7 +8,7 @@
     this._arrowButtons = this.element.querySelectorAll('.overlay-gallery-control');
 
     this._onCloseClick = this._onCloseClick.bind(this);
-    //this._onArrowClick = this._onArrowClick.bind(this);
+    this._onArrowClick = this._onArrowClick.bind(this);
     this._onDocumentKeyDown = this._onDocumentKeyDown.bind(this);
 
   };
@@ -52,14 +52,13 @@
     this.hide();
   };
 
-  Gallery.prototype._onArrowClick = function() {
-    if ( this.classList.contains('overlay-gallery-control-left') ) {
+  Gallery.prototype._onArrowClick = function(event) {
+    if ( event.target.className.indexOf('overlay-gallery-control-left') > -1 ) {
       console.log('Left arrow has been clicked');
     }
-    if ( this.classList.contains('overlay-gallery-control-right') ) {
+    if ( event.target.className.indexOf('overlay-gallery-control-right') > -1 ) {
       console.log('Right arrow has been clicked');
     }
-    //console.log(this);
   };
 
   Gallery.prototype._onDocumentKeyDown = function(event) {
