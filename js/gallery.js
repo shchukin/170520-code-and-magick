@@ -16,7 +16,7 @@
   Gallery.prototype.show = function() {
 
     /* Show gallery */
-    this.element.classList.remove('invisible');
+    this.element.className = this.element.className.replace('invisible', '').replace(/\s+/g, ' ').trim();;
 
     /* Close button add event */
     this._closeButton.addEventListener('click', this._onCloseClick);
@@ -33,7 +33,7 @@
   Gallery.prototype.hide = function() {
 
     /* Hide gallery */
-    this.element.classList.add('invisible');
+    this.element.className += ' invisible';
 
     /* Close button remove event */
     this._closeButton.removeEventListener('click', this._onCloseClick);
