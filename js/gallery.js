@@ -1,5 +1,11 @@
 'use strict';
 
+var keyCodes = {
+  Escape: 27,
+  ArrowLeft: 37,
+  ArrowRight: 39
+};
+
 (function() {
 
   var Gallery = function() {
@@ -62,13 +68,13 @@
 
   Gallery.prototype._onDocumentKeyDown = function(event) {
     switch (event.keyCode) {
-      case 27:
+      case keyCodes.Escape:
         this.hide();
         break;
-      case 37:
+      case keyCodes.ArrowLeft:
         console.log('Left key has been pressed');
         break;
-      case 39:
+      case keyCodes.ArrowRight:
         console.log('Right key has been pressed');
         break;
     }
