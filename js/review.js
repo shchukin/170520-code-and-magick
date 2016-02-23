@@ -2,8 +2,8 @@
 
 (function() {
 
-  var AVATAR_MAX_LOADING_TIME = 10000;
-  var REVIEW_AUTHOR_AVATAR_SIZE = 124;
+  Review.prototype.AVATAR_MAX_LOADING_TIME = 10000;
+  Review.prototype.REVIEW_AUTHOR_AVATAR_SIZE = 124;
 
   var reviewTemplate = document.querySelector('#review-template');
 
@@ -29,8 +29,8 @@
 
     avatarValue.onload = function() {
       clearTimeout(avatarLoadTimeout);
-      avatarValue.width = REVIEW_AUTHOR_AVATAR_SIZE;
-      avatarValue.height = REVIEW_AUTHOR_AVATAR_SIZE;
+      avatarValue.width = this.REVIEW_AUTHOR_AVATAR_SIZE;
+      avatarValue.height = this.REVIEW_AUTHOR_AVATAR_SIZE;
       avatarValue.alt = this._data.author.name;
       avatarValue.title = this._data.author.name;
       avatarValue.className = avatarElement.className;
@@ -44,7 +44,7 @@
     avatarLoadTimeout = setTimeout(function() {
       avatarValue.src = '';
       this.element.className += ' review-load-failure';
-    }.bind(this), AVATAR_MAX_LOADING_TIME);
+    }.bind(this), this.AVATAR_MAX_LOADING_TIME);
 
     avatarValue.src = this._data.author.picture;
 
