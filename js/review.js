@@ -8,10 +8,10 @@
   var reviewTemplate = document.querySelector('#review-template');
 
 
-  function convertGradeValueToWord( grade ) {
+  Review.prototype.convertGradeValueToWord = function( grade ) {
     var grades = [null, 'one', 'two', 'three', 'four', 'five'];
     return grades[grade];
-  }
+  };
 
   Review.prototype.createElement = function() {
     this.element = ( 'content' in reviewTemplate ) ? ( reviewTemplate.content.children[0].cloneNode(true) ) : ( reviewTemplate.childNodes[0].cloneNode(true) );
@@ -48,7 +48,7 @@
 
     avatarValue.src = this._data.author.picture;
 
-    ratingValue = convertGradeValueToWord(this._data.rating);
+    ratingValue = this.convertGradeValueToWord(this._data.rating);
     ratingElement.className += this._data.rating >= 2 ? ' review-rating-' + ratingValue : '';
 
     descriptionValue = this._data.description;
