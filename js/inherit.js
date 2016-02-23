@@ -1,7 +1,11 @@
 'use strict';
 
-(function() {
+function inherit(ParentClass, ChildClass) {
 
-  console.log('Hello from inherit.js')
+  var TempConstructor = function() {};
+  TempConstructor.prototype = ParentClass.prototype;
 
-})();
+  ChildClass.prototype = new TempConstructor();
+  ChildClass.prototype.constructor = ChildClass;
+
+}
