@@ -1,6 +1,12 @@
 'use strict';
 
 (function() {
+  
+  function Review(data) {
+    this._data = data;
+    this.element = '';
+    this.createElement();
+  }
 
   Review.prototype.AVATAR_MAX_LOADING_TIME = 10000;
   Review.prototype.REVIEW_AUTHOR_AVATAR_SIZE = 124;
@@ -58,13 +64,6 @@
   Review.prototype.render = function(element) {
     element.appendChild(this.element);
   };
-
-
-  function Review(data) {
-    this._data = data;
-    this.element = '';
-    this.createElement();
-  }
 
 
   window.Review = Review;
