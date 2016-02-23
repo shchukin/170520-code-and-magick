@@ -13,7 +13,7 @@
   };
 
   Review.prototype.createElement = function() {
-    this.element = ( 'content' in this.reviewTemplate ) ? ( this.reviewTemplate.content.children[0].cloneNode(true) ) : ( reviewTemplate.childNodes[0].cloneNode(true) );
+    this.element = ( 'content' in this.reviewTemplate ) ? ( this.reviewTemplate.content.children[0].cloneNode(true) ) : ( this.reviewTemplate.childNodes[0].cloneNode(true) );
 
     var avatarElement = this.element.querySelector('.review-author');
     var ratingElement = this.element.querySelector('.review-rating');
