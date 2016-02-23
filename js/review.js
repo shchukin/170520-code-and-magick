@@ -5,8 +5,7 @@
   Review.prototype.AVATAR_MAX_LOADING_TIME = 10000;
   Review.prototype.REVIEW_AUTHOR_AVATAR_SIZE = 124;
 
-  var reviewTemplate = document.querySelector('#review-template');
-
+  Review.prototype.reviewTemplate = document.querySelector('#review-template');
 
   Review.prototype.convertGradeValueToWord = function( grade ) {
     var grades = [null, 'one', 'two', 'three', 'four', 'five'];
@@ -14,7 +13,7 @@
   };
 
   Review.prototype.createElement = function() {
-    this.element = ( 'content' in reviewTemplate ) ? ( reviewTemplate.content.children[0].cloneNode(true) ) : ( reviewTemplate.childNodes[0].cloneNode(true) );
+    this.element = ( 'content' in this.reviewTemplate ) ? ( this.reviewTemplate.content.children[0].cloneNode(true) ) : ( reviewTemplate.childNodes[0].cloneNode(true) );
 
     var avatarElement = this.element.querySelector('.review-author');
     var ratingElement = this.element.querySelector('.review-rating');
