@@ -1,7 +1,7 @@
 'use strict';
 
 (function() {
-  
+
   function Review(data) {
     this._data = data;
     this.element = '';
