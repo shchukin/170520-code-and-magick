@@ -55,21 +55,22 @@
   Gallery.prototype._onArrowClick = function(event) {
     if ( event.target.className.indexOf('overlay-gallery-control-left') > -1 ) {
       console.log('Left arrow has been clicked');
-    }
-    if ( event.target.className.indexOf('overlay-gallery-control-right') > -1 ) {
+    } else if ( event.target.className.indexOf('overlay-gallery-control-right') > -1 ) {
       console.log('Right arrow has been clicked');
     }
   };
 
   Gallery.prototype._onDocumentKeyDown = function(event) {
-    if (event.keyCode === 27) {
-      this.hide();
-    }
-    if (event.keyCode === 37) {
-      console.log('Left key has been pressed');
-    }
-    if (event.keyCode === 39) {
-      console.log('Right key has been pressed');
+    switch (event.keyCode) {
+      case 27:
+        this.hide();
+        break;
+      case 37:
+        console.log('Left key has been pressed');
+        break;
+      case 39:
+        console.log('Right key has been pressed');
+        break;
     }
   };
 
