@@ -55,6 +55,10 @@
 
   };
 
+  Review.prototype.render = function(element) {
+    element.appendChild(this.element);
+  };
+
 
   function Review(data) {
     this._data = data;
@@ -62,9 +66,6 @@
     this.createElement();
   }
 
-  Review.prototype.render = function(element) {
-    element.appendChild(this.element);
-  };
 
   window.Review = Review;
 
