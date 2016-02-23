@@ -13,7 +13,7 @@
     return grades[grade];
   }
 
-  Review.prototype.setElement = function() {
+  Review.prototype.createElement = function() {
     this.element = ( 'content' in reviewTemplate ) ? ( reviewTemplate.content.children[0].cloneNode(true) ) : ( reviewTemplate.childNodes[0].cloneNode(true) );
 
     var avatarElement = this.element.querySelector('.review-author');
@@ -60,7 +60,7 @@
   function Review(data) {
     this._data = data;
     this.element = '';
-    this.setElement();
+    this.createElement();
   }
 
   Review.prototype.render = function(element) {
