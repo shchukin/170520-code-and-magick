@@ -89,7 +89,7 @@ var keyCodes = {
 
   Gallery.prototype.setPictures = function(photos) {
     this._photos = photos;
-    this.element.querySelector('.preview-number-total').innerHTML = photos.length;
+    this._numberTotal.innerHTML = photos.length;
   };
 
   Gallery.prototype.setCurrentPicture = function(index) {
