@@ -11,6 +11,8 @@ var keyCodes = {
   var Gallery = function() {
     this.element = document.querySelector('.overlay-gallery');
     this._stage = this.element.querySelector('.overlay-gallery-preview');
+    this._numberCurrent = this.element.querySelector('.preview-number-current');
+    this._numberTotal = this.element.querySelector('.preview-number-total');
     this._closeButton = this.element.querySelector('.overlay-gallery-close');
     this._arrowButtons = this.element.querySelectorAll('.overlay-gallery-control');
 
@@ -87,14 +89,16 @@ var keyCodes = {
 
   Gallery.prototype.setPictures = function(photos) {
     this._photos = photos;
+    this.element.querySelector('.preview-number-total').innerHTML = photos.length;
   };
 
   Gallery.prototype.setCurrentPicture = function(index) {
-    var olderElement = this._stage.querySelector('img')
+    var olderElement = this._stage.querySelector('img');
     if (olderElement) {
       olderElement.remove();
     }
     this._stage.appendChild(this._photos[index].element);
+    this._numberCurrent.innerHTML = index + 1;
   };
 
   window.Gallery = Gallery;
