@@ -4,29 +4,29 @@
 
 (function() {
 
-  var Photos = function() {
+  var Theater = function() {
     this.elements = document.querySelectorAll('.photogallery-image');
     this.data = [].map.call(this.elements, function(item) {
       return item.querySelector('img').currentSrc;
     });
   };
 
-  Photos.prototype._onClick = function(event) {
+  Theater.prototype._onClick = function(event) {
     event.preventDefault();
     gallery.show();
   };
 
-  Photos.prototype.init = function() {
+  Theater.prototype.init = function() {
     [].forEach.call(this.elements, function(element) {
       element.addEventListener('click', this._onClick);
     }.bind(this));
   };
 
-  window.Photos = Photos;
+  window.Theater = Theater;
 
 })();
 
-var photos = new Photos();
+var photos = new Theater();
 photos.init();
 
 var gallery = new Gallery();
