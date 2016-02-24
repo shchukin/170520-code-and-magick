@@ -6,8 +6,8 @@
 
   var Theater = function() {
     this.elements = document.querySelectorAll('.photogallery-image');
-    this.data = [].map.call(this.elements, function(item) {
-      return item.querySelector('img').currentSrc;
+    this.data = [].map.call(this.elements, function(item, index) {
+      return new Photo(item.querySelector('img').currentSrc , index);
     });
 
     this.gallery = new Gallery();
@@ -26,7 +26,7 @@
     [].forEach.call(this.elements, function(element) {
       element.addEventListener('click', this._onElementClick);
     }.bind(this));
-    
+
     this.gallery.setPictures(this.data);
   };
 

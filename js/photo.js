@@ -2,10 +2,10 @@
 
 (function() {
 
-  function Photo(data) {
-    this._data = data;
+  function Photo(url, index) {
+    this._url = url;
+    this._index = index;
   }
-
 
   window.Photo = Photo;
 
