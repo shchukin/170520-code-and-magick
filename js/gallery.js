@@ -13,6 +13,8 @@ var keyCodes = {
     this._closeButton = this.element.querySelector('.overlay-gallery-close');
     this._arrowButtons = this.element.querySelectorAll('.overlay-gallery-control');
 
+    this._photos = [];
+
     this._onCloseClick = this._onCloseClick.bind(this);
     this._onArrowClick = this._onArrowClick.bind(this);
     this._onDocumentKeyDown = this._onDocumentKeyDown.bind(this);
@@ -78,6 +80,10 @@ var keyCodes = {
         console.log('Right key has been pressed');
         break;
     }
+  };
+
+  Gallery.prototype.setPictures = function(photos) {
+    this._photos = photos;
   };
 
   window.Gallery = Gallery;

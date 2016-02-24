@@ -4,16 +4,22 @@
 
 (function() {
 
-  var theaterElements = document.querySelectorAll('.photogallery-image');
+  var theaterItemElements = document.querySelectorAll('.photogallery-image');
 
-  var gallery = new Gallery();
+  var photos = [].map.call(theaterItemElements, function(item) {
+    return item.querySelector('img').currentSrc;
+  });
+
+  var screenshotGallery = new Gallery();
+  screenshotGallery.setPictures(photos);
+
 
   function _onClick(event) {
     event.preventDefault();
     gallery.show();
   }
 
-  [].forEach.call(theaterElements, function(element) {
+  [].forEach.call(theaterItemElements, function(element) {
     element.addEventListener('click', _onClick);
   });
 
