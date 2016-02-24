@@ -18,7 +18,12 @@
 
   Theater.prototype._onElementClick = function(event) {
     event.preventDefault();
-    this.gallery.show();
+
+    /* get index */
+    var splitUrl = event.target.src.split('/');
+    var index = splitUrl[splitUrl.length - 1].replace('.png', '') - 1;
+
+    this.gallery.show(index);
   };
 
   Theater.prototype._init = function() {

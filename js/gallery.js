@@ -22,7 +22,7 @@ var keyCodes = {
 
   };
 
-  Gallery.prototype.show = function() {
+  Gallery.prototype.show = function(startFrom) {
 
     /* Show gallery */
     this.element.className = this.element.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
@@ -38,7 +38,7 @@ var keyCodes = {
     /* Keyboard */
     document.addEventListener('keydown', this._onDocumentKeyDown);
 
-    this.setCurrentPicture(0);
+    this.setCurrentPicture(startFrom);
   };
 
   Gallery.prototype.hide = function() {
@@ -90,6 +90,10 @@ var keyCodes = {
   };
 
   Gallery.prototype.setCurrentPicture = function(index) {
+    var olderElement = this._stage.querySelector('img')
+    if (olderElement) {
+      olderElement.remove();
+    }
     this._stage.appendChild(this._photos[index].element);
   };
 
