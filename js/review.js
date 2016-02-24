@@ -4,7 +4,7 @@
 
   function Review(data) {
     this._data = data;
-    this.element = '';
+    this._element = '';
     this.createElement();
   }
 
@@ -19,11 +19,11 @@
   };
 
   Review.prototype.createElement = function() {
-    this.element = ( 'content' in this.reviewTemplate ) ? ( this.reviewTemplate.content.children[0].cloneNode(true) ) : ( this.reviewTemplate.childNodes[0].cloneNode(true) );
+    this._element = ( 'content' in this.reviewTemplate ) ? ( this.reviewTemplate.content.children[0].cloneNode(true) ) : ( this.reviewTemplate.childNodes[0].cloneNode(true) );
 
-    var avatarElement = this.element.querySelector('.review-author');
-    var ratingElement = this.element.querySelector('.review-rating');
-    var descriptionElement = this.element.querySelector('.review-text');
+    var avatarElement = this._element.querySelector('.review-author');
+    var ratingElement = this._element.querySelector('.review-rating');
+    var descriptionElement = this._element.querySelector('.review-text');
 
     var avatarValue = new Image();
     var ratingValue;
@@ -39,16 +39,16 @@
       avatarValue.alt = this._data.author.name;
       avatarValue.title = this._data.author.name;
       avatarValue.className = avatarElement.className;
-      this.element.replaceChild(avatarValue, avatarElement);
+      this._element.replaceChild(avatarValue, avatarElement);
     }.bind(this);
 
     avatarValue.onerror = function() {
-      this.element.className += ' review-load-failure';
+      this._element.className += ' review-load-failure';
     }.bind(this);
 
     avatarLoadTimeout = setTimeout(function() {
       avatarValue.src = '';
-      this.element.className += ' review-load-failure';
+      this._element.className += ' review-load-failure';
     }.bind(this), this.AVATAR_MAX_LOADING_TIME);
 
     avatarValue.src = this._data.author.picture;
@@ -62,7 +62,7 @@
   };
 
   Review.prototype.render = function(element) {
-    element.appendChild(this.element);
+    element.appendChild(this._element);
   };
 
 

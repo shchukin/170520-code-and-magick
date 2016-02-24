@@ -9,12 +9,12 @@ var keyCodes = {
 (function() {
 
   var Gallery = function() {
-    this.element = document.querySelector('.overlay-gallery');
-    this._stage = this.element.querySelector('.overlay-gallery-preview');
-    this._numberCurrent = this.element.querySelector('.preview-number-current');
-    this._numberTotal = this.element.querySelector('.preview-number-total');
-    this._closeButton = this.element.querySelector('.overlay-gallery-close');
-    this._arrowButtons = this.element.querySelectorAll('.overlay-gallery-control');
+    this._element = document.querySelector('.overlay-gallery');
+    this._stageElement = this._element.querySelector('.overlay-gallery-preview');
+    this._numberCurrentElement = this._element.querySelector('.preview-number-current');
+    this._numberTotalElement = this._element.querySelector('.preview-number-total');
+    this._closeButtonElement = this._element.querySelector('.overlay-gallery-close');
+    this._arrowButtonsElement = this._element.querySelectorAll('.overlay-gallery-control');
 
     this._photos = [];
 
@@ -27,13 +27,13 @@ var keyCodes = {
   Gallery.prototype.show = function(startFrom) {
 
     /* Show gallery */
-    this.element.className = this.element.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
+    this._element.className = this._element.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
 
     /* Close button add event */
-    this._closeButton.addEventListener('click', this._onCloseClick);
+    this._closeButtonElement.addEventListener('click', this._onCloseClick);
 
     /* Arrow buttons add event */
-    [].forEach.call(this._arrowButtons, function(arrow) {
+    [].forEach.call(this._arrowButtonsElement, function(arrow) {
       arrow.addEventListener('click', this._onArrowClick);
     }.bind(this));
 
@@ -46,13 +46,13 @@ var keyCodes = {
   Gallery.prototype.hide = function() {
 
     /* Hide gallery */
-    this.element.className += ' invisible';
+    this._element.className += ' invisible';
 
     /* Close button remove event */
-    this._closeButton.removeEventListener('click', this._onCloseClick);
+    this._closeButtonElement.removeEventListener('click', this._onCloseClick);
 
     /* Arrow buttons remove event */
-    [].forEach.call(this._arrowButtons, function(arrow) {
+    [].forEach.call(this._arrowButtonsElement, function(arrow) {
       arrow.removeEventListener('click', this._onArrowClick);
     }.bind(this));
 
@@ -89,16 +89,16 @@ var keyCodes = {
 
   Gallery.prototype.setPictures = function(photos) {
     this._photos = photos;
-    this._numberTotal.innerHTML = photos.length;
+    this._numberTotalElement.innerHTML = photos.length;
   };
 
   Gallery.prototype.setCurrentPicture = function(index) {
-    var olderElement = this._stage.querySelector('img');
+    var olderElement = this._stageElement.querySelector('img');
     if (olderElement) {
       olderElement.remove();
     }
-    this._stage.appendChild(this._photos[index].element);
-    this._numberCurrent.innerHTML = index + 1;
+    this._stageElement.appendChild(this._photos[index]._element);
+    this._numberCurrentElement.innerHTML = index + 1;
   };
 
   window.Gallery = Gallery;

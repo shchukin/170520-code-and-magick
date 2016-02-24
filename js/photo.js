@@ -3,8 +3,8 @@
 (function() {
 
   function Photo(url) {
-    this.element = document.createElement('img');
-    this.element.src = url;
+    this._element = document.createElement('img');
+    this._element.src = url;
   }
 
   window.Photo = Photo;
