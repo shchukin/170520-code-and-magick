@@ -4,23 +4,31 @@
 
 (function() {
 
-  var theaterItemElements = document.querySelectorAll('.photogallery-image');
+  var Photos = function() {
+    this.elements = document.querySelectorAll('.photogallery-image');
+    this.data = [].map.call(this.elements, function(item) {
+      return item.querySelector('img').currentSrc;
+    });
+  };
 
-  var photos = [].map.call(theaterItemElements, function(item) {
-    return item.querySelector('img').currentSrc;
-  });
-
-  var screenshotGallery = new Gallery();
-  screenshotGallery.setPictures(photos);
-
-
-  function _onClick(event) {
+  Photos.prototype._onClick = function(event) {
     event.preventDefault();
     gallery.show();
-  }
+  };
 
-  [].forEach.call(theaterItemElements, function(element) {
-    element.addEventListener('click', _onClick);
-  });
+  Photos.prototype.init = function() {
+    [].forEach.call(this.elements, function(element) {
+      element.addEventListener('click', this._onClick);
+    }.bind(this));
+  };
+
+  window.Photos = Photos;
 
 })();
+
+var photos = new Photos();
+photos.init();
+
+var gallery = new Gallery();
+gallery.setPictures(photos.data);
+
