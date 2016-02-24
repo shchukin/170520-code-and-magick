@@ -2,6 +2,11 @@
 
 (function() {
 
-  console.log('Hello from photo.js')
+  function Photo(data) {
+    this._data = data;
+  }
+
+
+  window.Photo = Photo;
 
 })();
