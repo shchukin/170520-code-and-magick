@@ -1,3 +1,5 @@
+/* exported inherit */
+
 'use strict';
 
 function inherit(ParentClass, ChildClass) {
