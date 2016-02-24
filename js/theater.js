@@ -1,4 +1,5 @@
 /* global Gallery */
+/* global Photo */
 
 'use strict';
 
@@ -7,7 +8,7 @@
   var Theater = function() {
     this.elements = document.querySelectorAll('.photogallery-image');
     this.data = [].map.call(this.elements, function(item, index) {
-      return new Photo(item.querySelector('img').currentSrc , index);
+      return new Photo(item.querySelector('img').currentSrc, index);
     });
 
     this.gallery = new Gallery();

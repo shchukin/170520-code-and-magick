@@ -69,7 +69,7 @@ var keyCodes = {
 
   Gallery.prototype._onArrowClick = function(event) {
     if ( event.target.className.indexOf('overlay-gallery-control-left') > -1 ) {
-      if( this._current === 0) {
+      if ( this._current === 0) {
         this._current = this._photos.length - 1;
       } else {
         this._current--;
@@ -91,7 +91,7 @@ var keyCodes = {
         this.hide();
         break;
       case keyCodes.ArrowLeft:
-        if( this._current === 0) {
+        if ( this._current === 0 ) {
           this._current = this._photos.length - 1;
         } else {
           this._current--;
