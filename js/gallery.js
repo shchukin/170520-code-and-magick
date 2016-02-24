@@ -10,6 +10,7 @@ var keyCodes = {
 
   var Gallery = function() {
     this.element = document.querySelector('.overlay-gallery');
+    this._stage = this.element.querySelector('.overlay-gallery-preview');
     this._closeButton = this.element.querySelector('.overlay-gallery-close');
     this._arrowButtons = this.element.querySelectorAll('.overlay-gallery-control');
 
@@ -36,6 +37,8 @@ var keyCodes = {
 
     /* Keyboard */
     document.addEventListener('keydown', this._onDocumentKeyDown);
+
+    this.setCurrentPicture(0);
   };
 
   Gallery.prototype.hide = function() {
@@ -84,6 +87,10 @@ var keyCodes = {
 
   Gallery.prototype.setPictures = function(photos) {
     this._photos = photos;
+  };
+
+  Gallery.prototype.setCurrentPicture = function(index) {
+    this._stage.appendChild(this._photos[index].element);
   };
 
   window.Gallery = Gallery;
