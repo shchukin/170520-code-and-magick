@@ -1,3 +1,5 @@
+/* global keyCode */
+
 'use strict';
 
 (function() {
