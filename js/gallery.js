@@ -115,13 +115,8 @@ var keyCodes = {
   };
 
   Gallery.prototype.setCurrentPicture = function() {
-    //var olderElement = this._stageElement.querySelector('img');
-    //if (olderElement) {
-    //  olderElement.remove();
-    //}
     this._photos[this._current - 1].removeElement();
-
-    this._stageElement.appendChild(this._photos[this._current].element);
+    this._photos[this._current].renderElement( this._stageElement );
     this._numberCurrentElement.innerHTML = this._current + 1;
   };
 

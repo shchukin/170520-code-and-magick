@@ -7,7 +7,11 @@
     this.element.src = url;
   }
 
-  Photo.prototype.removeElement = function(){
+  Photo.prototype.renderElement = function(location) {
+    location.appendChild(this.element);
+  };
+
+  Photo.prototype.removeElement = function() {
     if (this.element.parentNode) {
       this.element.parentNode.removeChild(this.element);
     }
