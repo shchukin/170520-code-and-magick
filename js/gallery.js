@@ -19,16 +19,6 @@
 
   };
 
-  
-  Gallery.prototype._prevIndex = function() {
-    return ( this._current === 0 ) ? ( this._photos.length - 1 ) : ( this._current - 1 );
-  };
-
-  Gallery.prototype._nextIndex = function() {
-    return ( this._current === this._photos.length - 1 ) ? ( 0 ) : ( this._current + 1 );
-  };
-
-
   Gallery.prototype.show = function(startFrom) {
 
     /* Show gallery */
@@ -45,7 +35,7 @@
     /* Keyboard */
     document.addEventListener('keydown', this._onDocumentKeyDown);
 
-    this.setCurrentPicture(startFrom);
+    this.choosePicture(startFrom);
   };
 
   Gallery.prototype.hide = function() {
@@ -72,9 +62,9 @@
 
   Gallery.prototype._onArrowClick = function(event) {
     if ( event.target.className.indexOf('overlay-gallery-control-left') > -1 ) {
-      this.setCurrentPicture( this._prevIndex() );
+      this.choosePicture( this._prevIndex() );
     } else if ( event.target.className.indexOf('overlay-gallery-control-right') > -1 ) {
-      this.setCurrentPicture( this._nextIndex() );
+      this.choosePicture( this._nextIndex() );
     }
   };
 
@@ -84,12 +74,20 @@
         this.hide();
         break;
       case keyCode.ArrowLeft:
-        this.setCurrentPicture( this._prevIndex() );
+        this.choosePicture( this._prevIndex() );
         break;
       case keyCode.ArrowRight:
-        this.setCurrentPicture( this._nextIndex() );
+        this.choosePicture( this._nextIndex() );
         break;
     }
+  };
+
+  Gallery.prototype._prevIndex = function() {
+    return ( this._current === 0 ) ? ( this._photos.length - 1 ) : ( this._current - 1 );
+  };
+
+  Gallery.prototype._nextIndex = function() {
+    return ( this._current === this._photos.length - 1 ) ? ( 0 ) : ( this._current + 1 );
   };
 
   Gallery.prototype.setPictures = function(photos) {
@@ -97,7 +95,7 @@
     this._numberTotalElement.innerHTML = photos.length;
   };
 
-  Gallery.prototype.setCurrentPicture = function(index) {
+  Gallery.prototype.choosePicture = function(index) {
     this._photos[this._current].removeElement();
     this._photos[index].renderElement( this._stageElement );
     this._numberCurrentElement.innerHTML = index + 1;
