@@ -10,7 +10,7 @@
     this._numberCurrentElement = this._element.querySelector('.preview-number-current');
     this._numberTotalElement = this._element.querySelector('.preview-number-total');
     this._closeButtonElement = this._element.querySelector('.overlay-gallery-close');
-    this._arrowButtonsElement = this._element.querySelectorAll('.overlay-gallery-control');
+    this._arrowButtonElements = this._element.querySelectorAll('.overlay-gallery-control');
 
     this._current = 0;
     this._photos = [];
@@ -30,7 +30,7 @@
     this._closeButtonElement.addEventListener('click', this._onCloseClick);
 
     /* Arrow buttons add event */
-    [].forEach.call(this._arrowButtonsElement, function(arrow) {
+    [].forEach.call(this._arrowButtonElements, function(arrow) {
       arrow.addEventListener('click', this._onArrowClick);
     }.bind(this));
 
@@ -49,7 +49,7 @@
     this._closeButtonElement.removeEventListener('click', this._onCloseClick);
 
     /* Arrow buttons remove event */
-    [].forEach.call(this._arrowButtonsElement, function(arrow) {
+    [].forEach.call(this._arrowButtonElements, function(arrow) {
       arrow.removeEventListener('click', this._onArrowClick);
     }.bind(this));
 
