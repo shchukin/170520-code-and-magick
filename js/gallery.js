@@ -1,11 +1,5 @@
 'use strict';
 
-var keyCodes = {
-  Escape: 27,
-  ArrowLeft: 37,
-  ArrowRight: 39
-};
-
 (function() {
 
   var Gallery = function() {
@@ -87,10 +81,10 @@ var keyCodes = {
 
   Gallery.prototype._onDocumentKeyDown = function(event) {
     switch (event.keyCode) {
-      case keyCodes.Escape:
+      case keyCode.Escape:
         this.hide();
         break;
-      case keyCodes.ArrowLeft:
+      case keyCode.ArrowLeft:
         if ( this._current === 0 ) {
           this._current = this._photos.length - 1;
         } else {
@@ -98,7 +92,7 @@ var keyCodes = {
         }
         this.setCurrentPicture();
         break;
-      case keyCodes.ArrowRight:
+      case keyCode.ArrowRight:
         if (this._current === this._photos.length - 1) {
           this._current = 0;
         } else {
