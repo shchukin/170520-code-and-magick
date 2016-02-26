@@ -1,4 +1,5 @@
 /* global Gallery */
+/* global Photo */
 
 'use strict';
 
@@ -6,15 +7,20 @@
 
   var theaterElements = document.querySelectorAll('.photogallery-image');
 
-  var gallery = new Gallery();
+  var theaterData = [].map.call(theaterElements, function(item) {
+    return new Photo(item.querySelector('img').getAttribute('src'));
+  });
 
-  function _onClick(event) {
-    event.preventDefault();
-    gallery.show();
-  }
+  var theaterGallery = new Gallery();
+
+  theaterGallery.setPictures(theaterData);
 
   [].forEach.call(theaterElements, function(element) {
-    element.addEventListener('click', _onClick);
+    element.addEventListener('click', function() {
+      theaterGallery.show( [].indexOf.call(theaterElements, this) );
+    });
   });
 
 })();
+
+
