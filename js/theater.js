@@ -8,7 +8,7 @@
   var theaterElements = document.querySelectorAll('.photogallery-image');
 
   var theaterData = [].map.call(theaterElements, function(item) {
-    return new Photo(item.querySelector('img').currentSrc);
+    return new Photo(item.querySelector('img').getAttribute('src'));
   });
 
   var theaterGallery = new Gallery();
