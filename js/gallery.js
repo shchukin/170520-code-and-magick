@@ -119,7 +119,7 @@ var keyCodes = {
     if (olderElement) {
       olderElement.remove();
     }
-    this._stageElement.appendChild(this._photos[this._current]._element);
+    this._stageElement.appendChild(this._photos[this._current].element);
     this._numberCurrentElement.innerHTML = this._current + 1;
   };
 
