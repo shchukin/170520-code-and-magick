@@ -19,6 +19,14 @@
 
   };
 
+  Gallery.prototype._prevIndex = function() {
+    return ( this._current === 0 ) ? ( this._photos.length - 1 ) : ( this._current - 1 );
+  };
+
+  Gallery.prototype._nextIndex = function() {
+    return ( this._current === this._photos.length - 1 ) ? ( 0 ) : ( this._current + 1 );
+  };
+
   Gallery.prototype.show = function(startFrom) {
 
     /* Show gallery */
