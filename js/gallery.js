@@ -1,17 +1,19 @@
-'use strict';
+/* global keyCode */
 
-var keyCodes = {
-  Escape: 27,
-  ArrowLeft: 37,
-  ArrowRight: 39
-};
+'use strict';
 
 (function() {
 
   var Gallery = function() {
-    this.element = document.querySelector('.overlay-gallery');
-    this._closeButton = this.element.querySelector('.overlay-gallery-close');
-    this._arrowButtons = this.element.querySelectorAll('.overlay-gallery-control');
+    this._element = document.querySelector('.overlay-gallery');
+    this._stageElement = this._element.querySelector('.overlay-gallery-preview');
+    this._numberCurrentElement = this._element.querySelector('.preview-number-current');
+    this._numberTotalElement = this._element.querySelector('.preview-number-total');
+    this._closeButtonElement = this._element.querySelector('.overlay-gallery-close');
+    this._arrowButtonElements = this._element.querySelectorAll('.overlay-gallery-control');
+
+    this._current = 0;
+    this._photos = [];
 
     this._onCloseClick = this._onCloseClick.bind(this);
     this._onArrowClick = this._onArrowClick.bind(this);
@@ -19,33 +21,35 @@ var keyCodes = {
 
   };
 
-  Gallery.prototype.show = function() {
+  Gallery.prototype.show = function(startFrom) {
 
     /* Show gallery */
-    this.element.className = this.element.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
+    this._element.className = this._element.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
 
     /* Close button add event */
-    this._closeButton.addEventListener('click', this._onCloseClick);
+    this._closeButtonElement.addEventListener('click', this._onCloseClick);
 
     /* Arrow buttons add event */
-    [].forEach.call(this._arrowButtons, function(arrow) {
+    [].forEach.call(this._arrowButtonElements, function(arrow) {
       arrow.addEventListener('click', this._onArrowClick);
     }.bind(this));
 
     /* Keyboard */
     document.addEventListener('keydown', this._onDocumentKeyDown);
+
+    this.choosePicture(startFrom);
   };
 
   Gallery.prototype.hide = function() {
 
     /* Hide gallery */
-    this.element.className += ' invisible';
+    this._element.className += ' invisible';
 
     /* Close button remove event */
-    this._closeButton.removeEventListener('click', this._onCloseClick);
+    this._closeButtonElement.removeEventListener('click', this._onCloseClick);
 
     /* Arrow buttons remove event */
-    [].forEach.call(this._arrowButtons, function(arrow) {
+    [].forEach.call(this._arrowButtonElements, function(arrow) {
       arrow.removeEventListener('click', this._onArrowClick);
     }.bind(this));
 
@@ -60,24 +64,44 @@ var keyCodes = {
 
   Gallery.prototype._onArrowClick = function(event) {
     if ( event.target.className.indexOf('overlay-gallery-control-left') > -1 ) {
-      console.log('Left arrow has been clicked');
+      this.choosePicture( this._prevIndex() );
     } else if ( event.target.className.indexOf('overlay-gallery-control-right') > -1 ) {
-      console.log('Right arrow has been clicked');
+      this.choosePicture( this._nextIndex() );
     }
   };
 
   Gallery.prototype._onDocumentKeyDown = function(event) {
     switch (event.keyCode) {
-      case keyCodes.Escape:
+      case keyCode.Escape:
         this.hide();
         break;
-      case keyCodes.ArrowLeft:
-        console.log('Left key has been pressed');
+      case keyCode.ArrowLeft:
+        this.choosePicture( this._prevIndex() );
         break;
-      case keyCodes.ArrowRight:
-        console.log('Right key has been pressed');
+      case keyCode.ArrowRight:
+        this.choosePicture( this._nextIndex() );
         break;
     }
+  };
+
+  Gallery.prototype._prevIndex = function() {
+    return ( this._current === 0 ) ? ( this._photos.length - 1 ) : ( this._current - 1 );
+  };
+
+  Gallery.prototype._nextIndex = function() {
+    return ( this._current === this._photos.length - 1 ) ? ( 0 ) : ( this._current + 1 );
+  };
+
+  Gallery.prototype.setPictures = function(photos) {
+    this._photos = photos;
+    this._numberTotalElement.innerHTML = photos.length;
+  };
+
+  Gallery.prototype.choosePicture = function(index) {
+    this._photos[this._current].removeElement();
+    this._photos[index].renderElement( this._stageElement );
+    this._numberCurrentElement.innerHTML = index + 1;
+    this._current = index;
   };
 
   window.Gallery = Gallery;
