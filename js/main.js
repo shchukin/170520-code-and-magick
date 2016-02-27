@@ -1,1 +1,3 @@
-require('theater');
+require('./form');
+require('./game');
+require('./submit');
