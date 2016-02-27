@@ -1,13 +1,9 @@
 'use strict';
 
-requirejs.config({
-  baseUrl: 'js'
-});
+var Review = require('./review');
 
 
-define([
-  'review'
-], function(Review) {
+define(function() {
 
   /* Constants */
 
