@@ -1,8 +1,8 @@
-/* global keyCode */
-
 'use strict';
 
-(function() {
+define([
+  'keycode'
+], function() {
 
   var Gallery = function() {
     this._element = document.querySelector('.overlay-gallery');
@@ -104,6 +104,6 @@
     this._current = index;
   };
 
-  window.Gallery = Gallery;
+  return Gallery;
 
-})();
+});

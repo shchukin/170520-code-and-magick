@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+define(function() {
 
   function Photo(url) {
     this.element = document.createElement('img');
@@ -17,6 +17,6 @@
     }
   };
 
-  window.Photo = Photo;
+  return Photo;
 
-})();
+});

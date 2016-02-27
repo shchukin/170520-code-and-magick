@@ -1,9 +1,14 @@
-/* global Gallery */
-/* global Photo */
-
 'use strict';
 
-(function() {
+requirejs.config({
+  baseUrl: 'js'
+});
+
+
+define([
+  'gallery',
+  'photo'
+], function(Gallery, Photo) {
 
   var theaterElements = document.querySelectorAll('.photogallery-image');
 
@@ -21,6 +26,13 @@
     });
   });
 
-})();
+});
+
+
+
+
+
+
+
 
 
