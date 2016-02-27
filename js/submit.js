@@ -1,6 +1,7 @@
-/* global docCookies */
-
 'use strict';
+
+var docCookies = require('./doc-cookies');
+
 
 var BIRTH_MONTH = 10;
 var BIRTH_DAY = 27;
