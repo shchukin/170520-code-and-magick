@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+define(function() {
 
   function Review(data) {
     this._data = data;
@@ -66,6 +66,6 @@
   };
 
 
-  window.Review = Review;
+  return Review;
 
-})();
+});
