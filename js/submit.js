@@ -2,50 +2,46 @@
 
 'use strict';
 
-(function() {
+var BIRTH_MONTH = 10;
+var BIRTH_DAY = 27;
 
-  var BIRTH_MONTH = 10;
-  var BIRTH_DAY = 27;
+var formElement = document.querySelector('.review-form');
+var nameElement = formElement.querySelector('#review-name');
+var markElements = formElement.querySelectorAll('[name="review-mark"]');
 
-  var formElement = document.querySelector('.review-form');
-  var nameElement = formElement.querySelector('#review-name');
-  var markElements = formElement.querySelectorAll('[name="review-mark"]');
-
-  var markCookie = docCookies.getItem('mark');
-  var nameCookie = docCookies.getItem('name');
+var markCookie = docCookies.getItem('mark');
+var nameCookie = docCookies.getItem('name');
 
 
-  /* Get cookies */
+/* Get cookies */
 
-  if ( markCookie ) {
-    for ( var i = 0; i < markElements.length; i++ ) {
-      markElements[i].checked = (i + 1 === +markCookie);
-    }
+if ( markCookie ) {
+  for ( var i = 0; i < markElements.length; i++ ) {
+    markElements[i].checked = (i + 1 === +markCookie);
   }
+}
 
-  if ( nameCookie ) {
-    nameElement.value = nameCookie;
-  }
+if ( nameCookie ) {
+  nameElement.value = nameCookie;
+}
 
 
-  /* Set cookies */
+/* Set cookies */
 
-  formElement.onsubmit = function(event) {
-    event.preventDefault();
+formElement.onsubmit = function(event) {
+  event.preventDefault();
 
-    var currentYear = new Date().getFullYear();
-    var birthdayThisYear = new Date(currentYear, BIRTH_MONTH - 1, BIRTH_DAY).getTime();
-    var currentDate = Date.now();
+  var currentYear = new Date().getFullYear();
+  var birthdayThisYear = new Date(currentYear, BIRTH_MONTH - 1, BIRTH_DAY).getTime();
+  var currentDate = Date.now();
 
-    var cookiesExpire = currentDate > birthdayThisYear ? currentDate - birthdayThisYear : currentDate - birthdayThisYear + (1000 * 60 * 60 * 24 * 365);
+  var cookiesExpire = currentDate > birthdayThisYear ? currentDate - birthdayThisYear : currentDate - birthdayThisYear + (1000 * 60 * 60 * 24 * 365);
 
-    markCookie = formElement.querySelector('[name="review-mark"]:checked').value;
-    nameCookie = formElement.querySelector('#review-name').value;
+  markCookie = formElement.querySelector('[name="review-mark"]:checked').value;
+  nameCookie = formElement.querySelector('#review-name').value;
 
-    docCookies.setItem('mark', markCookie, cookiesExpire);
-    docCookies.setItem('name', nameCookie, cookiesExpire);
+  docCookies.setItem('mark', markCookie, cookiesExpire);
+  docCookies.setItem('name', nameCookie, cookiesExpire);
 
-    formElement.submit();
-  };
-
-})();
+  formElement.submit();
+};
