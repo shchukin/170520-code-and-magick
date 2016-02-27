@@ -1,6 +1,6 @@
 'use strict';
 
-var keyCode = require('./keycode');
+var keyCode = require('keycode');
 
 var Gallery = function() {
   this._element = document.querySelector('.overlay-gallery');

@@ -1,6 +1,6 @@
 'use strict';
 
-var docCookies = require('./doc-cookies');
+var docCookies = require('doc-cookies');
 
 
 var BIRTH_MONTH = 10;

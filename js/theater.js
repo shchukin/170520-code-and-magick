@@ -1,7 +1,7 @@
 'use strict';
 
-var Photo = require('./photo');
-var Gallery = require('./gallery');
+var Photo = require('photo');
+var Gallery = require('gallery');
 
 
 var theaterElements = document.querySelectorAll('.photogallery-image');

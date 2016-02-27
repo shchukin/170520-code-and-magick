@@ -1,6 +1,6 @@
 'use strict';
 
-var Review = require('./review');
+var Review = require('review');
 
 /* Constants */
 
