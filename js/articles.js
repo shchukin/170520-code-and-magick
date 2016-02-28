@@ -69,9 +69,7 @@ var filters = {
 
 
 /* Application states */
-
-var filterActive = filtersElement.querySelector('input[type="radio"]:checked').id;
-
+var filterActive = localStorage.getItem('filterActive') ? localStorage.getItem('filterActive') : filtersElement.querySelector('input[type="radio"]:checked').id;
 var reviewsCurrentPage = 0;
 
 
@@ -81,6 +79,8 @@ function applyFilter(id) {
   filterActive = id;
   reviewsFiltered = filters[id](reviews);
   renderReviews(reviewsFiltered, reviewsCurrentPage = 0, true);
+  localStorage.setItem('filterActive', id);
+  filtersElement.querySelector('#' + filterActive).checked = true; // in case it was changed from somewhere else and radio button was not clicked (eg. local storage init)
 }
 
 function initFilters() {
