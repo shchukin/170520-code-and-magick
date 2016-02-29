@@ -17,25 +17,29 @@ var Gallery = function() {
   this._onArrowClick = this._onArrowClick.bind(this);
   this._onDocumentKeyDown = this._onDocumentKeyDown.bind(this);
 
-  window.addEventListener('hashchange', this._hashchange.bind(this) );
+  window.addEventListener('hashchange', this._onHashChange.bind(this) );
 
 };
 
-Gallery.prototype.restoreFromHash = function() {
-  if( location.hash.indexOf('screenshots') !== -1 ) {
-    this.show(location.hash.replace('#', ''));
-  }
+Gallery.prototype._doesHashContainsScreenshot = function() {
+  return location.hash.indexOf('screenshots') !== -1;
+  //var regexp = /#photo\/(\S+)/;
+  //console.log(location.hash.match(regexp);
 };
 
-Gallery.prototype._hashchange = function(startFrom) {
-  if(location.hash.indexOf('screenshots') !== -1) {
+Gallery.prototype._onHashChange = function() {
+  if( this._doesHashContainsScreenshot() ) {
     this.show(location.hash.replace('#', ''));
   }
   else {
     this.hide();
   }
-  //var regexp = /#photo\/(\S+)/;
-  //console.log(location.hash.match(regexp);
+};
+
+Gallery.prototype.restoreFromHash = function() {
+  if( this._doesHashContainsScreenshot() ) {
+    this.show(location.hash.replace('#', ''));
+  }
 };
 
 Gallery.prototype.show = function(startFrom) {
