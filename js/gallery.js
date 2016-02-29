@@ -22,14 +22,14 @@ var Gallery = function() {
 };
 
 Gallery.prototype._doesHashContainsScreenshot = function() {
-  return location.hash.indexOf('screenshots') !== -1;
+  return location.hash.indexOf('photo') !== -1;
   //var regexp = /#photo\/(\S+)/;
   //console.log(location.hash.match(regexp);
 };
 
 Gallery.prototype.restoreFromHash = function() {
   if( this._doesHashContainsScreenshot() ) {
-    this._show(location.hash.replace('#', ''));
+    this._show(location.hash.replace('#photo/', ''));
   }
 };
 
@@ -76,9 +76,9 @@ Gallery.prototype._onCloseClick = function() {
 
 Gallery.prototype._onArrowClick = function(event) {
   if ( event.target.className.indexOf('overlay-gallery-control-left') > -1 ) {
-    location.hash = this._photos[this._prevIndex()].src;
+    location.hash = 'photo/' + this._photos[this._prevIndex()].src;
   } else if ( event.target.className.indexOf('overlay-gallery-control-right') > -1 ) {
-    location.hash = this._photos[this._nextIndex()].src;
+    location.hash = 'photo/' + this._photos[this._nextIndex()].src;
   }
 };
 
@@ -88,17 +88,17 @@ Gallery.prototype._onDocumentKeyDown = function(event) {
       location.hash = '';
       break;
     case keyCode.ArrowLeft:
-      location.hash = this._photos[this._prevIndex()].src;
+      location.hash = 'photo/' + this._photos[this._prevIndex()].src;
       break;
     case keyCode.ArrowRight:
-      location.hash = this._photos[this._nextIndex()].src;
+      location.hash = 'photo/' + this._photos[this._nextIndex()].src;
       break;
   }
 };
 
 Gallery.prototype._onHashChange = function() {
   if( this._doesHashContainsScreenshot() ) {
-    this._show(location.hash.replace('#', ''));
+    this._show(location.hash.replace('#photo/', ''));
   }
   else {
     this._hide();

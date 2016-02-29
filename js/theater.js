@@ -18,7 +18,7 @@ gallery.setPictures(theaterData);
   element.addEventListener('click', function(event) {
     event.preventDefault();
     var index = [].indexOf.call(theaterElements, this);
-    location.hash = theaterData[index].src;
+    location.hash = 'photo/' + theaterData[index].src;
   });
 });
 
