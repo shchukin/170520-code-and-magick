@@ -23,7 +23,7 @@ var Gallery = function() {
 
 Gallery.prototype._doesHashContainsScreenshot = function() {
   var regexp = /#photo\/(\S+)/;
-  return location.hash.match(regexp) ? true : false;
+  return !!location.hash.match(regexp);
 };
 
 Gallery.prototype.restoreFromHash = function() {
