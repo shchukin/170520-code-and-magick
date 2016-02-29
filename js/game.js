@@ -50,7 +50,7 @@ function drawBubble(ctx) {
  * @param {number} containerY координата контейнера по оси Y
  * @param {number} containerWidth ширина контейнера
  * @param {number} containerHeight высота контейнера
- * @param {Array,<string>} content массив строк сообщения
+ * @param {Array.<string>} content массив строк сообщения
  * @param {number} lineHeight заданный интерлиньяж
  */
 function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth, containerHeight, content, lineHeight) {
