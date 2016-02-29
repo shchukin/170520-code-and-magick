@@ -12,8 +12,15 @@ var NOTIFICATION_BACKGROUND = '#FFFFFF';
 var SHADOW_SIZE = 10;
 var SHADOW_COLOR = 'rgba(0, 0, 0, 0.7)';
 
-
+/**
+ * Отрисовка бабла - фон для сообщения.
+ * Состоит из двух прямоугольников - теневой и фоновый
+ * Теневой смещен на несколько пикселей относительно основного.
+ *
+ * @param {Object} ctx
+ */
 function drawBubble(ctx) {
+  //отрисовка теневого прямоугольника
   ctx.fillStyle = SHADOW_COLOR;
   ctx.fillRect(
     ( (ctx.canvas.width - NOTIFICATION_WIDTH) / 2 ) + SHADOW_SIZE,
@@ -22,6 +29,7 @@ function drawBubble(ctx) {
     NOTIFICATION_HEIGHT
   );
 
+  //отрисовка фонового
   ctx.fillStyle = NOTIFICATION_BACKGROUND;
   ctx.textBaseline = 'top';
   ctx.fillRect(
@@ -32,12 +40,24 @@ function drawBubble(ctx) {
   );
 }
 
-
+/**
+ * Отрисовка текста внутри заданного контейнера с центрированием.
+ * Центрирование производится по обоим направлениям.
+ * Сообщение выводится построчно
+ *
+ * @param {Object} ctx
+ * @param {number} containerX координата контейнера по оси X
+ * @param {number} containerY координата контейнера по оси Y
+ * @param {number} containerWidth ширина контейнера
+ * @param {number} containerHeight высота контейнера
+ * @param {Array,<string>} content массив строк сообщения
+ * @param {number} lineHeight заданный интерлиньяж
+ */
 function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth, containerHeight, content, lineHeight) {
 
   var lineQuantity = Math.min(content.length, Math.floor( containerHeight / lineHeight) );
 
-  var textWidth = containerWidth;
+  var textWidth = containerWidth; // ширина текста неизвестна, полагаем ее равной ширине контейнера
 
   var textHeight = lineQuantity * lineHeight;
 
@@ -45,9 +65,9 @@ function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth,
 
   var textY;
 
-  if ( containerHeight - textHeight > 0 ) {                     // if container height is enough to fit all lines
+  if ( containerHeight - textHeight > 0 ) {                       // если высоты контейнера недостаточно чтобы вместить все строки
     textY = containerY + (containerHeight - textHeight) / 2;
-  } else {                                                        // else just start from top
+  } else {                                                        // то начинаем отрисовку от верха контейнера, без использования вертикального центрирования
     textY = containerY;
   }
 
@@ -57,7 +77,12 @@ function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth,
 
 }
 
-
+/**
+ * Создание нотивикации. Производится в два этапа: отрисовка бабла и отрисовка текст.
+ *
+ * @param {Object} ctx
+ * @param {number|string|Array} message сообещние может быть числом, строкой или массивом строк
+ */
 function drawNotification(ctx, message) {
 
   drawBubble(ctx);
@@ -66,12 +91,12 @@ function drawNotification(ctx, message) {
   ctx.fillStyle = NOTIFICATION_COLOR;
   ctx.textAlign = 'center';
 
-  if ( typeof (message) === 'number' ) {  // in case of number
-    message = [message.toString()];
+  if ( typeof (message) === 'number' ) {  // если типа сообщения число
+    message = [message.toString()];       // переводим его в строку
   }
 
-  if ( typeof (message) === 'string' ) {  // in case of single string
-    message = message.split('\n');
+  if ( typeof (message) === 'string' ) {  // если строка
+    message = message.split('\n');        // переводим в массив
   }
 
   drawAlignedTextInContainer(
