@@ -1,8 +1,9 @@
 'use strict';
 
 function Photo(url) {
+  this.src = url;
   this.element = document.createElement('img');
-  this.element.src = url;
+  this.element.src = this.src;
 }
 
 Photo.prototype.renderElement = function(location) {
