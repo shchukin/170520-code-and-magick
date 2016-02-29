@@ -27,7 +27,7 @@ Gallery.prototype._doesHashContainsScreenshot = function() {
 };
 
 Gallery.prototype.restoreFromHash = function() {
-  if( this._doesHashContainsScreenshot() ) {
+  if ( this._doesHashContainsScreenshot() ) {
     this._show(location.hash.replace('#photo/', ''));
   }
 };
@@ -96,10 +96,9 @@ Gallery.prototype._onDocumentKeyDown = function(event) {
 };
 
 Gallery.prototype._onHashChange = function() {
-  if( this._doesHashContainsScreenshot() ) {
+  if ( this._doesHashContainsScreenshot() ) {
     this._show(location.hash.replace('#photo/', ''));
-  }
-  else {
+  } else {
     this._hide();
   }
 };
@@ -120,8 +119,10 @@ Gallery.prototype.setPictures = function(photos) {
 
 Gallery.prototype._choosePicture = function(index) {
 
-  if( typeof(index) === 'string' ) {
-    index = this._photos.map(function(item) { return item.src; }).indexOf(index);
+  if ( typeof (index) === 'string' ) {
+    index = this._photos.map(function(item) {
+      return item.src;
+    }).indexOf(index);
   }
 
   this._photos[this._current].removeElement();
