@@ -20,9 +20,9 @@ theaterGallery.setPictures(theaterData);
     var index = [].indexOf.call(theaterElements, this);
     location.hash = theaterData[index].src;
   });
-
 });
 
+theaterGallery.restoreFromHash();
 
 
 

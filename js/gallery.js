@@ -21,6 +21,12 @@ var Gallery = function() {
 
 };
 
+Gallery.prototype.restoreFromHash = function() {
+  if( location.hash.indexOf('screenshots') !== -1 ) {
+    this.show(location.hash.replace('#', ''));
+  }
+};
+
 Gallery.prototype._hashchange = function(startFrom) {
   if(location.hash.indexOf('screenshots') !== -1) {
     this.show(location.hash.replace('#', ''));
