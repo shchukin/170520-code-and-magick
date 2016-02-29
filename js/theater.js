@@ -15,9 +15,12 @@ var theaterGallery = new Gallery();
 theaterGallery.setPictures(theaterData);
 
 [].forEach.call(theaterElements, function(element) {
-  element.addEventListener('click', function() {
-    theaterGallery.show( [].indexOf.call(theaterElements, this) );
+  element.addEventListener('click', function(event) {
+    event.preventDefault();
+    var index = [].indexOf.call(theaterElements, this);
+    location.hash = theaterData[index].src;
   });
+
 });
 
 
