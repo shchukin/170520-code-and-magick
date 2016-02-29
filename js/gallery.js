@@ -22,9 +22,8 @@ var Gallery = function() {
 };
 
 Gallery.prototype._doesHashContainsScreenshot = function() {
-  return location.hash.indexOf('photo') !== -1;
-  //var regexp = /#photo\/(\S+)/;
-  //console.log(location.hash.match(regexp);
+  var regexp = /#photo\/(\S+)/;
+  return location.hash.match(regexp) ? true : false;
 };
 
 Gallery.prototype.restoreFromHash = function() {
