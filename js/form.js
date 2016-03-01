@@ -15,21 +15,26 @@
 
 'use strict';
 
+var Tools = require('tools');
+
+var tools = new Tools();
+
+
 var formContainer = document.querySelector('.overlay-container');
 var formOpenButton = document.querySelector('.reviews-controls-new');
 var formCloseButton = document.querySelector('.review-form-close');
 
 // показ формы
-formOpenButton.onclick = function(evt) {
-  evt.preventDefault();
-  formContainer.classList.remove('invisible');
-};
+formOpenButton.addEventListener('click', function(event) {
+  event.preventDefault();
+  formContainer.className = tools.removeClass(formContainer.className, 'invisible');
+});
 
 // скрытие формы
-formCloseButton.onclick = function(evt) {
-  evt.preventDefault();
-  formContainer.classList.add('invisible');
-};
+formCloseButton.addEventListener('click', function(event) {
+  event.preventDefault();
+  formContainer.className += 'invisible';
+});
 
 
 
