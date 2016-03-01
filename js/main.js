@@ -3,8 +3,8 @@
 require('tools');
 
 require('game');
-require('form');
 require('submit');
+require('form');
 require('check');
 require('inherit');
 
