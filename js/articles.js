@@ -11,6 +11,7 @@
 
 'use strict';
 
+var tools = require('tools');
 var Review = require('review');
 
 /* Constants */
@@ -140,7 +141,7 @@ function initMoreButton() {
  */
 function disableMoreButton() {
   if ( isMoreReviewToShow() && moreElement.className.indexOf('invisible') > -1 ) {
-    moreElement.className = moreElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
+    moreElement.className = tools.removeClass(moreElement.className, 'invisible');
   }
   if ( !isMoreReviewToShow() && moreElement.className.indexOf('invisible') === -1 ) {
     moreElement.className += ' invisible';
@@ -196,22 +197,24 @@ function getReviews() {
 
   // В случае успешного получения данных показываем фильтры, скрываем индикатор загрузки,
   // парсим данные и применяем фильтр (сохраняется в local storage выше), которое вызывает рендер
-  xhr.onload = function(event) {
-    reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
-    filtersElement.className = filtersElement.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
+
+
+  xhr.addEventListener('load', function(event) {
+    reviewsListElement.className = tools.removeClass(reviewsListElement.className, 'reviews-list-loading');
+    filtersElement.className = tools.removeClass(filtersElement.className, 'invisible');
     reviews = JSON.parse( event.target.response );
     applyFilter(filterActive);
-  };
+  });
 
-  xhr.onerror = function() {
-    reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
+  xhr.addEventListener('error', function() {
+    reviewsListElement.className = tools.removeClass(reviewsListElement.className, 'reviews-list-loading');
     reviewsListElement.className += ' reviews-load-failure';
-  };
+  });
 
-  xhr.ontimeout = function() {
-    reviewsListElement.className = reviewsListElement.className.replace('reviews-list-loading', '').replace(/\s+/g, ' ').trim();
+  xhr.addEventListener('timeout', function() {
+    reviewsListElement.className = tools.removeClass(reviewsListElement.className, 'reviews-list-loading');
     reviewsListElement.className += ' reviews-load-failure';
-  };
+  });
 
   xhr.send();
 
