@@ -121,6 +121,6 @@ function onMarkChange() {
 }
 
 // установка кликов по оценкам
-for (i = 0; i < markElements.length; i++ ) {
-  markElements[i].onchange = onMarkChange;
-}
+[].forEach.call(markElements, function(item) {
+  item.addEventListener('change', onMarkChange);
+});
