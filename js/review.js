@@ -60,7 +60,8 @@ Review.prototype.createElement = function() {
 
 
   // в случае успешной загрузки изображения аватара формируем ноду img, заполняем данными и заменяем ту, что предоставлена в шаблоне
-  avatarValue.onload = function() {
+
+  avatarValue.addEventListener('load', function() {
     clearTimeout(avatarLoadTimeout);
     avatarValue.width = this.REVIEW_AUTHOR_AVATAR_SIZE;
     avatarValue.height = this.REVIEW_AUTHOR_AVATAR_SIZE;
@@ -68,12 +69,12 @@ Review.prototype.createElement = function() {
     avatarValue.title = this._data.author.name;
     avatarValue.className = avatarElement.className;
     this._element.replaceChild(avatarValue, avatarElement);
-  }.bind(this);
+  }.bind(this));
 
   // в случае ошибки добавляем класс символизирующий ошибку - крестик на фотографии
-  avatarValue.onerror = function() {
+  avatarValue.addEventListener('error', function() {
     this._element.className += ' review-load-failure';
-  }.bind(this);
+  }.bind(this));
 
   // устанавливаем таймаут на загрузку изображения аватара. Если он превосходит заданное константой время, то трактуем как кейс ошибки
   avatarLoadTimeout = setTimeout(function() {

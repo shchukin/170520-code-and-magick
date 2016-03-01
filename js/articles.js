@@ -199,22 +199,24 @@ function getReviews() {
 
   // В случае успешного получения данных показываем фильтры, скрываем индикатор загрузки,
   // парсим данные и применяем фильтр (сохраняется в local storage выше), которое вызывает рендер
-  xhr.onload = function(event) {
+
+
+  xhr.addEventListener("load", function(event) {
     reviewsListElement.className = tools.removeClass(reviewsListElement.className, 'reviews-list-loading');
     filtersElement.className = tools.removeClass(filtersElement.className, 'invisible');
     reviews = JSON.parse( event.target.response );
     applyFilter(filterActive);
-  };
+  });
 
-  xhr.onerror = function() {
+  xhr.addEventListener("error", function() {
     reviewsListElement.className = tools.removeClass(reviewsListElement.className, 'reviews-list-loading');
     reviewsListElement.className += ' reviews-load-failure';
-  };
+  });
 
-  xhr.ontimeout = function() {
+  xhr.addEventListener("timeout", function() {
     reviewsListElement.className = tools.removeClass(reviewsListElement.className, 'reviews-list-loading');
     reviewsListElement.className += ' reviews-load-failure';
-  };
+  });
 
   xhr.send();
 
