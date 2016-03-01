@@ -58,9 +58,6 @@ var markPositive; // если оценка позитивная (значени�
 var nameValidity; // валидность имени
 var textValidity; // валидность сообщения
 
-/* Helpers */
-var i;
-
 
 function changeMarkPositive() {
   markPositive = formElement.querySelector('[name="review-mark"]:checked').value >= LOWEST_POSITIVE_GRADE;

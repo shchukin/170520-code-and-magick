@@ -26,7 +26,7 @@ var nameCookie = docCookies.getItem('name');
 // Извлечение куки и установка соответтсвующих значений
 // Бежим по всем радиокнопка и проставляем false всем, кроме значения из кук
 if ( markCookie ) {
-  [].forEach.call(markElements,function(item, index){
+  [].forEach.call(markElements, function(item, index) {
     item.checked = (index + 1 === +markCookie);
   });
 }

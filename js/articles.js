@@ -201,19 +201,19 @@ function getReviews() {
   // парсим данные и применяем фильтр (сохраняется в local storage выше), которое вызывает рендер
 
 
-  xhr.addEventListener("load", function(event) {
+  xhr.addEventListener('load', function(event) {
     reviewsListElement.className = tools.removeClass(reviewsListElement.className, 'reviews-list-loading');
     filtersElement.className = tools.removeClass(filtersElement.className, 'invisible');
     reviews = JSON.parse( event.target.response );
     applyFilter(filterActive);
   });
 
-  xhr.addEventListener("error", function() {
+  xhr.addEventListener('error', function() {
     reviewsListElement.className = tools.removeClass(reviewsListElement.className, 'reviews-list-loading');
     reviewsListElement.className += ' reviews-load-failure';
   });
 
-  xhr.addEventListener("timeout", function() {
+  xhr.addEventListener('timeout', function() {
     reviewsListElement.className = tools.removeClass(reviewsListElement.className, 'reviews-list-loading');
     reviewsListElement.className += ' reviews-load-failure';
   });

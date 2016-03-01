@@ -15,7 +15,7 @@ function Tools() {
  * Снятие класса с элемента
  * @param {string} classList откуда убираем класс
  * @param {string} className какой класс
- * @returns {string} 
+ * @returns {string}
  */
 Tools.prototype.removeClass = function( classList, className ) {
   return classList.replace(className, '').replace(/\s+/g, ' ').trim();

@@ -66,7 +66,7 @@ function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth,
   var textY;
 
   // если высоты контейнера недостаточно чтобы вместить все строки, то начинаем отрисовку от верха контейнера, без использования вертикального центрирования
-  containerHeight - textHeight > 0 ? (textY = containerY + (containerHeight - textHeight) / 2) : (textY = containerY);
+  textY = containerHeight - textHeight > 0 ? (containerY + (containerHeight - textHeight) / 2) : containerY;
 
   for ( var line = 0; line < lineQuantity; line++ ) {
     ctx.fillText(content[line], textX + (textWidth / 2), textY + (line * lineHeight) );
