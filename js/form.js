@@ -15,6 +15,8 @@
 
 'use strict';
 
+require('submit');
+
 var Tools = require('tools');
 
 var tools = new Tools();
