@@ -1,15 +1,31 @@
-'use strict';
+/**
+ * @fileoverview Работа с формой отправки отзыва
+ * Форма отправки отзыва находится в модальном окне, скрыто по умолчанию
+ * Главная задача модуля - валидация. Условия:
+ * «Имя пользователя» — обязательное поле
+ * Поле «Описание» становится обязательным, если поле «Оценка» ниже 3
+ * Форма снабжается подсказками с информацие о том, какие из необходимых
+ * полей не заполнены. Имя - это первое обязательное поле.
+ * Описание обязательно только в том случае, если проставлена оценка
+ * ниже заданного значения в константе LOWEST_POSITIVE_GRADE
+ *
+ *
+ * @author Anton Shchukin (a.a.shchukin@gmail.com)
+ */
 
+'use strict';
 
 var formContainer = document.querySelector('.overlay-container');
 var formOpenButton = document.querySelector('.reviews-controls-new');
 var formCloseButton = document.querySelector('.review-form-close');
 
+// показ формы
 formOpenButton.onclick = function(evt) {
   evt.preventDefault();
   formContainer.classList.remove('invisible');
 };
 
+// скрытие формы
 formCloseButton.onclick = function(evt) {
   evt.preventDefault();
   formContainer.classList.add('invisible');
@@ -33,9 +49,9 @@ var textNotifyElement = formElement.querySelector('.review-fields-text');
 var notifyContainerElement = formElement.querySelector('.review-fields');
 
 /* Form state */
-var markPositive;
-var nameValidity;
-var textValidity;
+var markPositive; // если оценка позитивная (значение больше или равно константе LOWEST_POSITIVE_GRADE)
+var nameValidity; // валидность имени
+var textValidity; // валидность сообщения
 
 /* Helpers */
 var i;
@@ -46,13 +62,14 @@ function changeMarkPositive() {
 }
 
 function validateName() {
-  nameValidity = !!nameElement.value;
+  nameValidity = !!nameElement.value; // !! двойное отрицание преобразует в true или false значение имени (введено или нет соответствено)
 }
 
 function validateText() {
   textValidity = markPositive || textElement.value;
 }
 
+// динамика показа подсказок
 function setValidationHelpers() {
 
   if ( nameValidity ) {
@@ -97,6 +114,7 @@ function onMarkChange() {
   setValidationHelpers();
 }
 
+// установка кликов по оценкам
 for (i = 0; i < markElements.length; i++ ) {
   markElements[i].onchange = onMarkChange;
 }

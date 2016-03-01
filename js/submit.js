@@ -1,7 +1,16 @@
+/**
+ * @fileoverview Работа с отправкой отзывов
+ * Главным образом идет работа с куками.
+ * Сохраненяется имя и оценка.
+ * Срок жизни - количество дней, прошедшее с ближайшего дня рождения.
+ *
+ *
+ * @author Anton Shchukin (a.a.shchukin@gmail.com)
+ */
+
 'use strict';
 
 var docCookies = require('doc-cookies');
-
 
 var BIRTH_MONTH = 10;
 var BIRTH_DAY = 27;
@@ -14,7 +23,7 @@ var markCookie = docCookies.getItem('mark');
 var nameCookie = docCookies.getItem('name');
 
 
-/* Get cookies */
+// Извлечение куки и установка соответтсвующих значений
 
 if ( markCookie ) {
   for ( var i = 0; i < markElements.length; i++ ) {
@@ -27,8 +36,12 @@ if ( nameCookie ) {
 }
 
 
-/* Set cookies */
+/* Сохранение куки */
 
+/**
+ * Возможны две ситуации: наступил или не наступил день рождения в текущем году
+ * Проверяется сравнением текущей даты с датой дня рождения
+ */
 formElement.onsubmit = function(event) {
   event.preventDefault();
 
