@@ -29,6 +29,7 @@ var Gallery = function() {
 
   this._current = 0;
   this._photos = [];
+  this._active = false;
 
   this._onCloseClick = this._onCloseClick.bind(this);
   this._onArrowClick = this._onArrowClick.bind(this);
@@ -80,6 +81,9 @@ Gallery.prototype._show = function(startFrom) {
 
   // move to init picture
   this._choosePicture(startFrom);
+
+  // mark gallery active
+  this._active = true;
 };
 
 /**
@@ -101,6 +105,9 @@ Gallery.prototype._hide = function() {
 
   // Keyboard remove event
   document.removeEventListener('keydown', this._onDocumentKeyDown);
+
+  // mark gallery not an active
+  this._active = false;
 };
 
 /**
@@ -149,9 +156,11 @@ Gallery.prototype._onDocumentKeyDown = function(event) {
  * @private
  */
 Gallery.prototype._onHashChange = function() {
-  if ( this._doesHashContainsScreenshot() ) {
+  if ( this._active && this._doesHashContainsScreenshot() ) {
+    this._choosePicture( location.hash.replace('#photo/', '') );
+  } else if ( !this._active && this._doesHashContainsScreenshot() ) {
     this._show(location.hash.replace('#photo/', ''));
-  } else {
+  } else if ( this._active && !this._doesHashContainsScreenshot() ) {
     this._hide();
   }
 };
