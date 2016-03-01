@@ -92,8 +92,8 @@ function drawNotification(ctx, message) {
     message = [message.toString()];       // переводим его в строку
   }
 
-  if ( typeof (message) === 'string' ) {  // если строка
-    message = message.split('\n');        // переводим в массив
+  if ( typeof (message) === 'string' ) {  // если строка (или число переведенной в строку выше)
+    message = message.split('\n');        // переводим в массив, все переводим в массив
   }
 
   drawAlignedTextInContainer(
