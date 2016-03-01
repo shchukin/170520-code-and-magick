@@ -36,7 +36,7 @@ function Gallery() {
   this._onDocumentKeyDown = this._onDocumentKeyDown.bind(this);
 
   window.addEventListener('hashchange', this._onHashChange.bind(this) );
-};
+}
 
 /**
  * Проверяет хэш на наличие скриншотов. Если скриншоты есть, то идет показ галереи или
