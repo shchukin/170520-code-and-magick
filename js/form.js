@@ -104,14 +104,15 @@ validateName();
 validateText();
 setValidationHelpers();
 
-nameElement.oninput = function() {
+nameElement.addEventListener('input', function() {
   validateName();
   setValidationHelpers();
-};
-textElement.oninput = function() {
+});
+
+textElement.addEventListener('input', function() {
   validateText();
   setValidationHelpers();
-};
+});
 
 function onMarkChange() {
   changeMarkPositive();
