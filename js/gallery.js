@@ -12,6 +12,9 @@
 'use strict';
 
 var keyCode = require('keycode');
+var Tools = require('tools');
+
+var tools = new Tools();
 
 /**
  * Констурктор галереи инициализирует объект дом элементами и функциями обработчиками.
@@ -66,7 +69,7 @@ Gallery.prototype.restoreFromHash = function() {
 Gallery.prototype._show = function(startFrom) {
 
   // show gallery
-  this._element.className = this._element.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
+  this._element.className = tools.removeClass(this._element.className, 'invisible');
 
   // close button add event
   this._closeButtonElement.addEventListener('click', this._onCloseClick);

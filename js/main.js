@@ -1,5 +1,7 @@
 'use strict';
 
+require('tools');
+
 require('game');
 require('form');
 require('submit');
