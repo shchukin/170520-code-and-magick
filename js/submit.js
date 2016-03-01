@@ -42,7 +42,7 @@ if ( nameCookie ) {
  * Возможны две ситуации: наступил или не наступил день рождения в текущем году
  * Проверяется сравнением текущей даты с датой дня рождения
  */
-formElement.onsubmit = function(event) {
+formElement.addEventListener('submit', function(event) {
   event.preventDefault();
 
   var currentYear = new Date().getFullYear();
@@ -58,4 +58,4 @@ formElement.onsubmit = function(event) {
   docCookies.setItem('name', nameCookie, cookiesExpire);
 
   formElement.submit();
-};
+});
