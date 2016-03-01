@@ -19,7 +19,7 @@ var keyCode = require('keycode');
  * нужно воспользовать описанным ниже методом setPictures
  * @constructor
  */
-var Gallery = function() {
+function Gallery() {
   this._element = document.querySelector('.overlay-gallery');
   this._stageElement = this._element.querySelector('.overlay-gallery-preview');
   this._numberCurrentElement = this._element.querySelector('.preview-number-current');
