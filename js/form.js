@@ -15,12 +15,8 @@
 
 'use strict';
 
+var tools = require('tools');
 require('submit');
-
-var Tools = require('tools');
-
-var tools = new Tools();
-
 
 var formContainer = document.querySelector('.overlay-container');
 var formOpenButton = document.querySelector('.reviews-controls-new');

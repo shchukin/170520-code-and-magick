@@ -11,10 +11,8 @@
 
 'use strict';
 
+var tools = require('tools');
 var Review = require('review');
-var Tools = require('tools');
-
-var tools = new Tools();
 
 /* Constants */
 

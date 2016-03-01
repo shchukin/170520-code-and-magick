@@ -11,10 +11,8 @@
 
 'use strict';
 
+var tools = require('tools');
 var keyCode = require('keycode');
-var Tools = require('tools');
-
-var tools = new Tools();
 
 /**
  * Констурктор галереи инициализирует объект дом элементами и функциями обработчиками.
