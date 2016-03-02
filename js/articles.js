@@ -13,6 +13,7 @@
 
 var tools = require('tools');
 var Review = require('review');
+var Feedback = require('feedback');
 
 /* Constants */
 
@@ -149,6 +150,18 @@ function disableMoreButton() {
 }
 
 /**
+ * Инициализация кнопку "Добавить отзыв".
+ * Добавляет в хэш информацию о том, что фидбек активен, что подхватывает модуль фидбека
+ */
+function initAddButton() {
+
+  document.querySelector('.reviews-controls-new').addEventListener('click', function() {
+    location.hash = 'feedback';
+  });
+
+}
+
+/**
  * Вывод списка ревью. Осуществляется секциями.
  * По нажатию на кнопку "показать еще" к текущей страницы добавляется следующая
  * При применении фильтра отрендеренный ранее список зануляется
@@ -223,3 +236,7 @@ function getReviews() {
 getReviews();
 initFilters();
 initMoreButton();
+initAddButton();
+
+var feedback = new Feedback();
+feedback.restoreFromHash();

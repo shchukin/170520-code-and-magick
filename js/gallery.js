@@ -21,12 +21,12 @@ var keyCode = require('keycode');
  * @constructor
  */
 function Gallery() {
-  this._element = document.querySelector('.overlay-gallery');
-  this._stageElement = this._element.querySelector('.overlay-gallery-preview');
-  this._numberCurrentElement = this._element.querySelector('.preview-number-current');
-  this._numberTotalElement = this._element.querySelector('.preview-number-total');
-  this._closeButtonElement = this._element.querySelector('.overlay-gallery-close');
-  this._arrowButtonElements = this._element.querySelectorAll('.overlay-gallery-control');
+  this._overlayElement = document.querySelector('.overlay-gallery');
+  this._stageElement = this._overlayElement.querySelector('.overlay-gallery-preview');
+  this._numberCurrentElement = this._overlayElement.querySelector('.preview-number-current');
+  this._numberTotalElement = this._overlayElement.querySelector('.preview-number-total');
+  this._closeButtonElement = this._overlayElement.querySelector('.overlay-gallery-close');
+  this._arrowButtonElements = this._overlayElement.querySelectorAll('.overlay-gallery-control');
 
   this._current = 0;
   this._photos = [];
@@ -67,7 +67,7 @@ Gallery.prototype.restoreFromHash = function() {
 Gallery.prototype._show = function(startFrom) {
 
   // show gallery
-  tools.removeClass(this._element, 'invisible');
+  tools.removeClass(this._overlayElement, 'invisible');
 
   // close button add event
   this._closeButtonElement.addEventListener('click', this._onCloseClick);
@@ -94,7 +94,7 @@ Gallery.prototype._show = function(startFrom) {
 Gallery.prototype._hide = function() {
 
   // Hide gallery
-  tools.addClass(this._element, 'invisible')
+  tools.addClass(this._overlayElement, 'invisible')
 
   // Close button remove event
   this._closeButtonElement.removeEventListener('click', this._onCloseClick);
