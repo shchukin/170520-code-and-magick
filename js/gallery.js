@@ -67,7 +67,7 @@ Gallery.prototype.restoreFromHash = function() {
 Gallery.prototype._show = function(startFrom) {
 
   // show gallery
-  this._element.className = tools.removeClass(this._element.className, 'invisible');
+  tools.removeClass(this._element, 'invisible');
 
   // close button add event
   this._closeButtonElement.addEventListener('click', this._onCloseClick);
@@ -94,7 +94,7 @@ Gallery.prototype._show = function(startFrom) {
 Gallery.prototype._hide = function() {
 
   // Hide gallery
-  this._element.className += ' invisible';
+  tools.addClass(this._element, 'invisible')
 
   // Close button remove event
   this._closeButtonElement.removeEventListener('click', this._onCloseClick);
@@ -125,9 +125,9 @@ Gallery.prototype._onCloseClick = function() {
  * @private
  */
 Gallery.prototype._onArrowClick = function(event) {
-  if ( event.target.className.indexOf('overlay-gallery-control-left') > -1 ) {
+  if ( tools.hasClass(event.target, 'overlay-gallery-control-left') ) {
     location.hash = 'photo/' + this._photos[this._prevIndex()].src;
-  } else if ( event.target.className.indexOf('overlay-gallery-control-right') > -1 ) {
+  } else if ( tools.hasClass(event.target, 'overlay-gallery-control-right') ) {
     location.hash = 'photo/' + this._photos[this._nextIndex()].src;
   }
 };

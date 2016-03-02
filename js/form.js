@@ -25,13 +25,13 @@ var formCloseButton = document.querySelector('.review-form-close');
 // показ формы
 formOpenButton.addEventListener('click', function(event) {
   event.preventDefault();
-  formContainer.className = tools.removeClass(formContainer.className, 'invisible');
+  tools.removeClass(formContainer, 'invisible');
 });
 
 // скрытие формы
 formCloseButton.addEventListener('click', function(event) {
   event.preventDefault();
-  formContainer.className += 'invisible';
+  tools.addClass(formContainer, 'invisible');
 });
 
 

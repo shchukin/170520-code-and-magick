@@ -8,6 +8,8 @@
 
 'use strict';
 
+var tools = require('tools');
+
 /**
  * Содержит данные заданного формата и элемент для отображения на страницы
  * При вызове немедленно формирует элемент
@@ -73,19 +75,21 @@ Review.prototype.createElement = function() {
 
   // в случае ошибки добавляем класс символизирующий ошибку - крестик на фотографии
   avatarValue.addEventListener('error', function() {
-    this._element.className += ' review-load-failure';
+    tools.addClass(this._element, 'review-load-failure');
   }.bind(this));
 
   // устанавливаем таймаут на загрузку изображения аватара. Если он превосходит заданное константой время, то трактуем как кейс ошибки
   avatarLoadTimeout = setTimeout(function() {
     avatarValue.src = '';
-    this._element.className += ' review-load-failure';
+    tools.addClass(this._element, 'review-load-failure');
   }.bind(this), this.AVATAR_MAX_LOADING_TIME);
 
   avatarValue.src = this._data.author.picture;
 
   ratingValue = this.convertGradeValueToWord(this._data.rating);
-  ratingElement.className += this._data.rating >= 2 ? ' review-rating-' + ratingValue : '';
+  if( this._data.rating >= 2 ) {
+    tools.addClass(ratingElement, 'review-rating-' + ratingValue);
+  }
 
   descriptionValue = this._data.description;
   descriptionElement.textContent = descriptionValue;
