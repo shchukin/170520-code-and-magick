@@ -3,7 +3,6 @@
 require('tools');
 
 require('game');
-require('form');
 require('check');
 require('inherit');
 

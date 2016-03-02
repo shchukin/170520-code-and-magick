@@ -21,12 +21,12 @@ var keyCode = require('keycode');
  * @constructor
  */
 function Gallery() {
-  this._element = document.querySelector('.overlay-gallery');
-  this._stageElement = this._element.querySelector('.overlay-gallery-preview');
-  this._numberCurrentElement = this._element.querySelector('.preview-number-current');
-  this._numberTotalElement = this._element.querySelector('.preview-number-total');
-  this._closeButtonElement = this._element.querySelector('.overlay-gallery-close');
-  this._arrowButtonElements = this._element.querySelectorAll('.overlay-gallery-control');
+  this._overlayElement = document.querySelector('.overlay-gallery');
+  this._stageElement = this._overlayElement.querySelector('.overlay-gallery-preview');
+  this._numberCurrentElement = this._overlayElement.querySelector('.preview-number-current');
+  this._numberTotalElement = this._overlayElement.querySelector('.preview-number-total');
+  this._closeButtonElement = this._overlayElement.querySelector('.overlay-gallery-close');
+  this._arrowButtonElements = this._overlayElement.querySelectorAll('.overlay-gallery-control');
 
   this._current = 0;
   this._photos = [];
@@ -61,13 +61,13 @@ Gallery.prototype.restoreFromHash = function() {
 
 /**
  * Показ галереи. Инициализирует обработчики событий
- * @param {number} [startFrom] может принимать индекс элемента для показа
+ * @param {number|string} [startFrom] может принимать индекс элемента или ссылку на изображение
  * @private
  */
 Gallery.prototype._show = function(startFrom) {
 
   // show gallery
-  this._element.className = tools.removeClass(this._element.className, 'invisible');
+  tools.removeClass(this._overlayElement, 'invisible');
 
   // close button add event
   this._closeButtonElement.addEventListener('click', this._onCloseClick);
@@ -94,7 +94,7 @@ Gallery.prototype._show = function(startFrom) {
 Gallery.prototype._hide = function() {
 
   // Hide gallery
-  this._element.className += ' invisible';
+  tools.addClass(this._overlayElement, 'invisible');
 
   // Close button remove event
   this._closeButtonElement.removeEventListener('click', this._onCloseClick);
@@ -125,9 +125,9 @@ Gallery.prototype._onCloseClick = function() {
  * @private
  */
 Gallery.prototype._onArrowClick = function(event) {
-  if ( event.target.className.indexOf('overlay-gallery-control-left') > -1 ) {
+  if ( tools.hasClass(event.target, 'overlay-gallery-control-left') ) {
     location.hash = 'photo/' + this._photos[this._prevIndex()].src;
-  } else if ( event.target.className.indexOf('overlay-gallery-control-right') > -1 ) {
+  } else if ( tools.hasClass(event.target, 'overlay-gallery-control-right') ) {
     location.hash = 'photo/' + this._photos[this._nextIndex()].src;
   }
 };
@@ -196,7 +196,7 @@ Gallery.prototype.setPictures = function(photos) {
 };
 
 /**
- * Переключение на заданный индекс элемента.
+ * Переключение на заданный индекс элемента или по ссылке на изображение
  * @param {number|string} index
  * @private
  */

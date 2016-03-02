@@ -8,6 +8,8 @@
 
 'use strict';
 
+var tools = require('tools');
+
 /**
  * Содержит данные заданного формата и элемент для отображения на страницы
  * При вызове немедленно формирует элемент
@@ -16,7 +18,7 @@
  */
 function Review(data) {
   this._data = data;
-  this._element = '';
+  this._overlayElement = '';
   this.createElement();
 }
 
@@ -46,11 +48,11 @@ Review.prototype.convertGradeValueToWord = function( grade ) {
  */
 Review.prototype.createElement = function() {
   // формирование элемента на основе html-шаблона. Кейсы для кроссбраузерной поддержки
-  this._element = ( 'content' in this.reviewTemplate ) ? ( this.reviewTemplate.content.children[0].cloneNode(true) ) : ( this.reviewTemplate.childNodes[0].cloneNode(true) );
+  this._overlayElement = ( 'content' in this.reviewTemplate ) ? ( this.reviewTemplate.content.children[0].cloneNode(true) ) : ( this.reviewTemplate.childNodes[0].cloneNode(true) );
 
-  var avatarElement = this._element.querySelector('.review-author');
-  var ratingElement = this._element.querySelector('.review-rating');
-  var descriptionElement = this._element.querySelector('.review-text');
+  var avatarElement = this._overlayElement.querySelector('.review-author');
+  var ratingElement = this._overlayElement.querySelector('.review-rating');
+  var descriptionElement = this._overlayElement.querySelector('.review-text');
 
   var avatarValue = new Image();
   var ratingValue;
@@ -68,24 +70,26 @@ Review.prototype.createElement = function() {
     avatarValue.alt = this._data.author.name;
     avatarValue.title = this._data.author.name;
     avatarValue.className = avatarElement.className;
-    this._element.replaceChild(avatarValue, avatarElement);
+    this._overlayElement.replaceChild(avatarValue, avatarElement);
   }.bind(this));
 
   // в случае ошибки добавляем класс символизирующий ошибку - крестик на фотографии
   avatarValue.addEventListener('error', function() {
-    this._element.className += ' review-load-failure';
+    tools.addClass(this._overlayElement, 'review-load-failure');
   }.bind(this));
 
   // устанавливаем таймаут на загрузку изображения аватара. Если он превосходит заданное константой время, то трактуем как кейс ошибки
   avatarLoadTimeout = setTimeout(function() {
     avatarValue.src = '';
-    this._element.className += ' review-load-failure';
+    tools.addClass(this._overlayElement, 'review-load-failure');
   }.bind(this), this.AVATAR_MAX_LOADING_TIME);
 
   avatarValue.src = this._data.author.picture;
 
   ratingValue = this.convertGradeValueToWord(this._data.rating);
-  ratingElement.className += this._data.rating >= 2 ? ' review-rating-' + ratingValue : '';
+  if ( this._data.rating >= 2 ) {
+    tools.addClass(ratingElement, 'review-rating-' + ratingValue);
+  }
 
   descriptionValue = this._data.description;
   descriptionElement.textContent = descriptionValue;
@@ -97,7 +101,7 @@ Review.prototype.createElement = function() {
  * @param {Element} element
  */
 Review.prototype.render = function(element) {
-  element.appendChild(this._element);
+  element.appendChild(this._overlayElement);
 };
 
 

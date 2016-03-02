@@ -13,6 +13,7 @@
 
 var tools = require('tools');
 var Review = require('review');
+var Feedback = require('feedback');
 
 /* Constants */
 
@@ -140,12 +141,24 @@ function initMoreButton() {
  * Скрытие кнопки "показать еще" когда отображены все возможные ревью для текущего фильтра
  */
 function disableMoreButton() {
-  if ( isMoreReviewToShow() && moreElement.className.indexOf('invisible') > -1 ) {
-    moreElement.className = tools.removeClass(moreElement.className, 'invisible');
+  if ( isMoreReviewToShow() && tools.hasClass(moreElement, 'invisible') ) {
+    tools.removeClass(moreElement, 'invisible');
   }
-  if ( !isMoreReviewToShow() && moreElement.className.indexOf('invisible') === -1 ) {
-    moreElement.className += ' invisible';
+  if ( !isMoreReviewToShow() && !tools.hasClass(moreElement, 'invisible') ) {
+    tools.addClass(moreElement, 'invisible');
   }
+}
+
+/**
+ * Инициализация кнопку "Добавить отзыв".
+ * Добавляет в хэш информацию о том, что фидбек активен, что подхватывает модуль фидбека
+ */
+function initAddButton() {
+
+  document.querySelector('.reviews-controls-new').addEventListener('click', function() {
+    location.hash = 'feedback';
+  });
+
 }
 
 /**
@@ -187,10 +200,10 @@ function getReviews() {
   var xhr = new XMLHttpRequest();
 
   // Скрываем фильтры до получения данных
-  filtersElement.className += ' invisible';
+  tools.addClass(filtersElement, 'invisible');
 
   // Показываем индикатор загрузки
-  reviewsListElement.className += ' reviews-list-loading';
+  tools.addClass(reviewsListElement, 'reviews-list-loading');
 
   xhr.open('GET', '//o0.github.io/assets/json/reviews.json');
   xhr.timeout = XHR_MAX_LOADING_TIME;
@@ -200,20 +213,20 @@ function getReviews() {
 
 
   xhr.addEventListener('load', function(event) {
-    reviewsListElement.className = tools.removeClass(reviewsListElement.className, 'reviews-list-loading');
-    filtersElement.className = tools.removeClass(filtersElement.className, 'invisible');
+    tools.removeClass(reviewsListElement, 'reviews-list-loading');
+    tools.removeClass(filtersElement, 'invisible');
     reviews = JSON.parse( event.target.response );
     applyFilter(filterActive);
   });
 
   xhr.addEventListener('error', function() {
-    reviewsListElement.className = tools.removeClass(reviewsListElement.className, 'reviews-list-loading');
-    reviewsListElement.className += ' reviews-load-failure';
+    tools.removeClass(reviewsListElement, 'reviews-list-loading');
+    tools.addClass(reviewsListElement, 'reviews-load-failure');
   });
 
   xhr.addEventListener('timeout', function() {
-    reviewsListElement.className = tools.removeClass(reviewsListElement.className, 'reviews-list-loading');
-    reviewsListElement.className += ' reviews-load-failure';
+    tools.removeClass(reviewsListElement, 'reviews-list-loading');
+    tools.addClass(reviewsListElement, 'reviews-load-failure');
   });
 
   xhr.send();
@@ -223,3 +236,7 @@ function getReviews() {
 getReviews();
 initFilters();
 initMoreButton();
+initAddButton();
+
+var feedback = new Feedback();
+feedback.restoreFromHash();
