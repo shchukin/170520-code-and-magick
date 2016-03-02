@@ -61,7 +61,7 @@ Gallery.prototype.restoreFromHash = function() {
 
 /**
  * Показ галереи. Инициализирует обработчики событий
- * @param {number} [startFrom] может принимать индекс элемента для показа
+ * @param {number|string} [startFrom] может принимать индекс элемента или ссылку на изображение
  * @private
  */
 Gallery.prototype._show = function(startFrom) {
@@ -196,7 +196,7 @@ Gallery.prototype.setPictures = function(photos) {
 };
 
 /**
- * Переключение на заданный индекс элемента.
+ * Переключение на заданный индекс элемента или по ссылке на изображение
  * @param {number|string} index
  * @private
  */
