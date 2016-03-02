@@ -15,21 +15,24 @@
 
 'use strict';
 
+var tools = require('tools');
+require('submit');
+
 var formContainer = document.querySelector('.overlay-container');
 var formOpenButton = document.querySelector('.reviews-controls-new');
 var formCloseButton = document.querySelector('.review-form-close');
 
 // показ формы
-formOpenButton.onclick = function(evt) {
-  evt.preventDefault();
-  formContainer.classList.remove('invisible');
-};
+formOpenButton.addEventListener('click', function(event) {
+  event.preventDefault();
+  formContainer.className = tools.removeClass(formContainer.className, 'invisible');
+});
 
 // скрытие формы
-formCloseButton.onclick = function(evt) {
-  evt.preventDefault();
-  formContainer.classList.add('invisible');
-};
+formCloseButton.addEventListener('click', function(event) {
+  event.preventDefault();
+  formContainer.className += 'invisible';
+});
 
 
 
@@ -52,9 +55,6 @@ var notifyContainerElement = formElement.querySelector('.review-fields');
 var markPositive; // если оценка позитивная (значение больше или равно константе LOWEST_POSITIVE_GRADE)
 var nameValidity; // валидность имени
 var textValidity; // валидность сообщения
-
-/* Helpers */
-var i;
 
 
 function changeMarkPositive() {
@@ -99,14 +99,15 @@ validateName();
 validateText();
 setValidationHelpers();
 
-nameElement.oninput = function() {
+nameElement.addEventListener('input', function() {
   validateName();
   setValidationHelpers();
-};
-textElement.oninput = function() {
+});
+
+textElement.addEventListener('input', function() {
   validateText();
   setValidationHelpers();
-};
+});
 
 function onMarkChange() {
   changeMarkPositive();
@@ -115,6 +116,6 @@ function onMarkChange() {
 }
 
 // установка кликов по оценкам
-for (i = 0; i < markElements.length; i++ ) {
-  markElements[i].onchange = onMarkChange;
-}
+[].forEach.call(markElements, function(item) {
+  item.addEventListener('change', onMarkChange);
+});

@@ -65,11 +65,8 @@ function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth,
 
   var textY;
 
-  if ( containerHeight - textHeight > 0 ) {                       // если высоты контейнера недостаточно чтобы вместить все строки
-    textY = containerY + (containerHeight - textHeight) / 2;
-  } else {                                                        // то начинаем отрисовку от верха контейнера, без использования вертикального центрирования
-    textY = containerY;
-  }
+  // если высоты контейнера недостаточно чтобы вместить все строки, то начинаем отрисовку от верха контейнера, без использования вертикального центрирования
+  textY = containerHeight - textHeight > 0 ? (containerY + (containerHeight - textHeight) / 2) : containerY;
 
   for ( var line = 0; line < lineQuantity; line++ ) {
     ctx.fillText(content[line], textX + (textWidth / 2), textY + (line * lineHeight) );
@@ -95,8 +92,8 @@ function drawNotification(ctx, message) {
     message = [message.toString()];       // переводим его в строку
   }
 
-  if ( typeof (message) === 'string' ) {  // если строка
-    message = message.split('\n');        // переводим в массив
+  if ( typeof (message) === 'string' ) {  // если строка (или число переведенной в строку выше)
+    message = message.split('\n');        // переводим в массив, все переводим в массив
   }
 
   drawAlignedTextInContainer(

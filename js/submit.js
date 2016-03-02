@@ -24,11 +24,11 @@ var nameCookie = docCookies.getItem('name');
 
 
 // Извлечение куки и установка соответтсвующих значений
-
+// Бежим по всем радиокнопка и проставляем false всем, кроме значения из кук
 if ( markCookie ) {
-  for ( var i = 0; i < markElements.length; i++ ) {
-    markElements[i].checked = (i + 1 === +markCookie);
-  }
+  [].forEach.call(markElements, function(item, index) {
+    item.checked = (index + 1 === +markCookie);
+  });
 }
 
 if ( nameCookie ) {
@@ -42,7 +42,7 @@ if ( nameCookie ) {
  * Возможны две ситуации: наступил или не наступил день рождения в текущем году
  * Проверяется сравнением текущей даты с датой дня рождения
  */
-formElement.onsubmit = function(event) {
+formElement.addEventListener('submit', function(event) {
   event.preventDefault();
 
   var currentYear = new Date().getFullYear();
@@ -58,4 +58,4 @@ formElement.onsubmit = function(event) {
   docCookies.setItem('name', nameCookie, cookiesExpire);
 
   formElement.submit();
-};
+});

@@ -11,6 +11,7 @@
 
 'use strict';
 
+var tools = require('tools');
 var keyCode = require('keycode');
 
 /**
@@ -19,7 +20,7 @@ var keyCode = require('keycode');
  * нужно воспользовать описанным ниже методом setPictures
  * @constructor
  */
-var Gallery = function() {
+function Gallery() {
   this._element = document.querySelector('.overlay-gallery');
   this._stageElement = this._element.querySelector('.overlay-gallery-preview');
   this._numberCurrentElement = this._element.querySelector('.preview-number-current');
@@ -29,13 +30,14 @@ var Gallery = function() {
 
   this._current = 0;
   this._photos = [];
+  this._active = false;
 
   this._onCloseClick = this._onCloseClick.bind(this);
   this._onArrowClick = this._onArrowClick.bind(this);
   this._onDocumentKeyDown = this._onDocumentKeyDown.bind(this);
 
   window.addEventListener('hashchange', this._onHashChange.bind(this) );
-};
+}
 
 /**
  * Проверяет хэш на наличие скриншотов. Если скриншоты есть, то идет показ галереи или
@@ -65,7 +67,7 @@ Gallery.prototype.restoreFromHash = function() {
 Gallery.prototype._show = function(startFrom) {
 
   // show gallery
-  this._element.className = this._element.className.replace('invisible', '').replace(/\s+/g, ' ').trim();
+  this._element.className = tools.removeClass(this._element.className, 'invisible');
 
   // close button add event
   this._closeButtonElement.addEventListener('click', this._onCloseClick);
@@ -80,6 +82,9 @@ Gallery.prototype._show = function(startFrom) {
 
   // move to init picture
   this._choosePicture(startFrom);
+
+  // mark gallery active
+  this._active = true;
 };
 
 /**
@@ -101,6 +106,9 @@ Gallery.prototype._hide = function() {
 
   // Keyboard remove event
   document.removeEventListener('keydown', this._onDocumentKeyDown);
+
+  // mark gallery not an active
+  this._active = false;
 };
 
 /**
@@ -149,9 +157,11 @@ Gallery.prototype._onDocumentKeyDown = function(event) {
  * @private
  */
 Gallery.prototype._onHashChange = function() {
-  if ( this._doesHashContainsScreenshot() ) {
+  if ( this._active && this._doesHashContainsScreenshot() ) {
+    this._choosePicture( location.hash.replace('#photo/', '') );
+  } else if ( !this._active && this._doesHashContainsScreenshot() ) {
     this._show(location.hash.replace('#photo/', ''));
-  } else {
+  } else if ( this._active && !this._doesHashContainsScreenshot() ) {
     this._hide();
   }
 };
