@@ -42,9 +42,9 @@ function Feedback() {
   this._notifyContainerElement = this._formElement.querySelector('.review-fields');
 
   /* Form state */
-  this._markPositive; // если оценка позитивная (значение больше или равно константе LOWEST_POSITIVE_GRADE)
-  this._nameValidity; // валидность имени
-  this._textValidity; // валидность сообщения
+  this._markPositive = false; // если оценка позитивная (значение больше или равно константе LOWEST_POSITIVE_GRADE)
+  this._nameValidity = false; // валидность имени
+  this._textValidity = false; // валидность сообщения
 
   this._LOWEST_POSITIVE_GRADE = 3;
 
@@ -139,7 +139,7 @@ Feedback.prototype._onHashChange = function() {
  * Изменяет значение позитивности оценки, по правилам описанным выше
  * @private
  */
-Feedback.prototype._changeRatingPositive = function ()  {
+Feedback.prototype._changeRatingPositive = function() {
   this._markPositive = this._formElement.querySelector('[name="review-mark"]:checked').value >= this._LOWEST_POSITIVE_GRADE;
 };
 
@@ -156,7 +156,7 @@ Feedback.prototype._onCloseClick = function() {
  * Запускаем валидацию, так как оценка на нее влияет
  * @private
  */
-Feedback.prototype._onRatingChange = function () {
+Feedback.prototype._onRatingChange = function() {
   this._changeRatingPositive();
   this._validateText();
   this._setValidationHelpers();
@@ -166,7 +166,7 @@ Feedback.prototype._onRatingChange = function () {
  * Ввод имени и его валидация
  * @private
  */
-Feedback.prototype._onNameInput = function () {
+Feedback.prototype._onNameInput = function() {
   this._validateName();
   this._setValidationHelpers();
 };
@@ -175,7 +175,7 @@ Feedback.prototype._onNameInput = function () {
  * Ввод сообщения и его валидация
  * @private
  */
-Feedback.prototype._onTextInput = function () {
+Feedback.prototype._onTextInput = function() {
   this._validateText();
   this._setValidationHelpers();
 };
@@ -184,7 +184,7 @@ Feedback.prototype._onTextInput = function () {
  * Динамика скрытия и показа хелперов с информацией о том, что осталось заполнить
  * @private
  */
-Feedback.prototype._setValidationHelpers = function () {
+Feedback.prototype._setValidationHelpers = function() {
   if ( this._nameValidity ) {
     this._nameNotifyElement.style.display = 'none';
   } else {
@@ -210,14 +210,14 @@ Feedback.prototype._setValidationHelpers = function () {
  * Валидация имени: введено или нет
  * @private
  */
-Feedback.prototype._validateName = function () {
+Feedback.prototype._validateName = function() {
   this._nameValidity = !!this._nameElement.value; // !! двойное отрицание преобразует в true или false значение имени (введено или нет соответствено)
 };
 
 /**
  * Валидация сообщения: обязательно при негативной оценке
  */
-Feedback.prototype._validateText = function () {
+Feedback.prototype._validateText = function() {
   this._textValidity = this._markPositive || !!this._textElement.value; // см. выше
 };
 

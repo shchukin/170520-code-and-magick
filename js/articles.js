@@ -200,7 +200,7 @@ function getReviews() {
   var xhr = new XMLHttpRequest();
 
   // Скрываем фильтры до получения данных
-  tools.addClass(filtersElement, 'invisible')
+  tools.addClass(filtersElement, 'invisible');
 
   // Показываем индикатор загрузки
   tools.addClass(reviewsListElement, 'reviews-list-loading');
@@ -221,12 +221,12 @@ function getReviews() {
 
   xhr.addEventListener('error', function() {
     tools.removeClass(reviewsListElement, 'reviews-list-loading');
-    tools.addClass(reviewsListElement, 'reviews-load-failure')
+    tools.addClass(reviewsListElement, 'reviews-load-failure');
   });
 
   xhr.addEventListener('timeout', function() {
     tools.removeClass(reviewsListElement, 'reviews-list-loading');
-    tools.addClass(reviewsListElement, 'reviews-load-failure')
+    tools.addClass(reviewsListElement, 'reviews-load-failure');
   });
 
   xhr.send();

@@ -21,7 +21,7 @@ var tools = {
    * @param {string} className
    */
   addClass: function(node, className) {
-    if( !tools.hasClass(node, className) ) {
+    if ( !tools.hasClass(node, className) ) {
       node.className += ' ' + className;
 
       //когда добавили первый класс, он добавился с пробелом перед ( <div class=" example"></div> )
@@ -36,7 +36,7 @@ var tools = {
     node.className = node.className.replace(className, '').replace(/\s+/g, ' ').trim();
 
     // в случае когда классов совсем не осталось ( <div class></div> ) убираем атрибут
-    if( !node.className ) {
+    if ( !node.className ) {
       node.removeAttribute('class');
     }
   }

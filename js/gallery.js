@@ -94,7 +94,7 @@ Gallery.prototype._show = function(startFrom) {
 Gallery.prototype._hide = function() {
 
   // Hide gallery
-  tools.addClass(this._overlayElement, 'invisible')
+  tools.addClass(this._overlayElement, 'invisible');
 
   // Close button remove event
   this._closeButtonElement.removeEventListener('click', this._onCloseClick);

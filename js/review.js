@@ -87,7 +87,7 @@ Review.prototype.createElement = function() {
   avatarValue.src = this._data.author.picture;
 
   ratingValue = this.convertGradeValueToWord(this._data.rating);
-  if( this._data.rating >= 2 ) {
+  if ( this._data.rating >= 2 ) {
     tools.addClass(ratingElement, 'review-rating-' + ratingValue);
   }
 
