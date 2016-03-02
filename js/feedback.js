@@ -185,17 +185,9 @@ Feedback.prototype._onTextInput = function() {
  * @private
  */
 Feedback.prototype._setValidationHelpers = function() {
-  if ( this._nameValidity ) {
-    this._nameNotifyElement.style.display = 'none';
-  } else {
-    this._nameNotifyElement.style.display = 'inline';
-  }
 
-  if ( this._textValidity ) {
-    this._textNotifyElement.style.display = 'none';
-  } else {
-    this._textNotifyElement.style.display = 'inline';
-  }
+  this._nameNotifyElement.style.display = this._nameValidity ? 'none' : 'inline';
+  this._textNotifyElement.style.display = this._textValidity ? 'none' : 'inline';
 
   if ( this._nameValidity && this._textValidity ) {
     this._notifyContainerElement.style.display = 'none';
