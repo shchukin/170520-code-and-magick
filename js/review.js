@@ -21,9 +21,6 @@ function Review(data) {
   this._data = data;
   this._element = '';
   this.createElement();
-
-  this._onRatingClick = this._onRatingClick.bind(this);
-
 }
 
 Review.prototype.AVATAR_MAX_LOADING_TIME = 10000;
@@ -56,7 +53,8 @@ Review.prototype.createElement = function() {
   var avatarElement = this._element.querySelector('.review-author');
   var ratingElement = this._element.querySelector('.review-rating');
   var descriptionElement = this._element.querySelector('.review-text');
-  var voteElements = this._element.querySelectorAll('.review-quiz-answer');
+  var voteYesElement = this._element.querySelector('.review-quiz-answer-yes');
+  var voteNoElement = this._element.querySelector('.review-quiz-answer-no');
 
   var avatarValue = new Image();
   var ratingValue;
@@ -98,35 +96,24 @@ Review.prototype.createElement = function() {
   descriptionValue = this._data.description;
   descriptionElement.textContent = descriptionValue;
 
-  // устанавливаем рейтинг отзыва
-  [].forEach.call(voteElements, function(item) {
-    item.addEventListener('click', this._onRatingClick);
-  }.bind(this));
-  
-};
-
-
-Review.prototype._onRatingClick = function(event) {
-
-  console.log(this);
-
-  // если кликнутый контрол рейтинга не активен
-  if ( !tools.hasClass(event.target, 'review-quiz-answer-active') ) {
-    if (tools.hasClass(event.target, 'review-quiz-answer-yes')) {
+  voteYesElement.addEventListener('click', function(event) {
+    if ( !tools.hasClass(event.target, 'review-quiz-answer-active') ) {
       this._data.review_usefulness++;
-    } else if (tools.hasClass(event.target, 'review-quiz-answer-no')) {
+    }
+    tools.addClass(voteYesElement, 'review-quiz-answer-active');
+    tools.removeClass(voteNoElement, 'review-quiz-answer-active');
+  }.bind(this));
+
+  voteNoElement.addEventListener('click', function(event) {
+    if ( !tools.hasClass(event.target, 'review-quiz-answer-active') ) {
       this._data.review_usefulness--;
     }
+    tools.addClass(voteNoElement, 'review-quiz-answer-active');
+    tools.removeClass(voteYesElement, 'review-quiz-answer-active');
+  }.bind(this));
 
-    // снимаем активность со всех контролов
-    [].forEach.call(voteElements, function(item) {
-      tools.removeClass(item, 'review-quiz-answer-active');
-    });
-
-    // добавляем активность кликнутому
-    tools.addClass(event.target, 'review-quiz-answer-active');
-  }
 };
+
 
 
 /**
