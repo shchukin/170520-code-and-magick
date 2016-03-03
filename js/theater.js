@@ -11,6 +11,7 @@
 'use strict';
 
 var Photo = require('photo');
+var Video = require('video');
 var Gallery = require('gallery');
 
 // Тумбнейлы изображений обернуты в ссылки
@@ -18,7 +19,11 @@ var theaterElements = document.querySelectorAll('.photogallery-image');
 
 // Cбор адресов на полные изображения для галереи
 var theaterData = [].map.call(theaterElements, function(item) {
-  return new Photo(item.querySelector('img').getAttribute('src'));
+  if ( item.dataset.replacementVideo ) {
+    return new Video(item.dataset.replacementVideo);
+  } else {
+    return new Photo(item.querySelector('img').getAttribute('src'));
+  }
 });
 
 // Создание галереи

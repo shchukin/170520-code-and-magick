@@ -187,8 +187,8 @@ Gallery.prototype._nextIndex = function() {
 };
 
 /**
- * Устанавливаем массив изображений в галерею
- * @param {Array.<Photo>} photos
+ * Устанавливаем массив изображений и видео в галерею
+ * @param {Array.<Photo|Video>} photos
  */
 Gallery.prototype.setPictures = function(photos) {
   this._photos = photos;
@@ -212,6 +212,19 @@ Gallery.prototype._choosePicture = function(index) {
   this._photos[index].renderElement( this._stageElement );
   this._numberCurrentElement.innerHTML = index + 1;
   this._current = index;
+
+  // ставим все видео на паузу
+  this._photos.forEach(function(item) {
+    if ( item.tagName == 'VIDEO' ) {
+      item.pause();
+    }
+  });
+
+  // проигрываем текущее видео
+  if ( this._photos[index].element.tagName == 'VIDEO') {
+    this._photos[index].element.play()
+  }
+
 };
 
 module.exports = Gallery;
