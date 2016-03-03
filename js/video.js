@@ -1,12 +1,14 @@
 /**
  * @fileoverview Объект видео.
- * Содержит адрес видео и сформированный DOM-элемент
- * Обладает методами рендера на страницу и удаления самого себя со страницы
- *
+ * Является наследником Photo
+ * Дополняется функционалом play/pause
  * @author Anton Shchukin (a.a.shchukin@gmail.com)
  */
 
 'use strict';
+
+var Photo = require('photo');
+var inherit = require('inherit');
 
 /**
  * Конструктор принимает на вход ссылку на видео,
@@ -31,21 +33,6 @@ function Video(url) {
   });
 }
 
-/**
- * Рендер элемента видео на страницу
- * @param { Element } location нода в которую будут отрендерен элемент
- */
-Video.prototype.renderElement = function(location) {
-  location.appendChild(this.element);
-};
-
-/**
- * Удаление элемента со страницы
- */
-Video.prototype.removeElement = function() {
-  if (this.element.parentNode) {
-    this.element.parentNode.removeChild(this.element);
-  }
-};
+inherit(Photo, Video);
 
 module.exports = Video;
