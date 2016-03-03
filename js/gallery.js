@@ -215,14 +215,14 @@ Gallery.prototype._choosePicture = function(index) {
 
   // ставим все видео на паузу
   this._photos.forEach(function(item) {
-    if ( item.tagName == 'VIDEO' ) {
+    if ( item.tagName === 'VIDEO' ) {
       item.pause();
     }
   });
 
   // проигрываем текущее видео
-  if ( this._photos[index].element.tagName == 'VIDEO') {
-    this._photos[index].element.play()
+  if ( this._photos[index].element.tagName === 'VIDEO') {
+    this._photos[index].element.play();
   }
 
 };
