@@ -21,17 +21,40 @@ var inherit = require('inherit');
 function Video(url) {
   this.src = url;
   this.element = document.createElement('video');
-
   this.element.src = this.src;
 
-  this.element.addEventListener('click', function() {
-    if (this.paused) {
-      this.play();
-    } else {
-      this.pause();
-    }
-  });
+  this._onVideoClick = this._onVideoClick.bind(this);
 }
+
+/**
+ * Рендер элемента видео на страницу
+ * @param { Element } location нода в которую будут отрендерен элемент
+ */
+Video.prototype.renderElement = function(location) {
+  location.appendChild(this.element);
+  this.element.addEventListener('click', this._onVideoClick);
+};
+
+/**
+ * Удаление элементы видео со страницы
+ */
+Video.prototype.removeElement = function() {
+  if (this.element.parentNode) {
+    this.element.parentNode.removeChild(this.element);
+  }
+  this.element.removeEventListener('click', this._onVideoClick);
+};
+
+
+Video.prototype._onVideoClick = function() {
+  alert('Hello, World!');
+  //if (this.paused) {
+  //  this.play();
+  //} else {
+  //  this.pause();
+  //}
+};
+
 
 inherit(Photo, Video);
 
