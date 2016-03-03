@@ -9,13 +9,36 @@
 
 var tools = {
   /**
-   * Снятие класса с элемента
-   * @param {string} classList откуда убираем класс
-   * @param {string} className какой класс
-   * @returns {string}
+   * @param {object} node
+   * @param {string} className
+   * @returns {boolean}
    */
-  removeClass: function(classList, className) {
-    return classList.replace(className, '').replace(/\s+/g, ' ').trim();
+  hasClass: function(node, className) {
+    return node.className.indexOf(className) !== -1;
+  },
+  /**
+   * @param {object} node
+   * @param {string} className
+   */
+  addClass: function(node, className) {
+    if ( !tools.hasClass(node, className) ) {
+      node.className += ' ' + className;
+
+      //когда добавили первый класс, он добавился с пробелом перед ( <div class=" example"></div> )
+      node.className = node.className.trim();
+    }
+  },
+  /**
+   * @param {object} node
+   * @param {string} className
+   */
+  removeClass: function(node, className) {
+    node.className = node.className.replace(className, '').replace(/\s+/g, ' ').trim();
+
+    // в случае когда классов совсем не осталось ( <div class></div> ) убираем атрибут
+    if ( !node.className ) {
+      node.removeAttribute('class');
+    }
   }
 };
 
