@@ -1,6 +1,7 @@
 /**
  * @fileoverview Объект отзыва.
  * Формирует ноду отзыва и заполняет ее данными.
+ * Работает с рейтингами полезности отзыва
  * Обладает методом рендера
  *
  * @author Anton Shchukin (a.a.shchukin@gmail.com)
@@ -53,6 +54,7 @@ Review.prototype.createElement = function() {
   var avatarElement = this._overlayElement.querySelector('.review-author');
   var ratingElement = this._overlayElement.querySelector('.review-rating');
   var descriptionElement = this._overlayElement.querySelector('.review-text');
+  var voteElements = this._overlayElement.querySelectorAll('.review-quiz-answer');
 
   var avatarValue = new Image();
   var ratingValue;
@@ -94,6 +96,29 @@ Review.prototype.createElement = function() {
   descriptionValue = this._data.description;
   descriptionElement.textContent = descriptionValue;
 
+  // устанавливаем рейтинг отзыва
+  [].forEach.call(voteElements, function(item) {
+    item.addEventListener('click', function(event) {
+
+      // если кликнутый контрол рейтинга не активен
+      if ( !tools.hasClass(event.target, 'review-quiz-answer-active') ) {
+        if (tools.hasClass(event.target, 'review-quiz-answer-yes')) {
+          this._data.review_usefulness++;
+        } else if (tools.hasClass(event.target, 'review-quiz-answer-no')) {
+          this._data.review_usefulness--;
+        }
+
+        // снимаем активность со всех контролов
+        [].forEach.call(voteElements, function(item) {
+          tools.removeClass(item, 'review-quiz-answer-active');
+        });
+
+        // добавляем активность кликнутому
+        tools.addClass(event.target, 'review-quiz-answer-active');
+      }
+
+    }.bind(this));
+  }.bind(this));
 };
 
 /**
