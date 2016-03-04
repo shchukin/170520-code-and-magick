@@ -26,6 +26,8 @@ function Review(data) {
 
   this.createElement();
 
+  this._rated = false; // если за ревью голосовали
+
   this._onVoteYesClick = this._onVoteYesClick.bind(this);
   this._onVoteNoClick = this._onVoteNoClick.bind(this);
 }
@@ -139,7 +141,8 @@ Review.prototype.remove = function() {
  */
 Review.prototype._onVoteYesClick = function(event) {
   if ( !tools.hasClass(event.target, 'review-quiz-answer-active') ) {
-    this._data.review_usefulness++;
+    this._data.review_usefulness += this._rated ? 2 : 1;
+    this._rated = true;
   }
   tools.addClass(this._voteYesElement, 'review-quiz-answer-active');
   tools.removeClass(this._voteNoElement, 'review-quiz-answer-active');
@@ -152,7 +155,8 @@ Review.prototype._onVoteYesClick = function(event) {
  */
 Review.prototype._onVoteNoClick = function(event) {
   if ( !tools.hasClass(event.target, 'review-quiz-answer-active') ) {
-    this._data.review_usefulness--;
+    this._data.review_usefulness -= this._rated ? 2 : 1;
+    this._rated = true;
   }
   tools.addClass(this._voteNoElement, 'review-quiz-answer-active');
   tools.removeClass(this._voteYesElement, 'review-quiz-answer-active');
