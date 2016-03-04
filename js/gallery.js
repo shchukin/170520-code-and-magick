@@ -14,7 +14,7 @@
 
 var tools = require('tools');
 var keyCode = require('keycode');
-var Video = require('video');
+var Video = require('video'); // нужно для использования instanceof Video для проверки если это видео
 
 /**
  * Констурктор галереи инициализирует объект дом элементами и функциями обработчиками.
@@ -223,7 +223,6 @@ Gallery.prototype._choosePicture = function(index) {
   });
 
   // проигрываем текущее видео
-
   if ( this._photos[index] instanceof Video ) {
     this._photos[index].element.play();
   }
