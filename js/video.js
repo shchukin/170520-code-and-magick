@@ -26,6 +26,9 @@ function Video(url) {
   this._onVideoClick = this._onVideoClick.bind(this);
 }
 
+inherit(Photo, Video);
+
+
 /**
  * Рендер элемента видео на страницу
  * @param { Element } location нода в которую будут отрендерен элемент
@@ -45,17 +48,19 @@ Video.prototype.removeElement = function() {
   this.element.removeEventListener('click', this._onVideoClick);
 };
 
-
-Video.prototype._onVideoClick = function() {
-  alert('Hello, World!');
-  //if (this.paused) {
-  //  this.play();
-  //} else {
-  //  this.pause();
-  //}
+/**
+ * Динамика play/pause по клику
+ * @param event
+ * @private
+ */
+Video.prototype._onVideoClick = function(event) {
+  if ( this.element.paused ) {
+    this.element.play();
+  } else {
+    this.element.pause();
+  }
 };
 
 
-inherit(Photo, Video);
-
 module.exports = Video;
+

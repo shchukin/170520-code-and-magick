@@ -221,6 +221,8 @@ Gallery.prototype._choosePicture = function(index) {
   });
 
   // проигрываем текущее видео
+
+  //console.log( this._photos[index] instanceof Video );
   if ( this._photos[index].element.tagName === 'VIDEO') {
     this._photos[index].element.play();
   }
