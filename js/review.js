@@ -20,7 +20,14 @@ var tools = require('tools');
 function Review(data) {
   this._data = data;
   this._element = '';
+
+  this._voteYesElement = '';
+  this._voteNoElement = '';
+
   this.createElement();
+
+  this._onVoteYesClick = this._onVoteYesClick.bind(this);
+  this._onVoteNoClick = this._onVoteNoClick.bind(this);
 }
 
 Review.prototype.AVATAR_MAX_LOADING_TIME = 10000;
@@ -96,22 +103,8 @@ Review.prototype.createElement = function() {
   descriptionValue = this._data.description;
   descriptionElement.textContent = descriptionValue;
 
-  voteYesElement.addEventListener('click', function(event) {
-    if ( !tools.hasClass(event.target, 'review-quiz-answer-active') ) {
-      this._data.review_usefulness++;
-    }
-    tools.addClass(voteYesElement, 'review-quiz-answer-active');
-    tools.removeClass(voteNoElement, 'review-quiz-answer-active');
-  }.bind(this));
-
-  voteNoElement.addEventListener('click', function(event) {
-    if ( !tools.hasClass(event.target, 'review-quiz-answer-active') ) {
-      this._data.review_usefulness--;
-    }
-    tools.addClass(voteNoElement, 'review-quiz-answer-active');
-    tools.removeClass(voteYesElement, 'review-quiz-answer-active');
-  }.bind(this));
-
+  this._voteYesElement = voteYesElement;
+  this._voteNoElement = voteNoElement;
 };
 
 
@@ -122,6 +115,25 @@ Review.prototype.createElement = function() {
  */
 Review.prototype.render = function(element) {
   element.appendChild(this._element);
+
+  this._voteYesElement.addEventListener('click', this._onVoteYesClick);
+  this._voteNoElement.addEventListener('click', this._onVoteNoClick)
+};
+
+Review.prototype._onVoteYesClick = function(event) {
+  if ( !tools.hasClass(event.target, 'review-quiz-answer-active') ) {
+    this._data.review_usefulness++;
+  }
+  tools.addClass(this._voteYesElement, 'review-quiz-answer-active');
+  tools.removeClass(this._voteNoElement, 'review-quiz-answer-active');
+};
+
+Review.prototype._onVoteNoClick = function(event) {
+  if ( !tools.hasClass(event.target, 'review-quiz-answer-active') ) {
+    this._data.review_usefulness--;
+  }
+  tools.addClass(this._voteNoElement, 'review-quiz-answer-active');
+  tools.removeClass(this._voteYesElement, 'review-quiz-answer-active');
 };
 
 
