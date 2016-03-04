@@ -35,6 +35,8 @@ var moreElement = document.querySelector('.reviews-controls-more');
 var reviews = null;
 var reviewsFiltered = null;
 
+var reviewElements = [];
+
 
 /* Filtering module */
 
@@ -171,6 +173,13 @@ function initAddButton() {
  */
 function renderReviews(data, pageNumber, replace) {
 
+  if (replace) {
+    reviewElements.forEach(function(item) {
+      item.remove();
+    });
+    reviewElements = [];
+  }
+
   var reviewValue = document.createDocumentFragment();
 
   var from = pageNumber * REVIEWS_PAGE_SIZE;
@@ -180,11 +189,8 @@ function renderReviews(data, pageNumber, replace) {
   pageOfData.forEach(function(item) {
     var reviewElement = new Review(item);
     reviewElement.render(reviewValue);
+    reviewElements.push(reviewElement);
   });
-
-  if (replace) {
-    reviewsListElement.innerHTML = '';
-  }
 
   reviewsListElement.appendChild(reviewValue);
 

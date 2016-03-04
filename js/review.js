@@ -120,6 +120,18 @@ Review.prototype.render = function(element) {
   this._voteNoElement.addEventListener('click', this._onVoteNoClick);
 };
 
+/**
+ * Удаление элемента со страницы
+ */
+Review.prototype.remove = function() {
+  if (this._element.parentNode) {
+    this._element.parentNode.removeChild(this._element);
+  }
+
+  this._voteYesElement.removeEventListener('click', this._onVoteYesClick);
+  this._voteNoElement.removeEventListener('click', this._onVoteNoClick);
+};
+
 Review.prototype._onVoteYesClick = function(event) {
   if ( !tools.hasClass(event.target, 'review-quiz-answer-active') ) {
     this._data.review_usefulness++;
