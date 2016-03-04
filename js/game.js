@@ -4,89 +4,27 @@ var NOTIFICATION_FONT = 16;
 var NOTIFICATION_LINE = 20;
 var NOTIFICATION_FAMILY = 'PT Mono';
 var NOTIFICATION_COLOR = '#000000';
-
-var NOTIFICATION_WIDTH = 500;
-var NOTIFICATION_HEIGHT = 200;
 var NOTIFICATION_BACKGROUND = '#FFFFFF';
-
-var SHADOW_SIZE = 10;
-var SHADOW_COLOR = 'rgba(0, 0, 0, 0.7)';
-
-/**
- * Отрисовка бабла - фон для сообщения.
- * Состоит из двух прямоугольников - теневой и фоновый
- * Теневой смещен на несколько пикселей относительно основного.
- *
- * @param {Object} ctx
- */
-function drawBubble(ctx) {
-  //отрисовка теневого прямоугольника
-  ctx.fillStyle = SHADOW_COLOR;
-  ctx.fillRect(
-    ( (ctx.canvas.width - NOTIFICATION_WIDTH) / 2 ) + SHADOW_SIZE,
-    ( (ctx.canvas.height - NOTIFICATION_HEIGHT) / 2 ) + SHADOW_SIZE,
-    NOTIFICATION_WIDTH,
-    NOTIFICATION_HEIGHT
-  );
-
-  //отрисовка фонового
-  ctx.fillStyle = NOTIFICATION_BACKGROUND;
-  ctx.textBaseline = 'top';
-  ctx.fillRect(
-    (ctx.canvas.width - NOTIFICATION_WIDTH) / 2,
-    (ctx.canvas.height - NOTIFICATION_HEIGHT) / 2,
-    NOTIFICATION_WIDTH,
-    NOTIFICATION_HEIGHT
-  );
-}
+var NOTIFICATION_PADDING_HORIZONTAL = 40;
+var NOTIFICATION_PADDING_VERTICAL = 20;
+var NOTIFICATION_SHADOW_SIZE = 10;
+var NOTIFICATION_SHADOW_COLOR = 'rgba(0, 0, 0, 0.7)';
 
 /**
- * Отрисовка текста внутри заданного контейнера с центрированием.
- * Центрирование производится по обоим направлениям.
- * Сообщение выводится построчно
- *
- * @param {Object} ctx
- * @param {number} containerX координата контейнера по оси X
- * @param {number} containerY координата контейнера по оси Y
- * @param {number} containerWidth ширина контейнера
- * @param {number} containerHeight высота контейнера
- * @param {Array.<string>} content массив строк сообщения
- * @param {number} lineHeight заданный интерлиньяж
- */
-function drawAlignedTextInContainer(ctx, containerX, containerY, containerWidth, containerHeight, content, lineHeight) {
-
-  var lineQuantity = Math.min(content.length, Math.floor( containerHeight / lineHeight) );
-
-  var textWidth = containerWidth; // ширина текста неизвестна, полагаем ее равной ширине контейнера
-
-  var textHeight = lineQuantity * lineHeight;
-
-  var textX = containerX;
-
-  var textY;
-
-  // если высоты контейнера недостаточно чтобы вместить все строки, то начинаем отрисовку от верха контейнера, без использования вертикального центрирования
-  textY = containerHeight - textHeight > 0 ? (containerY + (containerHeight - textHeight) / 2) : containerY;
-
-  for ( var line = 0; line < lineQuantity; line++ ) {
-    ctx.fillText(content[line], textX + (textWidth / 2), textY + (line * lineHeight) );
-  }
-
-}
-
-/**
- * Создание нотивикации. Производится в два этапа: отрисовка бабла и отрисовка текст.
+ * Создание нотификации. Производится в три этапа:
+ * а) замеры текста
+ * б) отрисовка бабла по полученным размерам
+ * в) отрисовка текста
  *
  * @param {Object} ctx
  * @param {number|string|Array} message сообещние может быть числом, строкой или массивом строк
  */
 function drawNotification(ctx, message) {
 
-  drawBubble(ctx);
-
-  ctx.font = NOTIFICATION_FONT + 'px' + ' ' + NOTIFICATION_FAMILY;
-  ctx.fillStyle = NOTIFICATION_COLOR;
-  ctx.textAlign = 'center';
+  var textWidth = 0;
+  var textHeight = 0;
+  var textLeft = 0;
+  var textTop = 0;
 
   if ( typeof (message) === 'number' ) {  // если типа сообщения число
     message = [message.toString()];       // переводим его в строку
@@ -96,17 +34,51 @@ function drawNotification(ctx, message) {
     message = message.split('\n');        // переводим в массив, все переводим в массив
   }
 
-  drawAlignedTextInContainer(
-    ctx,
-    (ctx.canvas.width - NOTIFICATION_WIDTH) / 2,
-    (ctx.canvas.height - NOTIFICATION_HEIGHT) / 2,
-    NOTIFICATION_WIDTH,
-    NOTIFICATION_HEIGHT,
-    message,
-    NOTIFICATION_LINE
+  // устанавливаем параметры шрифта, чтобы была возможность замерять размеры текста
+  ctx.font = NOTIFICATION_FONT + 'px' + ' ' + NOTIFICATION_FAMILY;
+
+  // считам размерности и координаты текста
+  textHeight = NOTIFICATION_LINE * message.length;
+
+  message.forEach(function(item) {
+    textWidth = Math.max(textWidth, Math.ceil(ctx.measureText(item).width) );
+  });
+
+  textLeft = ( ctx.canvas.width - textWidth ) / 2;
+  
+  textTop = ( ctx.canvas.height - textHeight > 0 ) ? ( (ctx.canvas.height - textHeight) / 2 ) : 0;
+
+
+  // рисуем теневой прямоугольник
+  ctx.fillStyle = NOTIFICATION_SHADOW_COLOR;
+  ctx.fillRect(
+    textLeft - NOTIFICATION_PADDING_HORIZONTAL + NOTIFICATION_SHADOW_SIZE,
+    textTop - NOTIFICATION_PADDING_VERTICAL + NOTIFICATION_SHADOW_SIZE,
+    textWidth + ( 2 * NOTIFICATION_PADDING_HORIZONTAL ),
+    textHeight + ( 2 * NOTIFICATION_PADDING_VERTICAL )
   );
 
+  // рисуем фоновый прямоугольник
+  ctx.fillStyle = NOTIFICATION_BACKGROUND;
+  ctx.textBaseline = 'top';
+  ctx.fillRect(
+    textLeft - NOTIFICATION_PADDING_HORIZONTAL,
+    textTop - NOTIFICATION_PADDING_VERTICAL,
+    textWidth + ( 2 * NOTIFICATION_PADDING_HORIZONTAL ),
+    textHeight + ( 2 * NOTIFICATION_PADDING_VERTICAL )
+  );
+
+  // печатаем текст
+  ctx.fillStyle = NOTIFICATION_COLOR;
+  ctx.textAlign = 'center';
+
+  message.forEach(function(item, index) {
+    ctx.fillText(item, textLeft + (textWidth / 2), textTop + (index * NOTIFICATION_LINE) );
+  });
 }
+
+
+
 
 var cloudsElement = document.querySelector('.header-clouds');
 var demoElement = document.querySelector('.demo');
