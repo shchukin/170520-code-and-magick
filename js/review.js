@@ -117,7 +117,7 @@ Review.prototype.render = function(element) {
   element.appendChild(this._element);
 
   this._voteYesElement.addEventListener('click', this._onVoteYesClick);
-  this._voteNoElement.addEventListener('click', this._onVoteNoClick)
+  this._voteNoElement.addEventListener('click', this._onVoteNoClick);
 };
 
 Review.prototype._onVoteYesClick = function(event) {

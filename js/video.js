@@ -50,10 +50,9 @@ Video.prototype.removeElement = function() {
 
 /**
  * Динамика play/pause по клику
- * @param event
  * @private
  */
-Video.prototype._onVideoClick = function(event) {
+Video.prototype._onVideoClick = function() {
   if ( this.element.paused ) {
     this.element.play();
   } else {
