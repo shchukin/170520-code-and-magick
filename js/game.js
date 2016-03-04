@@ -45,7 +45,7 @@ function drawNotification(ctx, message) {
   });
 
   textLeft = ( ctx.canvas.width - textWidth ) / 2;
-  
+
   textTop = ( ctx.canvas.height - textHeight > 0 ) ? ( (ctx.canvas.height - textHeight) / 2 ) : 0;
 
 
