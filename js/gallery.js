@@ -11,8 +11,10 @@
 
 'use strict';
 
+
 var tools = require('tools');
 var keyCode = require('keycode');
+var Video = require('video');
 
 /**
  * Констурктор галереи инициализирует объект дом элементами и функциями обработчиками.
@@ -215,15 +217,14 @@ Gallery.prototype._choosePicture = function(index) {
 
   // ставим все видео на паузу
   this._photos.forEach(function(item) {
-    if ( item.tagName === 'VIDEO' ) {
-      item.pause();
+    if ( item instanceof Video ) {
+      item.element.pause();
     }
   });
 
   // проигрываем текущее видео
 
-  //console.log( this._photos[index] instanceof Video );
-  if ( this._photos[index].element.tagName === 'VIDEO') {
+  if ( this._photos[index] instanceof Video ) {
     this._photos[index].element.play();
   }
 
