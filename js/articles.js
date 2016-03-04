@@ -35,7 +35,7 @@ var moreElement = document.querySelector('.reviews-controls-more');
 var reviews = null;
 var reviewsFiltered = null;
 
-var reviewElements = [];
+var reviewElements = []; // массив объектов Review, чтобы была возможность пройтись по ним и вызвать .remove()
 
 
 /* Filtering module */
@@ -174,6 +174,7 @@ function initAddButton() {
 function renderReviews(data, pageNumber, replace) {
 
   if (replace) {
+    //удаляем сохраненные в массив объекты ревью
     reviewElements.forEach(function(item) {
       item.remove();
     });
@@ -189,7 +190,7 @@ function renderReviews(data, pageNumber, replace) {
   pageOfData.forEach(function(item) {
     var reviewElement = new Review(item);
     reviewElement.render(reviewValue);
-    reviewElements.push(reviewElement);
+    reviewElements.push(reviewElement); // сохраняем сам объект, чтобы можно было вызвать .remove у объекта в случае replace
   });
 
   reviewsListElement.appendChild(reviewValue);

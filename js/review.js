@@ -132,6 +132,11 @@ Review.prototype.remove = function() {
   this._voteNoElement.removeEventListener('click', this._onVoteNoClick);
 };
 
+/**
+ * Обработка клика по "да" на полезности отзыва
+ * @param event
+ * @private
+ */
 Review.prototype._onVoteYesClick = function(event) {
   if ( !tools.hasClass(event.target, 'review-quiz-answer-active') ) {
     this._data.review_usefulness++;
@@ -140,6 +145,11 @@ Review.prototype._onVoteYesClick = function(event) {
   tools.removeClass(this._voteNoElement, 'review-quiz-answer-active');
 };
 
+/**
+ * Обработка клика по "нет" на полезности отзыва
+ * @param event
+ * @private
+ */
 Review.prototype._onVoteNoClick = function(event) {
   if ( !tools.hasClass(event.target, 'review-quiz-answer-active') ) {
     this._data.review_usefulness--;
